@@ -4,14 +4,23 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    private const string MoveActionName = "Move";
+    private const string LookActionName = "Look";
+    private const string JumpActionName = "Jump";
+    private const string SprintActionName = "Sprint";
+
     [Header("References")]
+    [Tooltip("Input Actions asset containing the player action map.")]
+    [SerializeField] private InputActionAsset inputActions;
+    [SerializeField] private string actionMapName = "Player";
     [Tooltip("The camera used for looking. If empty, the first child Camera is used.")]
     [SerializeField] private Transform cameraTransform;
 
     [Header("Movement")]
     [SerializeField, Min(0f)] private float walkSpeed = 5f;
     [SerializeField, Min(0f)] private float sprintSpeed = 8f;
-    [SerializeField, Min(0f)] private float acceleration = 25f;
+    [SerializeField, Min(0f)] private float acceleration = 45f;
+    [SerializeField, Min(0f)] private float deceleration = 70f;
     [SerializeField, Range(0f, 1f)] private float airControl = 0.35f;
 
     [Header("Jumping")]
@@ -33,6 +42,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 planarVelocity;
     private float verticalVelocity;
     private float pitch;
+    private InputActionMap playerActions;
+    private InputAction moveAction;
+    private InputAction lookAction;
+    private InputAction jumpAction;
+    private InputAction sprintAction;
 
     private void Awake()
     {
@@ -43,15 +57,20 @@ public class PlayerController : MonoBehaviour
             Camera childCamera = GetComponentInChildren<Camera>();
             cameraTransform = childCamera != null ? childCamera.transform : null;
         }
+
+        CacheInputActions();
     }
 
     private void OnEnable()
     {
+        playerActions?.Enable();
         SetCursorState(lockCursor);
     }
 
     private void OnDisable()
     {
+        playerActions?.Disable();
+
         if (lockCursor)
             SetCursorState(false);
     }
@@ -64,10 +83,10 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 input = ReadMovement();
+        Vector2 input = Vector2.ClampMagnitude(moveAction.ReadValue<Vector2>(), 1f);
         bool grounded = controller.isGrounded;
 
-        IsSprinting = ReadSprint() && input.y > 0.1f;
+        IsSprinting = sprintAction.IsPressed() && input.y > 0.1f;
         float targetSpeed = IsSprinting ? sprintSpeed : walkSpeed;
 
         Vector3 desiredDirection = transform.right * input.x + transform.forward * input.y;
@@ -75,16 +94,18 @@ public class PlayerController : MonoBehaviour
             desiredDirection.Normalize();
 
         Vector3 desiredVelocity = desiredDirection * targetSpeed;
+        bool hasMovementInput = input.sqrMagnitude > 0.0001f;
+        float responsiveness = hasMovementInput ? acceleration : deceleration;
         float control = grounded ? 1f : airControl;
         planarVelocity = Vector3.MoveTowards(
             planarVelocity,
             desiredVelocity,
-            acceleration * control * Time.deltaTime);
+            responsiveness * control * Time.deltaTime);
 
         if (grounded && verticalVelocity < 0f)
             verticalVelocity = -groundedForce;
 
-        if (grounded && ReadJumpPressed())
+        if (grounded && jumpAction.WasPressedThisFrame())
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
         verticalVelocity += gravity * Time.deltaTime;
@@ -98,13 +119,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLook()
     {
-        Vector2 look = Vector2.zero;
-
-        if (Mouse.current != null)
-            look += Mouse.current.delta.ReadValue() * mouseSensitivity;
-
-        if (Gamepad.current != null)
-            look += Gamepad.current.rightStick.ReadValue() * gamepadLookSpeed * Time.deltaTime;
+        Vector2 look = lookAction.ReadValue<Vector2>();
+        bool isPointerDelta = lookAction.activeControl?.device is Pointer;
+        look *= isPointerDelta ? mouseSensitivity : gamepadLookSpeed * Time.deltaTime;
 
         transform.Rotate(Vector3.up, look.x, Space.Self);
 
@@ -113,38 +130,30 @@ public class PlayerController : MonoBehaviour
             cameraTransform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
     }
 
-    private static Vector2 ReadMovement()
+    private void CacheInputActions()
     {
-        Vector2 input = Vector2.zero;
+        if (inputActions == null)
+            inputActions = InputSystem.actions;
 
-        if (Keyboard.current != null)
+        if (inputActions == null)
         {
-            input.x = (Keyboard.current.dKey.isPressed ? 1f : 0f)
-                    - (Keyboard.current.aKey.isPressed ? 1f : 0f);
-            input.y = (Keyboard.current.wKey.isPressed ? 1f : 0f)
-                    - (Keyboard.current.sKey.isPressed ? 1f : 0f);
+            Debug.LogError($"{nameof(PlayerController)} on '{name}' needs an Input Actions asset.", this);
+            enabled = false;
+            return;
         }
 
-        if (Gamepad.current != null)
+        playerActions = inputActions.FindActionMap(actionMapName, false);
+        if (playerActions == null)
         {
-            Vector2 stick = Gamepad.current.leftStick.ReadValue();
-            if (stick.sqrMagnitude > input.sqrMagnitude)
-                input = stick;
+            Debug.LogError($"Action map '{actionMapName}' was not found in '{inputActions.name}'.", this);
+            enabled = false;
+            return;
         }
 
-        return Vector2.ClampMagnitude(input, 1f);
-    }
-
-    private static bool ReadJumpPressed()
-    {
-        return (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
-            || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame);
-    }
-
-    private static bool ReadSprint()
-    {
-        return (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed)
-            || (Gamepad.current != null && Gamepad.current.leftStickButton.isPressed);
+        moveAction = playerActions.FindAction(MoveActionName, true);
+        lookAction = playerActions.FindAction(LookActionName, true);
+        jumpAction = playerActions.FindAction(JumpActionName, true);
+        sprintAction = playerActions.FindAction(SprintActionName, true);
     }
 
     private static void SetCursorState(bool locked)
