@@ -1,6 +1,17 @@
+// -----------------------------------------------------------------------------
+// File: PlayerController.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Handles first-person movement, looking, sprinting, jumping, gravity,
+//          and cursor state using Unity's Input System.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Controls a first-person player through a <see cref="CharacterController"/>
+/// and actions supplied by a Unity Input Actions asset.
+/// </summary>
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
@@ -34,8 +45,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0f, 89f)] private float maxLookAngle = 85f;
     [SerializeField] private bool lockCursor = true;
 
+    /// <summary>Gets whether the character controller is touching the ground.</summary>
     public bool IsGrounded => controller != null && controller.isGrounded;
+
+    /// <summary>Gets whether the player is currently moving at sprint speed.</summary>
     public bool IsSprinting { get; private set; }
+
+    /// <summary>Gets the player's current planar and vertical velocity.</summary>
     public Vector3 Velocity => planarVelocity + Vector3.up * verticalVelocity;
 
     private CharacterController controller;

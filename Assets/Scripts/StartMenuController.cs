@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------------
+// File: StartMenuController.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Builds and controls the start menu, settings placeholder, scene
+//          navigation, desktop exit, and optional menu background music.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
@@ -47,6 +54,9 @@ public sealed class StartMenuController : MonoBehaviour
         ConfigureMusic();
     }
 
+    /// <summary>
+    /// Loads the gameplay scene configured in the Inspector.
+    /// </summary>
     public void Play()
     {
         if (!Application.CanStreamedLevelBeLoaded(gameplaySceneName))
@@ -60,18 +70,27 @@ public sealed class StartMenuController : MonoBehaviour
         SceneManager.LoadScene(gameplaySceneName);
     }
 
+    /// <summary>
+    /// Replaces the main navigation panel with the settings placeholder.
+    /// </summary>
     public void OpenSettings()
     {
         mainPanel.SetActive(false);
         settingsPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Returns from the settings placeholder to the main navigation panel.
+    /// </summary>
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);
         mainPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Closes a standalone build, or exits Play Mode when testing in Unity.
+    /// </summary>
     public void QuitToDesktop()
     {
 #if UNITY_EDITOR

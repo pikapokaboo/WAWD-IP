@@ -222,8 +222,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
@@ -464,8 +464,8 @@ MonoBehaviour:
   gameplaySceneName: Main
   gameTitle: What ever goofy thing we bouta name dis
   settingsPlaceholder: Will insert settings later
-  panelSize: {x: 560, y: 640}
-  buttonSize: {x: 420, y: 64}
+  panelSize: {x: 1000, y: 1000}
+  buttonSize: {x: 340, y: 64}
   spacing: 18
   panelColor: {r: 0.12, g: 0.12, b: 0.12, a: 0.88}
   buttonColor: {r: 0.38, g: 0.38, b: 0.38, a: 1}
