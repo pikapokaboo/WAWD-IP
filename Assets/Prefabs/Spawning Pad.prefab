@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7000000000000000000
+--- !u!1 &5989533048593666472
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7000000000000000001}
-  - component: {fileID: 7000000000000000002}
-  - component: {fileID: 7000000000000000003}
-  - component: {fileID: 7000000000000000004}
-  - component: {fileID: 7000000000000000005}
-  - component: {fileID: 7000000000000000006}
+  - component: {fileID: 9587820136884433}
+  - component: {fileID: 9087614674874847516}
+  - component: {fileID: 1709383788287076921}
+  - component: {fileID: 4480140910859881603}
+  - component: {fileID: 4480140910859881604}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: Spawning Pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7000000000000000001
+--- !u!4 &9587820136884433
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000000000000000000}
+  m_GameObject: {fileID: 5989533048593666472}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 1, z: 0.75}
+  m_LocalPosition: {x: -6.4, y: -0, z: -1.4}
+  m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7000000000000000002
+--- !u!33 &9087614674874847516
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000000000000000000}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7000000000000000003
+  m_GameObject: {fileID: 5989533048593666472}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1709383788287076921
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000000000000000000}
+  m_GameObject: {fileID: 5989533048593666472}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -69,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 3d95771d7bde9ad4cab4b7628aca5e8d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,13 +92,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7000000000000000004
-CapsuleCollider:
+--- !u!65 &4480140910859881603
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000000000000000000}
+  m_GameObject: {fileID: 5989533048593666472}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -111,41 +110,24 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7000000000000000005
+--- !u!114 &4480140910859881604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000000000000000000}
+  m_GameObject: {fileID: 5989533048593666472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c052b39450154fddb1b64869411a16aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bf7397dd54f457cb6ef3694d22dbb89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7000000000000000006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000000000000000000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 928664188afe46aab547bf8d27ef3398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  possibleTraits:
-  - traitName: Wants to go home
-    traitType: 1
-    selectionChance: 100
-    navigationPriority: 0
-    canCombineWithOtherTraits: 1
-    incompatibleTraitNames: []
-    action: {fileID: 0}
-  logSelectedTraits: 0
+  npcPrefab: {fileID: 7000000000000000005, guid: 31c558079c814cf6a0acd820df7bfbad, type: 3}
+  spawnPoint: {fileID: 0}
+  spawnHeight: 1.05
+  spawnInterval: 3
+  maximumLivingNpcs: 10
+  spawnImmediately: 1
