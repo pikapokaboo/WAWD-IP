@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7000000000000000001}
   - component: {fileID: 7000000000000000004}
   - component: {fileID: 7000000000000000005}
+  - component: {fileID: 7345617529748220109}
   - component: {fileID: 7000000000000000006}
   - component: {fileID: 7000000000000000007}
   m_Layer: 0
@@ -71,6 +72,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c052b39450154fddb1b64869411a16aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7345617529748220109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7000000000000000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbc48629ca4cb044983373a1bb09db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcPathToHome
+  despawningPad: {fileID: 0}
+  findPadAutomatically: 1
+  navMeshSampleRadius: 2
+  repathInterval: 0.5
 --- !u!114 &7000000000000000006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +107,7 @@ MonoBehaviour:
     navigationPriority: 0
     canCombineWithOtherTraits: 1
     incompatibleTraitNames: []
-    action: {fileID: 0}
+    action: {fileID: 7345617529748220109}
   logSelectedTraits: 0
 --- !u!195 &7000000000000000007
 NavMeshAgent:
