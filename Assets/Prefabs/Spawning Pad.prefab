@@ -127,7 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcPrefab: {fileID: 7000000000000000005, guid: 31c558079c814cf6a0acd820df7bfbad, type: 3}
   spawnPoint: {fileID: 0}
-  spawnHeight: 1.05
+  despawningPad: {fileID: 0}
+  spawnHeight: 0.05
   spawnInterval: 3
   maximumLivingNpcs: 10
   spawnImmediately: 1
