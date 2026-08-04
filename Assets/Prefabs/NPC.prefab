@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7345617529748220109}
   - component: {fileID: 7000000000000000006}
   - component: {fileID: 7000000000000000007}
+  - component: {fileID: 7000000000000000011}
+  - component: {fileID: 7000000000000000012}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -105,9 +107,26 @@ MonoBehaviour:
     traitType: 1
     selectionChance: 100
     navigationPriority: 0
-    canCombineWithOtherTraits: 1
-    incompatibleTraitNames: []
+    eitherOrGroup:
+    eitherOrWeight: 1
+    comesWithTraitNames: []
     action: {fileID: 7345617529748220109}
+  - traitName: Walks Slow
+    traitType: 0
+    selectionChance: 100
+    navigationPriority: 0
+    eitherOrGroup: Walking Speed
+    eitherOrWeight: 1
+    comesWithTraitNames: []
+    action: {fileID: 7000000000000000011}
+  - traitName: Walks Fast
+    traitType: 0
+    selectionChance: 100
+    navigationPriority: 0
+    eitherOrGroup: Walking Speed
+    eitherOrWeight: 1
+    comesWithTraitNames: []
+    action: {fileID: 7000000000000000012}
   logSelectedTraits: 0
 --- !u!195 &7000000000000000007
 NavMeshAgent:
@@ -131,6 +150,32 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7000000000000000011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7000000000000000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa72d7563ec4fda906b054511b5ded0, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  movementSpeed: 2
+--- !u!114 &7000000000000000012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7000000000000000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa72d7563ec4fda906b054511b5ded0, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  movementSpeed: 5
 --- !u!1 &7000000000000000009
 GameObject:
   m_ObjectHideFlags: 0

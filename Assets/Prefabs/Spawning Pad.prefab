@@ -129,6 +129,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   despawningPad: {fileID: 0}
   spawnHeight: 0.05
-  spawnInterval: 3
+  minimumSpawnInterval: 2
+  maximumSpawnInterval: 5
   maximumLivingNpcs: 10
   spawnImmediately: 1

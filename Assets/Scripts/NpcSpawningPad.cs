@@ -26,7 +26,9 @@ public sealed class NpcSpawningPad : MonoBehaviour
     [Tooltip("Vertical offset used when no custom spawn point is assigned.")]
     [SerializeField, Min(0f)] private float spawnHeight = 0.05f;
 
-    [SerializeField, Min(0.1f)] private float spawnInterval = 3f;
+    [Header("Spawn Timing")]
+    [SerializeField, Min(0.1f)] private float minimumSpawnInterval = 2f;
+    [SerializeField, Min(0.1f)] private float maximumSpawnInterval = 5f;
     [SerializeField, Min(1)] private int maximumLivingNpcs = 10;
     [SerializeField] private bool spawnImmediately = true;
 
@@ -35,7 +37,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
 
     private void OnEnable()
     {
-        nextSpawnTime = Time.time + (spawnImmediately ? 0f : spawnInterval);
+        nextSpawnTime = Time.time + (spawnImmediately ? 0f : GetRandomSpawnDelay());
     }
 
     private void Update()
@@ -48,7 +50,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
         if (livingNpcs.Count < maximumLivingNpcs)
             SpawnNpc();
 
-        nextSpawnTime = Time.time + spawnInterval;
+        nextSpawnTime = Time.time + GetRandomSpawnDelay();
     }
 
     /// <summary>
@@ -90,9 +92,15 @@ public sealed class NpcSpawningPad : MonoBehaviour
         livingNpcs.RemoveAll(npc => npc == null);
     }
 
+    private float GetRandomSpawnDelay()
+    {
+        return Random.Range(minimumSpawnInterval, maximumSpawnInterval);
+    }
+
     private void OnValidate()
     {
-        spawnInterval = Mathf.Max(0.1f, spawnInterval);
+        minimumSpawnInterval = Mathf.Max(0.1f, minimumSpawnInterval);
+        maximumSpawnInterval = Mathf.Max(minimumSpawnInterval, maximumSpawnInterval);
         maximumLivingNpcs = Mathf.Max(1, maximumLivingNpcs);
         spawnHeight = Mathf.Max(0f, spawnHeight);
     }

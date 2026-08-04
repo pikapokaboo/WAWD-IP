@@ -1,7 +1,8 @@
 // -----------------------------------------------------------------------------
 // File: NpcTraitProfile.cs
 // Project: WAWD Integrated Studio Project
-// Purpose: Randomly assigns compatible modular traits whenever an NPC spawns.
+// Purpose: Assigns modular traits, either/or choices, and required companion
+//          traits whenever an NPC spawns.
 // -----------------------------------------------------------------------------
 
 using System;
@@ -23,22 +24,27 @@ public enum NpcTraitType
 [Serializable]
 public sealed class NpcTraitOption
 {
-    [Tooltip("Unique name used by compatibility checks and gameplay queries.")]
+    [Tooltip("Unique name used by Comes With entries and gameplay queries.")]
     [SerializeField] private string traitName = "New Trait";
 
     [SerializeField] private NpcTraitType traitType;
 
-    [Tooltip("Independent chance that this trait is rolled when the NPC spawns.")]
+    [Tooltip("Chance to obtain this trait. For an Either/Or group, the group rolls once using this chance; keep it identical on every member.")]
     [SerializeField, Range(0f, 100f)] private float selectionChance = 50f;
 
     [Tooltip("Higher values take priority. Only used by navigational traits.")]
     [SerializeField] private int navigationPriority;
 
-    [Tooltip("Turn this off if selecting this trait should prevent every other trait.")]
-    [SerializeField] private bool canCombineWithOtherTraits = true;
+    [Header("Either / Or")]
+    [Tooltip("Traits with the same non-empty group name are mutually exclusive. The group can contain any number of traits.")]
+    [SerializeField] private string eitherOrGroup;
 
-    [Tooltip("Trait names that cannot be selected together with this trait.")]
-    [SerializeField] private List<string> incompatibleTraitNames = new();
+    [Tooltip("Relative chance of choosing this trait after its Either/Or group succeeds. Equal weights give equal odds.")]
+    [SerializeField, Min(0f)] private float eitherOrWeight = 1f;
+
+    [Header("Required Traits")]
+    [Tooltip("Trait names automatically granted whenever this trait is selected. Their own percentage rolls are ignored.")]
+    [SerializeField] private List<string> comesWithTraitNames = new();
 
     [Tooltip("Optional modular action component enabled when this trait is selected.")]
     [SerializeField] private NpcTraitAction action;
@@ -51,14 +57,20 @@ public sealed class NpcTraitOption
     /// <summary>Gets whether this is a behavioural or navigational trait.</summary>
     public NpcTraitType TraitType => traitType;
 
-    /// <summary>Gets this trait's independent spawn percentage.</summary>
+    /// <summary>Gets this trait or its group's spawn percentage.</summary>
     public float SelectionChance => selectionChance;
 
     /// <summary>Gets the priority used to order active navigational traits.</summary>
     public int NavigationPriority => navigationPriority;
 
-    /// <summary>Gets whether this trait may coexist with other traits.</summary>
-    public bool CanCombineWithOtherTraits => canCombineWithOtherTraits;
+    /// <summary>Gets the mutually exclusive group name, or an empty string.</summary>
+    public string EitherOrGroup => eitherOrGroup?.Trim() ?? string.Empty;
+
+    /// <summary>Gets this choice's relative weight within its group.</summary>
+    public float EitherOrWeight => Mathf.Max(0f, eitherOrWeight);
+
+    /// <summary>Gets the names of traits automatically granted with this one.</summary>
+    public IReadOnlyList<string> ComesWithTraitNames => comesWithTraitNames;
 
     /// <summary>Gets the modular action component linked to this trait.</summary>
     public NpcTraitAction Action => action;
@@ -70,38 +82,17 @@ public sealed class NpcTraitOption
     {
         isSelected = selected;
     }
-
-    internal bool ExplicitlyConflictsWith(NpcTraitOption other)
-    {
-        return ContainsName(incompatibleTraitNames, other.traitName)
-            || ContainsName(other.incompatibleTraitNames, traitName);
-    }
-
-    private static bool ContainsName(List<string> names, string candidate)
-    {
-        if (names == null || string.IsNullOrWhiteSpace(candidate))
-            return false;
-
-        foreach (string value in names)
-        {
-            if (string.Equals(value?.Trim(), candidate.Trim(),
-                    StringComparison.OrdinalIgnoreCase))
-                return true;
-        }
-
-        return false;
-    }
 }
 
 /// <summary>
-/// Rolls an NPC's traits on spawn, resolves incompatibilities, enables linked
-/// action components, and exposes the resulting traits to other systems.
+/// Rolls an NPC's independent traits and either/or groups, grants required
+/// companion traits, enables linked actions, and exposes the result.
 /// </summary>
 [DefaultExecutionOrder(-1000)]
 [DisallowMultipleComponent]
 public sealed class NpcTraitProfile : MonoBehaviour
 {
-    [Tooltip("All traits this type of NPC is allowed to roll.")]
+    [Tooltip("All traits this type of NPC is allowed to receive.")]
     [SerializeField] private List<NpcTraitOption> possibleTraits = new();
 
     [Tooltip("Print selected traits to the Console when this NPC spawns.")]
@@ -109,6 +100,10 @@ public sealed class NpcTraitProfile : MonoBehaviour
 
     private readonly List<NpcTraitOption> activeTraits = new();
     private readonly List<NpcTraitOption> activeNavigationalTraits = new();
+    private readonly HashSet<string> selectedNames =
+        new(StringComparer.OrdinalIgnoreCase);
+    private readonly HashSet<string> selectedEitherOrGroups =
+        new(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>Gets every trait selected for this NPC.</summary>
     public IReadOnlyList<NpcTraitOption> ActiveTraits => activeTraits;
@@ -125,35 +120,49 @@ public sealed class NpcTraitProfile : MonoBehaviour
     }
 
     /// <summary>
-    /// Clears the current selection and performs fresh percentage rolls.
+    /// Clears the current selection and performs fresh trait and group rolls.
     /// </summary>
     [ContextMenu("Reroll Traits")]
     public void RollTraits()
     {
-        DisableAllActions();
-        activeTraits.Clear();
-        activeNavigationalTraits.Clear();
+        ResetSelection();
 
-        List<NpcTraitOption> candidates = new(possibleTraits);
-        Shuffle(candidates);
+        Dictionary<string, List<NpcTraitOption>> eitherOrGroups =
+            new(StringComparer.OrdinalIgnoreCase);
+        List<NpcTraitOption> independentTraits = new();
 
-        foreach (NpcTraitOption candidate in candidates)
+        foreach (NpcTraitOption trait in possibleTraits)
         {
-            if (!IsValid(candidate) || HasDuplicateActiveName(candidate.TraitName))
+            if (!IsValid(trait))
                 continue;
 
-            if (UnityEngine.Random.value * 100f > candidate.SelectionChance)
+            if (string.IsNullOrWhiteSpace(trait.EitherOrGroup))
+            {
+                independentTraits.Add(trait);
                 continue;
+            }
 
-            if (!IsCompatibleWithActiveTraits(candidate))
-                continue;
+            if (!eitherOrGroups.TryGetValue(trait.EitherOrGroup, out var group))
+            {
+                group = new List<NpcTraitOption>();
+                eitherOrGroups.Add(trait.EitherOrGroup, group);
+            }
 
-            candidate.SetSelected(true);
-            activeTraits.Add(candidate);
-
-            if (candidate.TraitType == NpcTraitType.Navigational)
-                activeNavigationalTraits.Add(candidate);
+            group.Add(trait);
         }
+
+        Shuffle(independentTraits);
+        foreach (NpcTraitOption trait in independentTraits)
+        {
+            if (RollSucceeded(trait.SelectionChance))
+                SelectTraitAndDependencies(trait, new HashSet<string>(
+                    StringComparer.OrdinalIgnoreCase));
+        }
+
+        List<List<NpcTraitOption>> shuffledGroups = new(eitherOrGroups.Values);
+        Shuffle(shuffledGroups);
+        foreach (List<NpcTraitOption> group in shuffledGroups)
+            RollEitherOrGroup(group);
 
         activeNavigationalTraits.Sort((left, right) =>
             right.NavigationPriority.CompareTo(left.NavigationPriority));
@@ -165,19 +174,11 @@ public sealed class NpcTraitProfile : MonoBehaviour
             Debug.Log($"{name} traits: {BuildSelectedTraitText()}", this);
     }
 
-    /// <summary>
-    /// Returns whether this NPC currently owns the named trait.
-    /// </summary>
+    /// <summary>Returns whether this NPC currently owns the named trait.</summary>
     public bool HasTrait(string traitName)
     {
-        foreach (NpcTraitOption trait in activeTraits)
-        {
-            if (string.Equals(trait.TraitName, traitName,
-                    StringComparison.OrdinalIgnoreCase))
-                return true;
-        }
-
-        return false;
+        return !string.IsNullOrWhiteSpace(traitName)
+            && selectedNames.Contains(traitName.Trim());
     }
 
     /// <summary>
@@ -195,7 +196,73 @@ public sealed class NpcTraitProfile : MonoBehaviour
         return false;
     }
 
-    private void DisableAllActions()
+    private void RollEitherOrGroup(List<NpcTraitOption> group)
+    {
+        if (group.Count == 0
+            || selectedEitherOrGroups.Contains(group[0].EitherOrGroup)
+            || !RollSucceeded(group[0].SelectionChance))
+            return;
+
+        NpcTraitOption choice = ChooseWeighted(group);
+        if (choice != null)
+        {
+            SelectTraitAndDependencies(choice, new HashSet<string>(
+                StringComparer.OrdinalIgnoreCase));
+        }
+    }
+
+    private void SelectTraitAndDependencies(NpcTraitOption trait,
+        HashSet<string> dependencyChain)
+    {
+        if (!IsValid(trait) || selectedNames.Contains(trait.TraitName))
+            return;
+
+        if (!dependencyChain.Add(trait.TraitName))
+        {
+            Debug.LogWarning(
+                $"A Comes With cycle involving '{trait.TraitName}' was ignored.", this);
+            return;
+        }
+
+        string groupName = trait.EitherOrGroup;
+        if (!string.IsNullOrWhiteSpace(groupName)
+            && selectedEitherOrGroups.Contains(groupName))
+        {
+            Debug.LogWarning(
+                $"Trait '{trait.TraitName}' could not be granted because another trait "
+                + $"from Either/Or group '{groupName}' is already selected.", this);
+            dependencyChain.Remove(trait.TraitName);
+            return;
+        }
+
+        trait.SetSelected(true);
+        activeTraits.Add(trait);
+        selectedNames.Add(trait.TraitName.Trim());
+
+        if (!string.IsNullOrWhiteSpace(groupName))
+            selectedEitherOrGroups.Add(groupName);
+
+        if (trait.TraitType == NpcTraitType.Navigational)
+            activeNavigationalTraits.Add(trait);
+
+        foreach (string requiredName in trait.ComesWithTraitNames)
+        {
+            NpcTraitOption requiredTrait = FindTrait(requiredName);
+            if (requiredTrait == null)
+            {
+                Debug.LogWarning(
+                    $"Trait '{trait.TraitName}' requires unknown trait '{requiredName}'.",
+                    this);
+                continue;
+            }
+
+            SelectTraitAndDependencies(requiredTrait, dependencyChain);
+        }
+
+        dependencyChain.Remove(trait.TraitName);
+    }
+
+    private void ResetSelection()
     {
         HashSet<NpcTraitAction> handledActions = new();
 
@@ -206,33 +273,51 @@ public sealed class NpcTraitProfile : MonoBehaviour
             if (trait?.Action != null && handledActions.Add(trait.Action))
                 trait.Action.SetTraitActive(false);
         }
+
+        activeTraits.Clear();
+        activeNavigationalTraits.Clear();
+        selectedNames.Clear();
+        selectedEitherOrGroups.Clear();
     }
 
-    private bool IsCompatibleWithActiveTraits(NpcTraitOption candidate)
+    private NpcTraitOption FindTrait(string traitName)
     {
-        if (!candidate.CanCombineWithOtherTraits && activeTraits.Count > 0)
-            return false;
+        if (string.IsNullOrWhiteSpace(traitName))
+            return null;
 
-        foreach (NpcTraitOption selected in activeTraits)
+        foreach (NpcTraitOption trait in possibleTraits)
         {
-            if (!selected.CanCombineWithOtherTraits
-                || candidate.ExplicitlyConflictsWith(selected))
-                return false;
+            if (IsValid(trait) && string.Equals(trait.TraitName.Trim(),
+                    traitName.Trim(), StringComparison.OrdinalIgnoreCase))
+                return trait;
         }
 
-        return true;
+        return null;
     }
 
-    private bool HasDuplicateActiveName(string traitName)
+    private static NpcTraitOption ChooseWeighted(List<NpcTraitOption> choices)
     {
-        foreach (NpcTraitOption selected in activeTraits)
+        float totalWeight = 0f;
+        foreach (NpcTraitOption choice in choices)
+            totalWeight += choice.EitherOrWeight;
+
+        if (totalWeight <= 0f)
+            return choices[UnityEngine.Random.Range(0, choices.Count)];
+
+        float roll = UnityEngine.Random.value * totalWeight;
+        foreach (NpcTraitOption choice in choices)
         {
-            if (string.Equals(selected.TraitName, traitName,
-                    StringComparison.OrdinalIgnoreCase))
-                return true;
+            roll -= choice.EitherOrWeight;
+            if (roll <= 0f)
+                return choice;
         }
 
-        return false;
+        return choices[^1];
+    }
+
+    private static bool RollSucceeded(float percentage)
+    {
+        return UnityEngine.Random.value * 100f < percentage;
     }
 
     private static bool IsValid(NpcTraitOption trait)
@@ -240,12 +325,12 @@ public sealed class NpcTraitProfile : MonoBehaviour
         return trait != null && !string.IsNullOrWhiteSpace(trait.TraitName);
     }
 
-    private static void Shuffle(List<NpcTraitOption> traits)
+    private static void Shuffle<T>(List<T> items)
     {
-        for (int i = traits.Count - 1; i > 0; i--)
+        for (int i = items.Count - 1; i > 0; i--)
         {
             int swapIndex = UnityEngine.Random.Range(0, i + 1);
-            (traits[i], traits[swapIndex]) = (traits[swapIndex], traits[i]);
+            (items[i], items[swapIndex]) = (items[swapIndex], items[i]);
         }
     }
 
