@@ -34,7 +34,12 @@ public class NPCAnimation : MonoBehaviour
         animator.SetTrigger("Sit");
     }
 
-    public void Wave()
+        public void Stand()
+    {
+        animator.SetTrigger("Stand");
+    }
+
+    public void Look()
     {
         animator.SetTrigger("Look");
     }
