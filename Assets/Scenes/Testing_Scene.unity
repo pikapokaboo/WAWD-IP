@@ -192,6 +192,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6249222645296706245, guid: 13b95055a67960d4393cfe8cc13328d6, type: 3}
+      propertyPath: possibleTraits.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249222645296706245, guid: 13b95055a67960d4393cfe8cc13328d6, type: 3}
+      propertyPath: possibleTraits.Array.data[3].action
+      value: 
+      objectReference: {fileID: 994941989}
+    - target: {fileID: 6249222645296706245, guid: 13b95055a67960d4393cfe8cc13328d6, type: 3}
+      propertyPath: possibleTraits.Array.data[3].traitName
+      value: Walks Fast
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249222645296706245, guid: 13b95055a67960d4393cfe8cc13328d6, type: 3}
+      propertyPath: possibleTraits.Array.data[3].eitherOrGroup
+      value: Walking Speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249222645296706245, guid: 13b95055a67960d4393cfe8cc13328d6, type: 3}
+      propertyPath: possibleTraits.Array.data[3].eitherOrWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249222645296706245, guid: 13b95055a67960d4393cfe8cc13328d6, type: 3}
+      propertyPath: possibleTraits.Array.data[3].selectionChance
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6578399251251019655, guid: 13b95055a67960d4393cfe8cc13328d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.699707
@@ -753,6 +777,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &994941989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2871618957421875256, guid: 13b95055a67960d4393cfe8cc13328d6, type: 3}
+  m_PrefabInstance: {fileID: 245967385}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa72d7563ec4fda906b054511b5ded0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1534456458
 PrefabInstance:
   m_ObjectHideFlags: 0
