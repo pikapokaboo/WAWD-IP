@@ -29,7 +29,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
     [Header("Spawn Timing")]
     [SerializeField, Min(0.1f)] private float minimumSpawnInterval = 2f;
     [SerializeField, Min(0.1f)] private float maximumSpawnInterval = 5f;
-    [SerializeField, Min(1)] private int maximumLivingNpcs = 10;
+    [SerializeField, Min(1)] private int maximumLivingNpcs = 5;
     [SerializeField] private bool spawnImmediately = true;
 
     private readonly List<SpawnedNpc> livingNpcs = new();

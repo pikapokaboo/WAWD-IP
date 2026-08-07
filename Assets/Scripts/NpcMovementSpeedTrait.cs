@@ -18,6 +18,7 @@ public sealed class NpcMovementSpeedTrait : NpcTraitAction
     [SerializeField, Min(0f)] private float movementSpeed = 3.5f;
 
     private NavMeshAgent agent;
+    private SpawnedNpc spawnedNpc;
     private float originalSpeed;
     private bool hasCachedOriginalSpeed;
 
@@ -26,6 +27,8 @@ public sealed class NpcMovementSpeedTrait : NpcTraitAction
     {
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
+        if (spawnedNpc == null)
+            spawnedNpc = GetComponent<SpawnedNpc>();
 
         if (!hasCachedOriginalSpeed)
         {
@@ -33,14 +36,22 @@ public sealed class NpcMovementSpeedTrait : NpcTraitAction
             hasCachedOriginalSpeed = true;
         }
 
-        agent.speed = movementSpeed;
+        if (spawnedNpc != null)
+            spawnedNpc.SetPreferredSpeed(movementSpeed);
+        else
+            agent.speed = movementSpeed;
     }
 
     /// <inheritdoc />
     protected override void OnTraitDeactivated()
     {
         if (agent != null && hasCachedOriginalSpeed)
-            agent.speed = originalSpeed;
+        {
+            if (spawnedNpc != null)
+                spawnedNpc.SetPreferredSpeed(originalSpeed);
+            else
+                agent.speed = originalSpeed;
+        }
     }
 
     private void OnValidate()

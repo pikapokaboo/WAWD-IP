@@ -17,6 +17,9 @@ GameObject:
   - component: {fileID: 8496424730586346404}
   - component: {fileID: 2871618957421875256}
   - component: {fileID: 1212871271708382739}
+  - component: {fileID: 1212871271708382740}
+  - component: {fileID: 1212871271708382742}
+  - component: {fileID: 1212871271708382741}
   m_Layer: 0
   m_Name: NPChibi
   m_TagString: Untagged
@@ -75,6 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c052b39450154fddb1b64869411a16aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avoidanceRadius: 1.15
+  minimumAvoidancePriority: 40
+  maximumAvoidancePriority: 60
+  slowDownDistance: 3
+  stopDistance: 1.5
+  speedChangeRate: 5
 --- !u!114 &5613375707644866499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +117,7 @@ MonoBehaviour:
     traitType: 1
     selectionChance: 100
     navigationPriority: 0
-    eitherOrGroup: 
+    eitherOrGroup:
     eitherOrWeight: 1
     comesWithTraitNames: []
     action: {fileID: 5613375707644866499}
@@ -128,6 +137,56 @@ MonoBehaviour:
     eitherOrWeight: 1
     comesWithTraitNames: []
     action: {fileID: 2871618957421875256}
+  - traitName: Wants Malk
+    traitType: 1
+    selectionChance: 100
+    navigationPriority: 10
+    eitherOrGroup: Store Intent
+    eitherOrWeight: 3
+    comesWithTraitNames: []
+    action: {fileID: 1212871271708382740}
+  - traitName: Just Browsing
+    traitType: 0
+    selectionChance: 100
+    navigationPriority: 0
+    eitherOrGroup: Store Intent
+    eitherOrWeight: 1
+    comesWithTraitNames:
+    - Browses Store
+    action: {fileID: 0}
+  - traitName: Just Passing By
+    traitType: 0
+    selectionChance: 100
+    navigationPriority: 0
+    eitherOrGroup: Store Intent
+    eitherOrWeight: 1
+    comesWithTraitNames: []
+    action: {fileID: 0}
+  - traitName: In a Rush
+    traitType: 0
+    selectionChance: 100
+    navigationPriority: 0
+    eitherOrGroup: Shopping Pace
+    eitherOrWeight: 1
+    comesWithTraitNames: []
+    action: {fileID: 0}
+  - traitName: Not in a Rush
+    traitType: 0
+    selectionChance: 100
+    navigationPriority: 0
+    eitherOrGroup: Shopping Pace
+    eitherOrWeight: 1
+    comesWithTraitNames:
+    - Browses Store
+    action: {fileID: 0}
+  - traitName: Browses Store
+    traitType: 1
+    selectionChance: 0
+    navigationPriority: 20
+    eitherOrGroup:
+    eitherOrWeight: 1
+    comesWithTraitNames: []
+    action: {fileID: 1212871271708382742}
   logSelectedTraits: 0
 --- !u!195 &3430047859680791773
 NavMeshAgent:
@@ -138,11 +197,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 8770770118774919518}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.75
+  m_Radius: 1.15
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 5
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 240
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -161,8 +220,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fa72d7563ec4fda906b054511b5ded0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   movementSpeed: 2
 --- !u!114 &2871618957421875256
 MonoBehaviour:
@@ -174,8 +233,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fa72d7563ec4fda906b054511b5ded0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   movementSpeed: 3
 --- !u!114 &1212871271708382739
 MonoBehaviour:
@@ -189,6 +248,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e336595decd8e3e4e881405bb042bf51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCAnimation
+--- !u!114 &1212871271708382740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770770118774919518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec12f7b6d1d64eb59a94cd8198e8cb0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requestedProduct: Malk
+  grabDuration: 2.32
+  shelfFacingOffset: 90
+  shelfTurnSpeed: 180
+--- !u!114 &1212871271708382742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770770118774919518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3286ad1b32ec44c3abec76fa7dc39bb1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  nonRushBrowseChance: 30
+  numberOfStops: {x: 2, y: 3}
+  pauseAtStop: {x: 3, y: 5}
+  shelfFacingOffset: 90
+  shelfTurnSpeed: 180
+--- !u!114 &1212871271708382741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770770118774919518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5954ef43b44d0a88b2680b5a53a012, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  heightAboveNpc: 2.6
+  worldScale: 0.005
+  idleMessage: Idle
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineColor: {r: 0, g: 0, b: 0, a: 0.9}
+  fontSize: 28
 --- !u!1001 &5960069421697611403
 PrefabInstance:
   m_ObjectHideFlags: 0

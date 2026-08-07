@@ -69,6 +69,8 @@ public sealed class NpcPathToHome : NpcTraitAction
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
 
+        agent.updateRotation = true;
+        agent.isStopped = false;
         nextRepathTime = 0f;
         TrySetPath();
     }

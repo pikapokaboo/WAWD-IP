@@ -4,6 +4,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class NPCAnimation : MonoBehaviour
 {
+    private static readonly int IsWalkingParameter = Animator.StringToHash("IsWalking");
+    private static readonly int GrabState = Animator.StringToHash("Grab");
+
     private NavMeshAgent agent;
     private Animator animator;
 
@@ -21,12 +24,20 @@ public class NPCAnimation : MonoBehaviour
         !agent.pathPending &&
         !agent.isStopped;
 
-        animator.SetBool("IsWalking", isWalking);
+        if (animator != null)
+            animator.SetBool(IsWalkingParameter, isWalking);
     }
 
     public void Grab()
     {
-        animator.SetTrigger("Grab");
+        if (animator == null)
+            return;
+
+        // The controller's trigger transition is only available from Idle and
+        // waits for exit time. Entering the state directly makes shelf grabs
+        // start immediately, even if the NPC has only just stopped walking.
+        animator.SetBool(IsWalkingParameter, false);
+        animator.CrossFadeInFixedTime(GrabState, 0.1f, 0, 0f);
     }
 
     public void Sit()
@@ -43,4 +54,5 @@ public class NPCAnimation : MonoBehaviour
     {
         animator.SetTrigger("Look");
     }
+
 }

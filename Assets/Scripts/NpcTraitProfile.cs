@@ -104,6 +104,7 @@ public sealed class NpcTraitProfile : MonoBehaviour
         new(StringComparer.OrdinalIgnoreCase);
     private readonly HashSet<string> selectedEitherOrGroups =
         new(StringComparer.OrdinalIgnoreCase);
+    private readonly HashSet<NpcTraitOption> completedNavigationTraits = new();
 
     /// <summary>Gets every trait selected for this NPC.</summary>
     public IReadOnlyList<NpcTraitOption> ActiveTraits => activeTraits;
@@ -113,6 +114,9 @@ public sealed class NpcTraitProfile : MonoBehaviour
     /// </summary>
     public IReadOnlyList<NpcTraitOption> ActiveNavigationalTraits =>
         activeNavigationalTraits;
+
+    /// <summary>Gets the navigational trait currently controlling this NPC.</summary>
+    public NpcTraitOption CurrentNavigationTrait { get; private set; }
 
     private void Awake()
     {
@@ -168,7 +172,12 @@ public sealed class NpcTraitProfile : MonoBehaviour
             right.NavigationPriority.CompareTo(left.NavigationPriority));
 
         foreach (NpcTraitOption trait in activeTraits)
-            trait.Action?.SetTraitActive(true);
+        {
+            if (trait.TraitType == NpcTraitType.Behavioural)
+                trait.Action?.SetTraitActive(true);
+        }
+
+        ActivateHighestPriorityNavigationAction();
 
         if (logSelectedTraits)
             Debug.Log($"{name} traits: {BuildSelectedTraitText()}", this);
@@ -194,6 +203,22 @@ public sealed class NpcTraitProfile : MonoBehaviour
 
         trait = null;
         return false;
+    }
+
+    /// <summary>
+    /// Marks the currently running navigation action as complete and activates
+    /// the next-highest-priority unfinished navigational trait.
+    /// </summary>
+    public void CompleteNavigationAction(NpcTraitAction completedAction)
+    {
+        if (completedAction == null || CurrentNavigationTrait == null
+            || CurrentNavigationTrait.Action != completedAction)
+            return;
+
+        completedAction.SetTraitActive(false);
+        completedNavigationTraits.Add(CurrentNavigationTrait);
+        CurrentNavigationTrait = null;
+        ActivateHighestPriorityNavigationAction();
     }
 
     private void RollEitherOrGroup(List<NpcTraitOption> group)
@@ -278,6 +303,24 @@ public sealed class NpcTraitProfile : MonoBehaviour
         activeNavigationalTraits.Clear();
         selectedNames.Clear();
         selectedEitherOrGroups.Clear();
+        completedNavigationTraits.Clear();
+        CurrentNavigationTrait = null;
+    }
+
+    private void ActivateHighestPriorityNavigationAction()
+    {
+        foreach (NpcTraitOption trait in activeNavigationalTraits)
+            trait.Action?.SetTraitActive(false);
+
+        foreach (NpcTraitOption trait in activeNavigationalTraits)
+        {
+            if (trait.Action == null || completedNavigationTraits.Contains(trait))
+                continue;
+
+            CurrentNavigationTrait = trait;
+            trait.Action.SetTraitActive(true);
+            return;
+        }
     }
 
     private NpcTraitOption FindTrait(string traitName)
