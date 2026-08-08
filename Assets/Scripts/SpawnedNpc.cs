@@ -19,7 +19,7 @@ public sealed class SpawnedNpc : MonoBehaviour
 
     [Header("Crowd Avoidance")]
     [Tooltip("Navigation avoidance radius. Set to match the character's visible width.")]
-    [SerializeField, Min(0.1f)] private float avoidanceRadius = 1.15f;
+    [SerializeField, Min(0.1f)] private float avoidanceRadius = 1.25f;
     [SerializeField, Range(0, 99)] private int minimumAvoidancePriority = 40;
     [SerializeField, Range(0, 99)] private int maximumAvoidancePriority = 60;
     [Tooltip("NPCs begin slowing when another customer is this far ahead.")]

@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c052b39450154fddb1b64869411a16aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avoidanceRadius: 1.15
+  avoidanceRadius: 1.25
   minimumAvoidancePriority: 40
   maximumAvoidancePriority: 60
   slowDownDistance: 3
@@ -117,7 +117,7 @@ MonoBehaviour:
     traitType: 1
     selectionChance: 100
     navigationPriority: 0
-    eitherOrGroup:
+    eitherOrGroup: 
     eitherOrWeight: 1
     comesWithTraitNames: []
     action: {fileID: 5613375707644866499}
@@ -183,7 +183,7 @@ MonoBehaviour:
     traitType: 1
     selectionChance: 0
     navigationPriority: 20
-    eitherOrGroup:
+    eitherOrGroup: 
     eitherOrWeight: 1
     comesWithTraitNames: []
     action: {fileID: 1212871271708382742}
@@ -197,7 +197,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8770770118774919518}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.15
+  m_Radius: 1.25
   m_Speed: 3.5
   m_Acceleration: 5
   avoidancePriority: 50
@@ -220,8 +220,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fa72d7563ec4fda906b054511b5ded0, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   movementSpeed: 2
 --- !u!114 &2871618957421875256
 MonoBehaviour:
@@ -233,9 +233,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fa72d7563ec4fda906b054511b5ded0, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  movementSpeed: 3
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 2.5
 --- !u!114 &1212871271708382739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,8 +274,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3286ad1b32ec44c3abec76fa7dc39bb1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   nonRushBrowseChance: 30
   numberOfStops: {x: 2, y: 3}
   pauseAtStop: {x: 3, y: 5}
@@ -291,9 +291,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f5954ef43b44d0a88b2680b5a53a012, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  heightAboveNpc: 2.6
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightAboveNpc: 2
   worldScale: 0.005
   idleMessage: Idle
   textColor: {r: 1, g: 1, b: 1, a: 1}
