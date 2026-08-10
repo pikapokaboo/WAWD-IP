@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6578399251251019655}
   - component: {fileID: 6396647401719047372}
-  - component: {fileID: 5613375707644866499}
+  - component: {fileID: 5075730643526610543}
   - component: {fileID: 3430047859680791773}
-  - component: {fileID: 1212871271708382739}
+  - component: {fileID: 3430047859680791774}
+  - component: {fileID: 3430047859680791775}
   m_Layer: 0
   m_Name: NPChibi
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +60,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &5613375707644866499
+--- !u!114 &5075730643526610543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,13 +69,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 8770770118774919518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bbc48629ca4cb044983373a1bb09db4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NpcPathToHome
-  despawningPad: {fileID: 0}
-  findPadAutomatically: 1
-  navMeshSampleRadius: 2
-  repathInterval: 0.5
+  m_Script: {fileID: 11500000, guid: 06e2240024934924a4878063af32ea9d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  possibleTraits:
+  - traitName: Slow Walker
+    spawnChance: 100
+    eitherOrPool: Walking Speed
+    poolWeight: 1
+    comesWith: []
+  - traitName: Normal Walker
+    spawnChance: 100
+    eitherOrPool: Walking Speed
+    poolWeight: 1
+    comesWith: []
+  - traitName: Fast Walker
+    spawnChance: 100
+    eitherOrPool: Walking Speed
+    poolWeight: 1
+    comesWith: []
+  - traitName: Light Spender
+    spawnChance: 100
+    eitherOrPool: Spending Type
+    poolWeight: 40
+    comesWith: []
+  - traitName: Heavy Spender
+    spawnChance: 100
+    eitherOrPool: Spending Type
+    poolWeight: 40
+    comesWith: []
+  - traitName: No Money
+    spawnChance: 100
+    eitherOrPool: Spending Type
+    poolWeight: 20
+    comesWith: []
+  rollOnAwake: 1
+  logResult: 0
 --- !u!195 &3430047859680791773
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -97,7 +127,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1212871271708382739
+--- !u!114 &3430047859680791774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,9 +136,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 8770770118774919518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e336595decd8e3e4e881405bb042bf51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCAnimation
+  m_Script: {fileID: 11500000, guid: 8387eb67c1824b648ece968ea20826af, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  homeTarget: {fileID: 0}
+  enterStoreChance: 45
+  slowSpeed: 2
+  normalSpeed: 3.5
+  fastSpeed: 5
+  arrivalDistance: 0.08
+  turnSpeed: 360
+  shelfFacingYawOffset: 90
+  lookDuration: 1.5
+  grabDuration: 1.5
+--- !u!114 &3430047859680791775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770770118774919518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e22c7e9388c411d928d09feac94920e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  showDebugNote: 1
+  height: 3.2
+  fontSize: 15
+  actionColour: {r: 0.25, g: 0.9, b: 1, a: 1}
+  traitColour: {r: 1, g: 0.8, b: 0.2, a: 1}
+  productColour: {r: 0.35, g: 1, b: 0.45, a: 1}
 --- !u!1001 &5960069421697611403
 PrefabInstance:
   m_ObjectHideFlags: 0

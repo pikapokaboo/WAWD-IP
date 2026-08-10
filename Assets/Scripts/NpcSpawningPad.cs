@@ -15,13 +15,10 @@ public sealed class NpcSpawningPad : MonoBehaviour
 {
     [Header("Spawn Settings")]
     [Tooltip("NPC prefab created by this pad.")]
-    [SerializeField] private NpcPathToHome npcPrefab;
+    [SerializeField] private GameObject npcPrefab;
 
     [Tooltip("Optional transform used as the exact spawn position and rotation.")]
     [SerializeField] private Transform spawnPoint;
-
-    [Tooltip("Scene pad assigned to navigation actions on newly spawned NPCs.")]
-    [SerializeField] private NpcDespawningPad despawningPad;
 
     [Tooltip("Vertical offset used when no custom spawn point is assigned.")]
     [SerializeField, Min(0f)] private float spawnHeight = 0.05f;
@@ -32,7 +29,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
     [SerializeField, Min(1)] private int maximumLivingNpcs = 5;
     [SerializeField] private bool spawnImmediately = true;
 
-    private readonly List<NpcPathToHome> livingNpcs = new();
+    private readonly List<GameObject> livingNpcs = new();
     private float nextSpawnTime;
 
     private void OnEnable()
@@ -74,11 +71,8 @@ public sealed class NpcSpawningPad : MonoBehaviour
             : transform.position + transform.up * spawnHeight;
         Quaternion rotation = spawnPoint != null ? spawnPoint.rotation : transform.rotation;
 
-        NpcPathToHome spawnedNpc = Instantiate(npcPrefab, position, rotation);
+        GameObject spawnedNpc = Instantiate(npcPrefab, position, rotation);
         livingNpcs.Add(spawnedNpc);
-
-        if (despawningPad != null)
-            spawnedNpc.SetDestination(despawningPad);
     }
 
     private void RemoveDestroyedNpcs()

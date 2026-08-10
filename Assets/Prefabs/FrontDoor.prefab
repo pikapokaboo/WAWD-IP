@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1162494153916530613}
+  - component: {fileID: 2954012685181376993}
   m_Layer: 0
   m_Name: FrontDoor
   m_TagString: Untagged
@@ -32,6 +33,24 @@ Transform:
   - {fileID: 6453375398358981398}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2954012685181376993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954012685181376992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f2d772d2104a98bf8c96104218824a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  doorVisual: {fileID: 0}
+  detectionRadius: 3
+  openAngle: 95
+  swingSpeed: 180
+  closeDelay: 0.75
+  hingeOnPositiveSide: 0
 --- !u!1001 &6774618658486615293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99,6 +118,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f3b64f95e7c62a04bb484378cdaf31e2, type: 3}
       propertyPath: m_Name
       value: Door 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -888600520273224937, guid: f3b64f95e7c62a04bb484378cdaf31e2, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262866279356285446, guid: f3b64f95e7c62a04bb484378cdaf31e2, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2450325783812515836, guid: f3b64f95e7c62a04bb484378cdaf31e2, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

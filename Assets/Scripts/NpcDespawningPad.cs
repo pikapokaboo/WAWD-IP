@@ -15,9 +15,8 @@ public sealed class NpcDespawningPad : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        NpcPathToHome npc = other.GetComponentInParent<NpcPathToHome>();
-        if (npc != null)
-            Destroy(npc.gameObject);
+        if (other.CompareTag("NPC"))
+            Destroy(other.gameObject);
     }
 
     private void Reset()

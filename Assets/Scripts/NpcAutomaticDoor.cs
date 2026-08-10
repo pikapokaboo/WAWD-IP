@@ -24,8 +24,11 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
     private void Awake()
     {
         if (doorVisual == null)
+            doorVisual = FindDoorRenderer(transform)?.transform;
+
+        if (doorVisual == null)
         {
-            Debug.LogWarning($"{nameof(NpcAutomaticDoor)} on '{name}' needs a Door Visual.", this);
+            Debug.LogWarning($"{nameof(NpcAutomaticDoor)} on '{name}' could not find a door mesh.", this);
             enabled = false;
             return;
         }
@@ -71,7 +74,7 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
 
     private void CreateHingePivot()
     {
-        MeshRenderer doorRenderer = FindDoorRenderer();
+        MeshRenderer doorRenderer = FindDoorRenderer(doorVisual);
         if (doorRenderer == null)
         {
             swingPivot = doorVisual;
@@ -96,24 +99,41 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
         swingPivot.SetParent(doorVisual.parent, true);
         swingPivot.SetPositionAndRotation(hingeWorld, doorVisual.rotation);
         doorVisual.SetParent(swingPivot, true);
+
+        MeshRenderer handleRenderer = FindNamedRenderer(transform, "handle");
+        if (handleRenderer != null && !handleRenderer.transform.IsChildOf(doorVisual))
+            handleRenderer.transform.SetParent(swingPivot, true);
     }
 
-    private MeshRenderer FindDoorRenderer()
+    private static MeshRenderer FindDoorRenderer(Transform searchRoot)
     {
         foreach (MeshRenderer candidate in
-                 doorVisual.GetComponentsInChildren<MeshRenderer>(true))
+                 searchRoot.GetComponentsInChildren<MeshRenderer>(true))
         {
             string objectName = candidate.gameObject.name.ToLowerInvariant();
-            if (objectName.Contains("door") && !objectName.Contains("handle"))
+            if (objectName.Contains("door") && !objectName.Contains("handle")
+                && !objectName.Contains("frame"))
                 return candidate;
         }
 
-        return doorVisual.GetComponentInChildren<MeshRenderer>(true);
+        return searchRoot.GetComponentInChildren<MeshRenderer>(true);
+    }
+
+    private static MeshRenderer FindNamedRenderer(Transform searchRoot, string namePart)
+    {
+        foreach (MeshRenderer candidate in
+                 searchRoot.GetComponentsInChildren<MeshRenderer>(true))
+        {
+            if (candidate.gameObject.name.ToLowerInvariant().Contains(namePart))
+                return candidate;
+        }
+
+        return null;
     }
 
     private void CreateStationaryColliderCopies()
     {
-        Collider[] movingColliders = doorVisual.GetComponentsInChildren<Collider>(true);
+        Collider[] movingColliders = GetComponentsInChildren<Collider>(true);
         GameObject collisionRoot = new("Stationary Door Collision");
         collisionRoot.transform.SetParent(transform, false);
 

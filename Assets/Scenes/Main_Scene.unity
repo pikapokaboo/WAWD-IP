@@ -1425,7 +1425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5599822395548962044, guid: f214663b64cb1bb4c9e68bdcf6c8cb15, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.8
+      value: -11.6
       objectReference: {fileID: 0}
     - target: {fileID: 5599822395548962044, guid: f214663b64cb1bb4c9e68bdcf6c8cb15, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1433,7 +1433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5599822395548962044, guid: f214663b64cb1bb4c9e68bdcf6c8cb15, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 9.2
       objectReference: {fileID: 0}
     - target: {fileID: 5599822395548962044, guid: f214663b64cb1bb4c9e68bdcf6c8cb15, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3064,6 +3064,14 @@ PrefabInstance:
     - target: {fileID: 288261380870400218, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_Name
       value: Shelf (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Malk
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5719,6 +5727,14 @@ PrefabInstance:
     - target: {fileID: 288261380870400218, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_Name
       value: Shelf (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Bepis
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8641,6 +8657,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelf (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Nickers
+      objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.29
@@ -9963,6 +9987,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelf
       objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Corn
+      objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.29
@@ -11053,6 +11085,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelf (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Stawjerry
+      objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.29
@@ -11594,6 +11634,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelf (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Cock
+      objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.395134
@@ -11765,6 +11813,14 @@ PrefabInstance:
     - target: {fileID: 288261380870400218, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_Name
       value: Shelf (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Wheeze
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12644,6 +12700,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelf (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Domitos
+      objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.395134
@@ -13474,6 +13538,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelf (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Bo'oh'o'wa'er
+      objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.29
@@ -13578,7 +13650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6100000000000000002, guid: e47e3a8c100c48f2a1fc4fe327eb2f16, type: 3}
       propertyPath: m_VoxelSize
-      value: 0.25
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 6100000000000000002, guid: e47e3a8c100c48f2a1fc4fe327eb2f16, type: 3}
       propertyPath: m_NavMeshData
@@ -13724,6 +13796,14 @@ PrefabInstance:
     - target: {fileID: 288261380870400218, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_Name
       value: Shelf (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: products.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Wamen
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
