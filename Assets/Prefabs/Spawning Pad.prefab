@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf7397dd54f457cb6ef3694d22dbb89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcPrefab: {fileID: 7000000000000000005, guid: 31c558079c814cf6a0acd820df7bfbad, type: 3}
+  npcPrefab: {fileID: 5613375707644866499, guid: 13b95055a67960d4393cfe8cc13328d6, type: 3}
   spawnPoint: {fileID: 0}
   despawningPad: {fileID: 0}
   spawnHeight: 0.05

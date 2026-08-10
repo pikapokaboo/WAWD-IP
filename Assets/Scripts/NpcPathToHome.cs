@@ -13,7 +13,7 @@ using UnityEngine.AI;
 /// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(NavMeshAgent))]
-public sealed class NpcPathToHome : NpcTraitAction
+public sealed class NpcPathToHome : MonoBehaviour
 {
     [Header("Destination")]
     [Tooltip("Scene despawning pad this NPC should walk toward.")]
@@ -44,7 +44,7 @@ public sealed class NpcPathToHome : NpcTraitAction
 
     private void Update()
     {
-        if (!IsTraitActive || Time.time < nextRepathTime)
+        if (Time.time < nextRepathTime)
             return;
 
         TrySetPath();
@@ -59,12 +59,11 @@ public sealed class NpcPathToHome : NpcTraitAction
         despawningPad = pad;
         warnedAboutMissingPad = false;
 
-        if (IsTraitActive)
+        if (isActiveAndEnabled)
             TrySetPath();
     }
 
-    /// <inheritdoc />
-    protected override void OnTraitActivated()
+    private void OnEnable()
     {
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
@@ -75,8 +74,7 @@ public sealed class NpcPathToHome : NpcTraitAction
         TrySetPath();
     }
 
-    /// <inheritdoc />
-    protected override void OnTraitDeactivated()
+    private void OnDisable()
     {
         if (agent != null && agent.isOnNavMesh)
             agent.ResetPath();
