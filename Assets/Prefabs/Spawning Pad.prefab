@@ -130,5 +130,5 @@ MonoBehaviour:
   spawnHeight: 0.05
   minimumSpawnInterval: 2
   maximumSpawnInterval: 5
-  maximumLivingNpcs: 5
+  maximumLivingNpcs: 0
   spawnImmediately: 1

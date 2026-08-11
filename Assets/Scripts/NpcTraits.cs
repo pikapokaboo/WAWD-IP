@@ -9,6 +9,9 @@ public sealed class NpcTrait
     [Tooltip("Unique name used by other scripts to query this trait.")]
     [SerializeField] private string traitName = "New Trait";
 
+    [Tooltip("Show this trait in the NPC's overhead debug label.")]
+    [SerializeField] private bool showInDebugLabel = true;
+
     [Tooltip("Independent chance, or the shared chance for an Either/Or pool.")]
     [SerializeField, Range(0f, 100f)] private float spawnChance = 50f;
 
@@ -22,6 +25,7 @@ public sealed class NpcTrait
     [SerializeField] private List<string> comesWith = new();
 
     public string Name => traitName?.Trim() ?? string.Empty;
+    public bool ShowInDebugLabel => showInDebugLabel;
     public float SpawnChance => spawnChance;
     public string EitherOrPool => eitherOrPool?.Trim() ?? string.Empty;
     public float PoolWeight => Mathf.Max(0f, poolWeight);

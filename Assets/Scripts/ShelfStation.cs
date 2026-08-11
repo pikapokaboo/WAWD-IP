@@ -30,6 +30,7 @@ public sealed class ShelfStation : MonoBehaviour
     [SerializeField] private Color standingAreaColour = new(0.1f, 0.8f, 1f, 0.25f);
 
     private static readonly HashSet<ShelfStation> ActiveShelves = new();
+    private int approachingShopperCount;
 
     public static IEnumerable<ShelfStation> AllActive => ActiveShelves;
     public IReadOnlyList<string> Products => products;
@@ -40,6 +41,17 @@ public sealed class ShelfStation : MonoBehaviour
     public Vector3 LookPosition => lookTarget != null
         ? lookTarget.position
         : transform.position;
+    public bool HasApproachingShopper => approachingShopperCount > 0;
+
+    public void RegisterApproachingShopper()
+    {
+        approachingShopperCount++;
+    }
+
+    public void UnregisterApproachingShopper()
+    {
+        approachingShopperCount = Mathf.Max(0, approachingShopperCount - 1);
+    }
 
     private void Awake()
     {
@@ -89,6 +101,7 @@ public sealed class ShelfStation : MonoBehaviour
     private void OnDisable()
     {
         ActiveShelves.Remove(this);
+        approachingShopperCount = 0;
     }
 
     public bool HasProduct(string productName)

@@ -15,7 +15,8 @@ public sealed class NpcNavigation : MonoBehaviour
     [Tooltip("Destination used when the NPC leaves. If empty, the scene's despawning pad is used.")]
     [SerializeField] private Transform homeTarget;
     [Tooltip("Chance that an NPC shops instead of going directly home.")]
-    [SerializeField, Range(0f, 100f)] private float enterStoreChance = 45f;
+    [SerializeField, Range(0f, 100f)] private float enterStoreChance = 50f;
+    [SerializeField, Min(1)] private int maximumConcurrentShoppers = 6;
 
     [Header("Trait Speeds")]
     [SerializeField, Min(0.1f)] private float slowSpeed = 2f;
@@ -29,16 +30,52 @@ public sealed class NpcNavigation : MonoBehaviour
     [SerializeField] private float shelfFacingYawOffset = 90f;
     [SerializeField, Min(0f)] private float lookDuration = 1.5f;
     [SerializeField, Min(0f)] private float grabDuration = 1.5f;
+    [Tooltip("Temporary right-of-way used while an NPC is stationary at a shelf. Lower is stronger.")]
+    [SerializeField, Range(0, 99)] private int shelfInteractionPriority;
+
+    [Header("Browsing")]
+    [SerializeField, Range(0f, 100f)] private float urgentBrowseChance = 15f;
+    [SerializeField, Range(0f, 100f)] private float casualBrowseChance = 65f;
+    [SerializeField, Range(0f, 100f)] private float defaultBrowseChance = 35f;
+    [SerializeField] private Vector2 browseDurationRange = new(2.5f, 5f);
+
+    [Header("Traffic Avoidance")]
+    [Tooltip("Urgent Shopper priority range. In Unity, lower numbers have right of way.")]
+    [SerializeField] private Vector2Int urgentPriorityRange = new(15, 35);
+    [Tooltip("Casual Shopper priority range. Higher numbers yield more readily.")]
+    [SerializeField] private Vector2Int casualPriorityRange = new(55, 75);
+    [Tooltip("How long an NPC can make almost no progress before briefly stepping aside.")]
+    [SerializeField, Min(0.25f)] private float stuckCheckTime = 1.25f;
+    [SerializeField, Min(0.1f)] private float minimumProgress = 0.12f;
+    [SerializeField, Min(0.2f)] private float sidestepDistance = 0.9f;
+    [Tooltip("Minimum delay before this NPC may perform another make-room manoeuvre.")]
+    [SerializeField, Min(0f)] private float makeRoomCooldown = 3f;
+    [SerializeField, Min(0.25f)] private float overtakeDetectionDistance = 2.25f;
+    [SerializeField, Min(0.1f)] private float overtakeCheckInterval = 0.5f;
+    [SerializeField, Min(0.25f)] private float clearanceProbeDistance = 1.5f;
 
     private NavMeshAgent agent;
     private NpcTraits traits;
     private Animator animator;
     private readonly List<ShelfStation> shoppingRoute = new();
     private readonly List<string> wantedProducts = new();
+    private static int activeShopperCount;
+    private static readonly HashSet<NpcNavigation> ActiveNpcs = new();
+    private bool holdsShoppingSlot;
+    private float nextMakeRoomAllowedTime;
 
     public IReadOnlyList<ShelfStation> ShoppingRoute => shoppingRoute;
     public IReadOnlyList<string> WantedProducts => wantedProducts;
     public string CurrentAction { get; private set; } = "Starting";
+    public int AvoidancePriority => agent != null ? agent.avoidancePriority : -1;
+    public static int ActiveShopperCount => activeShopperCount;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetShopperCount()
+    {
+        activeShopperCount = 0;
+        ActiveNpcs.Clear();
+    }
 
     private IEnumerator Start()
     {
@@ -46,21 +83,35 @@ public sealed class NpcNavigation : MonoBehaviour
         traits = GetComponent<NpcTraits>();
         animator = GetComponentInChildren<Animator>();
 
+        agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+
         // Start runs after Awake, where NpcTraits normally rolls its result.
         if (!traits.HasRolled)
             traits.RollTraits();
 
         ApplyMovementTrait();
+        ApplyAvoidanceTrait();
         FindHomeTarget();
 
-        if (Random.value * 100f < enterStoreChance)
+        bool rolledShopping = Random.value * 100f < enterStoreChance;
+        bool receivedShoppingSlot = rolledShopping && TryTakeShoppingSlot();
+        if (receivedShoppingSlot)
         {
             BuildShoppingRoute();
             for (int i = 0; i < shoppingRoute.Count; i++)
+            {
+                PreferAvailableProduct(i);
+                yield return MaybeBrowse(shoppingRoute[i]);
+                // The shelf may have become occupied while this NPC browsed.
+                PreferAvailableProduct(i);
                 yield return VisitShelf(shoppingRoute[i], wantedProducts[i]);
+            }
+            ReleaseShoppingSlot();
         }
 
-        yield return GoHome();
+        yield return GoHome(rolledShopping && !receivedShoppingSlot
+            ? "Store full - going home"
+            : "Going home");
     }
 
     private void ApplyMovementTrait()
@@ -109,26 +160,56 @@ public sealed class NpcNavigation : MonoBehaviour
         }
     }
 
+    private void PreferAvailableProduct(int currentIndex)
+    {
+        if (currentIndex < 0 || currentIndex >= shoppingRoute.Count)
+            return;
+
+        ShelfStation currentShelf = shoppingRoute[currentIndex];
+        if (currentShelf == null || !currentShelf.HasApproachingShopper)
+            return;
+
+        for (int i = currentIndex + 1; i < shoppingRoute.Count; i++)
+        {
+            ShelfStation alternative = shoppingRoute[i];
+            if (alternative == null || alternative.HasApproachingShopper
+                || alternative == currentShelf)
+                continue;
+
+            (shoppingRoute[currentIndex], shoppingRoute[i]) =
+                (shoppingRoute[i], shoppingRoute[currentIndex]);
+            (wantedProducts[currentIndex], wantedProducts[i]) =
+                (wantedProducts[i], wantedProducts[currentIndex]);
+            return;
+        }
+    }
+
     private IEnumerator VisitShelf(ShelfStation shelf, string product)
     {
         if (shelf == null)
             yield break;
 
+        shelf.RegisterApproachingShopper();
         CurrentAction = $"Going to {product}";
         yield return MoveTo(shelf.StandPosition);
         if (shelf == null || !agent.isOnNavMesh)
+        {
+            if (shelf != null)
+                shelf.UnregisterApproachingShopper();
             yield break;
+        }
 
         agent.isStopped = true;
         agent.updateRotation = false;
+        int normalPriority = agent.avoidancePriority;
+        agent.avoidancePriority = shelfInteractionPriority;
         SetWalking(false);
         CurrentAction = $"Looking at {product}";
         yield return Face(shelf.LookPosition);
 
         if (traits.HasTrait("No Money"))
         {
-            PlayAnimation("Look");
-            yield return new WaitForSeconds(lookDuration);
+            yield return PlayAnimationToCompletion("Look", lookDuration + 5f);
         }
 
         CurrentAction = $"Grabbing {product}";
@@ -139,12 +220,70 @@ public sealed class NpcNavigation : MonoBehaviour
 
         if (agent.isOnNavMesh)
         {
+            agent.avoidancePriority = normalPriority;
             agent.updateRotation = true;
             agent.isStopped = false;
         }
+        shelf.UnregisterApproachingShopper();
     }
 
-    private IEnumerator GoHome()
+    private IEnumerator MaybeBrowse(ShelfStation wantedShelf)
+    {
+        float chance = traits.HasTrait("Urgent Shopper")
+            ? urgentBrowseChance
+            : traits.HasTrait("Casual Shopper")
+                ? casualBrowseChance
+                : defaultBrowseChance;
+
+        if (Random.value * 100f >= chance)
+            yield break;
+
+        List<ShelfStation> choices = new();
+        foreach (ShelfStation shelf in ShelfStation.AllActive)
+        {
+            if (shelf != null && shelf != wantedShelf && !shelf.HasApproachingShopper)
+                choices.Add(shelf);
+        }
+        if (choices.Count == 0)
+            yield break;
+
+        ShelfStation browseShelf = choices[Random.Range(0, choices.Count)];
+        int normalPriority = agent.avoidancePriority;
+        agent.avoidancePriority = 90;
+        CurrentAction = $"Browsing {browseShelf.name}";
+        yield return MoveTo(browseShelf.StandPosition);
+
+        if (browseShelf == null || browseShelf.HasApproachingShopper || !agent.isOnNavMesh)
+        {
+            agent.avoidancePriority = normalPriority;
+            yield break;
+        }
+
+        agent.isStopped = true;
+        agent.updateRotation = false;
+        agent.avoidancePriority = shelfInteractionPriority;
+        SetWalking(false);
+        yield return Face(browseShelf.LookPosition);
+
+        float browseUntil = Time.time + Random.Range(
+            Mathf.Min(browseDurationRange.x, browseDurationRange.y),
+            Mathf.Max(browseDurationRange.x, browseDurationRange.y));
+        while (Time.time < browseUntil && !browseShelf.HasApproachingShopper)
+        {
+            HoldFacing(browseShelf.LookPosition);
+            yield return null;
+        }
+
+        CurrentAction = browseShelf.HasApproachingShopper
+            ? "Giving way to a shopper"
+            : "Finished browsing";
+        agent.updateRotation = true;
+        agent.isStopped = false;
+        agent.avoidancePriority = normalPriority;
+        yield return null;
+    }
+
+    private IEnumerator GoHome(string action)
     {
         FindHomeTarget();
         if (homeTarget == null)
@@ -154,9 +293,39 @@ public sealed class NpcNavigation : MonoBehaviour
             yield break;
         }
 
-        CurrentAction = "Going home";
+        CurrentAction = action;
         yield return MoveTo(homeTarget.position);
         CurrentAction = "Home";
+    }
+
+    private bool TryTakeShoppingSlot()
+    {
+        if (activeShopperCount >= maximumConcurrentShoppers)
+            return false;
+
+        activeShopperCount++;
+        holdsShoppingSlot = true;
+        return true;
+    }
+
+    private void ReleaseShoppingSlot()
+    {
+        if (!holdsShoppingSlot)
+            return;
+
+        holdsShoppingSlot = false;
+        activeShopperCount = Mathf.Max(0, activeShopperCount - 1);
+    }
+
+    private void OnDisable()
+    {
+        ReleaseShoppingSlot();
+        ActiveNpcs.Remove(this);
+    }
+
+    private void OnEnable()
+    {
+        ActiveNpcs.Add(this);
     }
 
     private IEnumerator MoveTo(Vector3 destination)
@@ -169,17 +338,208 @@ public sealed class NpcNavigation : MonoBehaviour
         }
 
         agent.isStopped = false;
-        if (!agent.SetDestination(destination))
+        Vector3 reachableDestination = destination;
+        if (NavMesh.SamplePosition(destination, out NavMeshHit destinationHit,
+                Mathf.Max(0.75f, agent.radius), agent.areaMask))
+            reachableDestination = destinationHit.position;
+
+        if (!agent.SetDestination(reachableDestination))
             yield break;
 
         SetWalking(true);
-        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance + arrivalDistance)
+        Vector3 progressPosition = transform.position;
+        float nextOvertakeCheck = Time.time + Random.Range(0f, overtakeCheckInterval);
+        float nextProgressCheck = Time.time + stuckCheckTime
+            + agent.avoidancePriority * 0.005f;
+        while (agent.pathPending
+               || agent.remainingDistance > agent.stoppingDistance + arrivalDistance)
         {
             if (!agent.isOnNavMesh || agent.pathStatus == NavMeshPathStatus.PathInvalid)
                 break;
+
+            if (Time.time >= nextOvertakeCheck)
+            {
+                if (TryGetSlowerNpcAhead(out NpcNavigation slowerNpc))
+                    yield return OvertakeMovingNpc(reachableDestination, slowerNpc);
+                nextOvertakeCheck = Time.time + overtakeCheckInterval;
+            }
+
+            if (Time.time >= nextProgressCheck)
+            {
+                float progress = Vector3.Distance(transform.position, progressPosition);
+                if (progress < minimumProgress
+                    && Time.time >= nextMakeRoomAllowedTime
+                    && HasNearbyBlockingNpc(reachableDestination))
+                    yield return MakeRoom(reachableDestination, "Making room for another NPC");
+
+                progressPosition = transform.position;
+                nextProgressCheck = Time.time + stuckCheckTime
+                    + agent.avoidancePriority * 0.005f;
+            }
+            SetWalking(agent.pathPending || agent.velocity.sqrMagnitude > 0.01f);
             yield return null;
         }
         SetWalking(false);
+    }
+
+    private IEnumerator MakeRoom(Vector3 originalDestination, string avoidanceAction)
+    {
+        if (!agent.isOnNavMesh)
+            yield break;
+
+        Vector3 routeDirection = originalDestination - transform.position;
+        routeDirection.y = 0f;
+        if (routeDirection.sqrMagnitude < 0.01f)
+            yield break;
+
+        string previousAction = CurrentAction;
+        CurrentAction = avoidanceAction;
+        nextMakeRoomAllowedTime = Time.time + makeRoomCooldown;
+
+        routeDirection.Normalize();
+        Vector3 side = Vector3.Cross(Vector3.up, routeDirection);
+        // Alternate the preferred side and try the opposite side if blocked.
+        if ((GetInstanceID() & 1) == 0)
+            side = -side;
+
+        bool foundA = TryGetSidestep(side, out Vector3 pointA, out float scoreA);
+        bool foundB = TryGetSidestep(-side, out Vector3 pointB, out float scoreB);
+        bool found = foundA || foundB;
+        Vector3 bestPoint = !foundB || (foundA && scoreA >= scoreB) ? pointA : pointB;
+
+        if (found && agent.SetDestination(bestPoint))
+        {
+            float giveUpTime = Time.time + 1.25f;
+            while (agent.pathPending || agent.remainingDistance > arrivalDistance)
+            {
+                if (!agent.isOnNavMesh || Time.time >= giveUpTime)
+                    break;
+                SetWalking(agent.pathPending || agent.velocity.sqrMagnitude > 0.01f);
+                yield return null;
+            }
+        }
+
+        if (agent.isOnNavMesh)
+        {
+            agent.SetDestination(originalDestination);
+            SetWalking(true);
+        }
+        CurrentAction = previousAction;
+    }
+
+    private bool HasNearbyBlockingNpc(Vector3 destination)
+    {
+        Vector3 routeDirection = destination - transform.position;
+        routeDirection.y = 0f;
+        if (routeDirection.sqrMagnitude < 0.01f)
+            return false;
+        routeDirection.Normalize();
+
+        foreach (NpcNavigation other in ActiveNpcs)
+        {
+            if (other == null || other == this || other.agent == null
+                || !other.agent.isOnNavMesh)
+                continue;
+
+            Vector3 offset = other.transform.position - transform.position;
+            offset.y = 0f;
+            float blockingDistance = agent.radius + other.agent.radius + 0.75f;
+            if (offset.sqrMagnitude > blockingDistance * blockingDistance
+                || offset.sqrMagnitude < 0.001f)
+                continue;
+
+            // Only an NPC in or near the forward travel corridor counts as a
+            // blocker; nearby NPCs behind or well to the side are ignored.
+            if (Vector3.Dot(routeDirection, offset.normalized) > 0.35f)
+                return true;
+        }
+        return false;
+    }
+
+    private bool TryGetSidestep(Vector3 side, out Vector3 point, out float score)
+    {
+        return TryGetOpenNavMeshPoint(
+            transform.position + side * sidestepDistance, out point, out score);
+    }
+
+    private bool TryGetOpenNavMeshPoint(Vector3 desired, out Vector3 point, out float score)
+    {
+        point = transform.position;
+        score = float.NegativeInfinity;
+        if (!NavMesh.SamplePosition(desired,
+                out NavMeshHit sample, sidestepDistance, agent.areaMask))
+            return false;
+
+        NavMeshPath path = new();
+        if (!agent.CalculatePath(sample.position, path)
+            || path.status != NavMeshPathStatus.PathComplete)
+            return false;
+
+        point = sample.position;
+        score = 0f;
+        for (int i = 0; i < 8; i++)
+        {
+            float angle = i * 45f * Mathf.Deg2Rad;
+            Vector3 direction = new(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
+            if (NavMesh.Raycast(point, point + direction * clearanceProbeDistance,
+                    out NavMeshHit edge, agent.areaMask))
+                score += Vector3.Distance(point, edge.position);
+            else
+                score += clearanceProbeDistance;
+        }
+        return true;
+    }
+
+    private IEnumerator OvertakeMovingNpc(
+        Vector3 originalDestination, NpcNavigation slowerNpc)
+    {
+        if (slowerNpc == null || slowerNpc.agent == null)
+            yield break;
+
+        string previousAction = CurrentAction;
+        CurrentAction = "Overtaking slower NPC";
+
+        Vector3 slowerForward = slowerNpc.agent.velocity.normalized;
+        Vector3 side = Vector3.Cross(Vector3.up, slowerForward);
+        Vector3 predictedLead = slowerNpc.transform.position
+            + slowerForward * Mathf.Max(1.2f, slowerNpc.agent.radius * 2f);
+
+        bool foundA = TryGetOpenNavMeshPoint(
+            predictedLead + side * sidestepDistance, out _, out float scoreA);
+        bool foundB = TryGetOpenNavMeshPoint(
+            predictedLead - side * sidestepDistance, out _, out float scoreB);
+        if (!foundA && !foundB)
+        {
+            CurrentAction = previousAction;
+            yield break;
+        }
+        if (!foundA || (foundB && scoreB > scoreA))
+            side = -side;
+
+        float deadline = Time.time + 3f;
+        while (Time.time < deadline && slowerNpc != null
+               && slowerNpc.agent != null && slowerNpc.agent.isOnNavMesh)
+        {
+            Vector3 movingForward = slowerNpc.agent.velocity.sqrMagnitude > 0.04f
+                ? slowerNpc.agent.velocity.normalized
+                : slowerForward;
+            Vector3 movingTarget = slowerNpc.transform.position
+                + movingForward * Mathf.Max(1.2f, slowerNpc.agent.radius * 2f)
+                + side * sidestepDistance;
+            if (NavMesh.SamplePosition(movingTarget, out NavMeshHit hit,
+                    sidestepDistance, agent.areaMask))
+                agent.SetDestination(hit.position);
+
+            Vector3 relative = transform.position - slowerNpc.transform.position;
+            relative.y = 0f;
+            if (Vector3.Dot(movingForward, relative) > slowerNpc.agent.radius * 1.5f)
+                break;
+            yield return null;
+        }
+
+        if (agent.isOnNavMesh)
+            agent.SetDestination(originalDestination);
+        CurrentAction = previousAction;
     }
 
     private IEnumerator Face(Vector3 target)
@@ -200,6 +560,20 @@ public sealed class NpcNavigation : MonoBehaviour
         transform.rotation = targetRotation;
     }
 
+    private void HoldFacing(Vector3 target)
+    {
+        Vector3 direction = target - transform.position;
+        direction.y = 0f;
+        if (direction.sqrMagnitude < 0.001f)
+            return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(
+            direction.normalized, Vector3.up)
+            * Quaternion.Euler(0f, shelfFacingYawOffset, 0f);
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+    }
+
     private void FindHomeTarget()
     {
         if (homeTarget != null)
@@ -212,8 +586,15 @@ public sealed class NpcNavigation : MonoBehaviour
 
     private void SetWalking(bool walking)
     {
-        if (animator != null)
-            animator.SetBool("IsWalking", walking);
+        if (animator == null)
+            return;
+
+        animator.SetBool("IsWalking", walking);
+        // Only scale locomotion. Shelf interactions and idle animations should
+        // retain their authored playback speed.
+        animator.speed = walking
+            ? Mathf.Max(0.1f, agent.speed / normalSpeed)
+            : 1f;
     }
 
     private void PlayAnimation(string stateName)
@@ -224,6 +605,81 @@ public sealed class NpcNavigation : MonoBehaviour
         animator.ResetTrigger("Look");
         animator.ResetTrigger("Grab");
         animator.CrossFadeInFixedTime(stateName, 0.1f, 0, 0f);
+    }
+
+    private IEnumerator PlayAnimationToCompletion(string stateName, float timeout)
+    {
+        if (animator == null || string.IsNullOrWhiteSpace(stateName))
+            yield break;
+
+        PlayAnimation(stateName);
+        float deadline = Time.time + Mathf.Max(1f, timeout);
+
+        // Allow the cross-fade to enter the requested state.
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName(stateName)
+               && Time.time < deadline)
+            yield return null;
+
+        // Wait for the clip itself, rather than guessing its duration.
+        while (Time.time < deadline)
+        {
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+            if (!state.IsName(stateName) || state.normalizedTime >= 1f)
+                break;
+            yield return null;
+        }
+    }
+
+    private void ApplyAvoidanceTrait()
+    {
+        Vector2Int range = traits.HasTrait("Urgent Shopper")
+            ? urgentPriorityRange
+            : traits.HasTrait("Casual Shopper")
+                ? casualPriorityRange
+                : new Vector2Int(25, 75);
+
+        int minimum = Mathf.Clamp(Mathf.Min(range.x, range.y), 0, 99);
+        int maximum = Mathf.Clamp(Mathf.Max(range.x, range.y), minimum, 99);
+        int movementOffset = traits.HasTrait("Slow Walker")
+            ? -10
+            : traits.HasTrait("Fast Walker") ? 10 : 0;
+        agent.avoidancePriority = Mathf.Clamp(
+            Random.Range(minimum, maximum + 1) + movementOffset, 0, 99);
+    }
+
+    private bool TryGetSlowerNpcAhead(out NpcNavigation slowerNpc)
+    {
+        slowerNpc = null;
+        if (agent == null || agent.velocity.sqrMagnitude < 0.04f)
+            return false;
+
+        Vector3 forward = agent.velocity.normalized;
+        float closestDistanceSquared = float.PositiveInfinity;
+        foreach (NpcNavigation other in ActiveNpcs)
+        {
+            if (other == null || other == this || other.agent == null
+                || !other.agent.isOnNavMesh || other.agent.speed >= agent.speed - 0.1f
+                || other.agent.velocity.sqrMagnitude < 0.04f)
+                continue;
+
+            Vector3 otherDirection = other.agent.velocity.normalized;
+            if (Vector3.Dot(forward, otherDirection) < 0.75f)
+                continue;
+
+            Vector3 offset = other.transform.position - transform.position;
+            offset.y = 0f;
+            float distanceSquared = offset.sqrMagnitude;
+            if (distanceSquared > overtakeDetectionDistance * overtakeDetectionDistance
+                || distanceSquared >= closestDistanceSquared)
+                continue;
+
+            if (Vector3.Dot(forward, offset.normalized) > 0.55f)
+            {
+                closestDistanceSquared = distanceSquared;
+                slowerNpc = other;
+            }
+        }
+        return slowerNpc != null;
     }
 
     private readonly struct ProductLocation
@@ -256,5 +712,19 @@ public sealed class NpcNavigation : MonoBehaviour
         turnSpeed = Mathf.Max(1f, turnSpeed);
         lookDuration = Mathf.Max(0f, lookDuration);
         grabDuration = Mathf.Max(0f, grabDuration);
+        browseDurationRange.x = Mathf.Max(0f, browseDurationRange.x);
+        browseDurationRange.y = Mathf.Max(0f, browseDurationRange.y);
+        stuckCheckTime = Mathf.Max(0.25f, stuckCheckTime);
+        minimumProgress = Mathf.Max(0.1f, minimumProgress);
+        sidestepDistance = Mathf.Max(0.2f, sidestepDistance);
+        makeRoomCooldown = Mathf.Max(0f, makeRoomCooldown);
+        overtakeDetectionDistance = Mathf.Max(0.25f, overtakeDetectionDistance);
+        overtakeCheckInterval = Mathf.Max(0.1f, overtakeCheckInterval);
+        clearanceProbeDistance = Mathf.Max(0.25f, clearanceProbeDistance);
+        maximumConcurrentShoppers = Mathf.Max(1, maximumConcurrentShoppers);
+        urgentPriorityRange.x = Mathf.Clamp(urgentPriorityRange.x, 0, 99);
+        urgentPriorityRange.y = Mathf.Clamp(urgentPriorityRange.y, 0, 99);
+        casualPriorityRange.x = Mathf.Clamp(casualPriorityRange.x, 0, 99);
+        casualPriorityRange.y = Mathf.Clamp(casualPriorityRange.y, 0, 99);
     }
 }

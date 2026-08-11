@@ -14,6 +14,11 @@ public sealed class NpcDebugLabel : MonoBehaviour
     [SerializeField] private Color traitColour = new(1f, 0.8f, 0.2f);
     [SerializeField] private Color productColour = new(0.35f, 1f, 0.45f);
 
+    [Header("Displayed Information")]
+    [SerializeField] private bool showCurrentAction = true;
+    [SerializeField] private bool showAvoidancePriorityValue = true;
+    [SerializeField] private bool showWantedProducts = true;
+
     private NpcTraits traits;
     private NpcNavigation navigation;
     private GUIStyle style;
@@ -53,18 +58,37 @@ public sealed class NpcDebugLabel : MonoBehaviour
     private string BuildMessage()
     {
         StringBuilder message = new();
-        AppendColoured(message, navigation.CurrentAction, actionColour);
-        message.Append("\n");
+        if (showCurrentAction)
+        {
+            AppendColoured(message, navigation.CurrentAction, actionColour);
+            message.Append("\n");
+        }
         AppendColoured(message, "Traits: ", traitColour);
         IReadOnlyList<NpcTrait> active = traits.ActiveTraits;
+        int visibleTraitCount = 0;
         for (int i = 0; i < active.Count; i++)
         {
-            if (i > 0)
+            if (!active[i].ShowInDebugLabel)
+                continue;
+
+            if (visibleTraitCount > 0)
                 AppendColoured(message, ", ", traitColour);
             AppendColoured(message, active[i].Name, GetTraitColour(active[i].Name));
+            visibleTraitCount++;
         }
 
-        if (navigation.WantedProducts.Count > 0)
+        if (visibleTraitCount == 0)
+            AppendColoured(message, "Hidden", traitColour);
+
+        if (showAvoidancePriorityValue && navigation.AvoidancePriority >= 0)
+        {
+            message.Append("\n");
+            AppendColoured(message,
+                $"Avoidance priority: {navigation.AvoidancePriority}",
+                actionColour);
+        }
+
+        if (showWantedProducts && navigation.WantedProducts.Count > 0)
         {
             message.Append("\n");
             AppendColoured(message, "Wants: ", productColour);
@@ -80,8 +104,11 @@ public sealed class NpcDebugLabel : MonoBehaviour
 
     private Color GetTraitColour(string traitName)
     {
-        if (traitName == "No Money" || traitName == "Slow Walker")
+        if (traitName == "No Money" || traitName == "Slow Walker"
+            || traitName == "Urgent Shopper")
             return new Color(1f, 0.4f, 0.35f);
+        if (traitName == "Casual Shopper")
+            return new Color(0.45f, 0.7f, 1f);
         if (traitName == "Heavy Spender" || traitName == "Fast Walker")
             return new Color(0.45f, 1f, 0.45f);
         return traitColour;

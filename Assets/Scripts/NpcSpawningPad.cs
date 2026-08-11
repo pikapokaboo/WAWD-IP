@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Spawns NPCs at a configurable interval while enforcing a live NPC limit.
+/// Spawns NPCs at a configurable interval with an optional live NPC safety limit.
 /// </summary>
 [DisallowMultipleComponent]
 public sealed class NpcSpawningPad : MonoBehaviour
@@ -26,7 +26,8 @@ public sealed class NpcSpawningPad : MonoBehaviour
     [Header("Spawn Timing")]
     [SerializeField, Min(0.1f)] private float minimumSpawnInterval = 2f;
     [SerializeField, Min(0.1f)] private float maximumSpawnInterval = 5f;
-    [SerializeField, Min(1)] private int maximumLivingNpcs = 5;
+    [Tooltip("Optional safety limit. Set to 0 to allow continuous spawning.")]
+    [SerializeField, Min(0)] private int maximumLivingNpcs;
     [SerializeField] private bool spawnImmediately = true;
 
     private readonly List<GameObject> livingNpcs = new();
@@ -44,7 +45,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
 
         RemoveDestroyedNpcs();
 
-        if (livingNpcs.Count < maximumLivingNpcs)
+        if (maximumLivingNpcs == 0 || livingNpcs.Count < maximumLivingNpcs)
             SpawnNpc();
 
         nextSpawnTime = Time.time + GetRandomSpawnDelay();
@@ -63,7 +64,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
         }
 
         RemoveDestroyedNpcs();
-        if (livingNpcs.Count >= maximumLivingNpcs)
+        if (maximumLivingNpcs > 0 && livingNpcs.Count >= maximumLivingNpcs)
             return;
 
         Vector3 position = spawnPoint != null
@@ -89,7 +90,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
     {
         minimumSpawnInterval = Mathf.Max(0.1f, minimumSpawnInterval);
         maximumSpawnInterval = Mathf.Max(minimumSpawnInterval, maximumSpawnInterval);
-        maximumLivingNpcs = Mathf.Max(1, maximumLivingNpcs);
+        maximumLivingNpcs = Mathf.Max(0, maximumLivingNpcs);
         spawnHeight = Mathf.Max(0f, spawnHeight);
     }
 }

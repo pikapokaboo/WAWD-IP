@@ -45,12 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f2d772d2104a98bf8c96104218824a, type: 3}
   m_Name:
   m_EditorClassIdentifier:
+  open: 0
   doorVisual: {fileID: 0}
-  detectionRadius: 3
+  handleVisual: {fileID: 0}
   openAngle: 95
+  hingeOnPositiveSide: 0
+  automaticallyOpenForNpcs: 1
+  detectionRadius: 3
   swingSpeed: 180
   closeDelay: 0.75
-  hingeOnPositiveSide: 0
+  closedPoseStored: 0
+  closedLocalPosition: {x: 0, y: 0, z: 0}
+  closedLocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  handleClosedLocalPosition: {x: 0, y: 0, z: 0}
+  handleClosedLocalRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1001 &6774618658486615293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -121,11 +129,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -888600520273224937, guid: f3b64f95e7c62a04bb484378cdaf31e2, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7262866279356285446, guid: f3b64f95e7c62a04bb484378cdaf31e2, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2450325783812515836, guid: f3b64f95e7c62a04bb484378cdaf31e2, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
