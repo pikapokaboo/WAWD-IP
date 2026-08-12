@@ -62,6 +62,7 @@ public sealed class NpcNavigation : MonoBehaviour
     private NpcTraits traits;
     private Animator animator;
     private NpcSpeechBubble speech;
+    private NpcSitting sitting;
     private readonly List<ShelfStation> shoppingRoute = new();
     private readonly List<string> wantedProducts = new();
     private static int activeShopperCount;
@@ -94,6 +95,7 @@ public sealed class NpcNavigation : MonoBehaviour
         traits = GetComponent<NpcTraits>();
         animator = GetComponentInChildren<Animator>();
         speech = GetComponent<NpcSpeechBubble>();
+        sitting = GetComponent<NpcSitting>();
 
         CapsuleCollider bodyCollider = GetComponent<CapsuleCollider>();
         agent.radius = bodyCollider != null ? bodyCollider.radius : personalSpaceRadius;
@@ -132,6 +134,7 @@ public sealed class NpcNavigation : MonoBehaviour
         // Shopping includes collecting, queueing, and paying. The slot is only
         // freed once this NPC actually changes state to going home.
         ReleaseShoppingSlot();
+        yield return MaybeRest();
         yield return GoHome(rolledShopping && !receivedShoppingSlot
             ? "Store full - going home"
             : "Going home");
@@ -325,6 +328,49 @@ public sealed class NpcNavigation : MonoBehaviour
         agent.isStopped = false;
         agent.avoidancePriority = normalPriority;
         yield return null;
+    }
+
+    private IEnumerator MaybeRest()
+    {
+        if (sitting == null || !traits.HasTrait("Tired"))
+            yield break;
+
+        ChairStation chair = FindNearestAvailableChair();
+        if (chair == null)
+            yield break;
+
+        CurrentAction = "Feeling tired";
+        if (!sitting.TryBeginSitSequence(chair))
+            yield break;
+
+        while (sitting.IsSitting)
+        {
+            CurrentAction = "Resting";
+            yield return null;
+        }
+
+        CurrentAction = "Rested";
+    }
+
+    private ChairStation FindNearestAvailableChair()
+    {
+        ChairStation closest = null;
+        float closestSqrDistance = float.PositiveInfinity;
+
+        foreach (ChairStation chair in ChairStation.AllActive)
+        {
+            if (chair == null || !chair.IsAvailableFor(sitting))
+                continue;
+
+            float sqrDistance = (chair.ApproachPosition - transform.position).sqrMagnitude;
+            if (sqrDistance < closestSqrDistance)
+            {
+                closestSqrDistance = sqrDistance;
+                closest = chair;
+            }
+        }
+
+        return closest;
     }
 
     private IEnumerator GoHome(string action)
