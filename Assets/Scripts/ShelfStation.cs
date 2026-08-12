@@ -31,6 +31,7 @@ public sealed class ShelfStation : MonoBehaviour
 
     private static readonly HashSet<ShelfStation> ActiveShelves = new();
     private int approachingShopperCount;
+    private bool markerVisible;
 
     public static IEnumerable<ShelfStation> AllActive => ActiveShelves;
     public IReadOnlyList<string> Products => products;
@@ -58,11 +59,26 @@ public sealed class ShelfStation : MonoBehaviour
         if (standingPosition == null)
             return;
 
-        // The marker is editing data, not part of the visible game world.
+        SetRuntimeMarkerVisibility(false);
+    }
+
+    private void Update()
+    {
+        if (markerVisible != DeveloperConsole.ShowInteractionMarkers)
+            SetRuntimeMarkerVisibility(DeveloperConsole.ShowInteractionMarkers);
+    }
+
+    private void SetRuntimeMarkerVisibility(bool visible)
+    {
+        if (standingPosition == null)
+            return;
+
+        markerVisible = visible;
         foreach (Renderer markerRenderer in
                  standingPosition.GetComponentsInChildren<Renderer>(true))
-            markerRenderer.enabled = false;
+            markerRenderer.enabled = visible;
 
+        // Debug markers must never affect navigation or physics.
         foreach (Collider markerCollider in
                  standingPosition.GetComponentsInChildren<Collider>(true))
             markerCollider.enabled = false;
@@ -70,7 +86,8 @@ public sealed class ShelfStation : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!showStandingArea || standingPosition == null)
+        if (!DeveloperConsole.ShowInteractionMarkers || !showStandingArea
+            || standingPosition == null)
             return;
 
         Matrix4x4 previousMatrix = Gizmos.matrix;

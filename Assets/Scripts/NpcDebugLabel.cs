@@ -18,6 +18,7 @@ public sealed class NpcDebugLabel : MonoBehaviour
     [SerializeField] private bool showCurrentAction = true;
     [SerializeField] private bool showAvoidancePriorityValue = true;
     [SerializeField] private bool showWantedProducts = true;
+    [SerializeField] private bool showCheckoutQueueNumber = true;
 
     private NpcTraits traits;
     private NpcNavigation navigation;
@@ -32,7 +33,8 @@ public sealed class NpcDebugLabel : MonoBehaviour
 
     private void OnGUI()
     {
-        if (!showDebugNote || Camera.main == null || traits == null || navigation == null)
+        if (!DeveloperConsole.ShowNpcDebug || !showDebugNote || Camera.main == null
+            || traits == null || navigation == null)
             return;
 
         Vector3 screen = Camera.main.WorldToScreenPoint(
@@ -85,6 +87,14 @@ public sealed class NpcDebugLabel : MonoBehaviour
             message.Append("\n");
             AppendColoured(message,
                 $"Avoidance priority: {navigation.AvoidancePriority}",
+                actionColour);
+        }
+
+        if (showCheckoutQueueNumber && navigation.CheckoutQueueNumber > 0)
+        {
+            message.Append("\n");
+            AppendColoured(message,
+                $"Checkout ticket: {navigation.CheckoutQueueNumber}",
                 actionColour);
         }
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3430047859680791773}
   - component: {fileID: 3430047859680791774}
   - component: {fileID: 3430047859680791775}
+  - component: {fileID: 3430047859680791776}
   m_Layer: 8
   m_Name: NPChibi
   m_TagString: NPC
@@ -30,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 8770770118774919518}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.7512, y: 0.33209, z: 9.4081}
-  m_LocalScale: {x: 1.4, y: 1.7, z: 1.4}
+  m_LocalPosition: {x: 6.756, y: 0.49538, z: 9.4112}
+  m_LocalScale: {x: 1.3000001, y: 1.5, z: 1.3000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6142015932178452832}
@@ -79,48 +80,121 @@ MonoBehaviour:
     eitherOrPool: Walking Speed
     poolWeight: 1
     comesWith: []
+    weightModifiers:
+    - requiredTrait: Child
+      weightMultiplier: 0.5
+    - requiredTrait: Teen
+      weightMultiplier: 0.35
+    - requiredTrait: Young Adult
+      weightMultiplier: 0.5
+    - requiredTrait: Adult
+      weightMultiplier: 0.8
+    - requiredTrait: Elderly
+      weightMultiplier: 4
   - traitName: Normal Walker
     showInDebugLabel: 1
     spawnChance: 100
     eitherOrPool: Walking Speed
     poolWeight: 1
     comesWith: []
+    weightModifiers:
+    - requiredTrait: Child
+      weightMultiplier: 1
+    - requiredTrait: Teen
+      weightMultiplier: 1
+    - requiredTrait: Young Adult
+      weightMultiplier: 1
+    - requiredTrait: Adult
+      weightMultiplier: 1.3
+    - requiredTrait: Elderly
+      weightMultiplier: 0.6
   - traitName: Fast Walker
     showInDebugLabel: 1
     spawnChance: 100
     eitherOrPool: Walking Speed
     poolWeight: 1
     comesWith: []
+    weightModifiers:
+    - requiredTrait: Child
+      weightMultiplier: 1.5
+    - requiredTrait: Teen
+      weightMultiplier: 1.65
+    - requiredTrait: Young Adult
+      weightMultiplier: 1.5
+    - requiredTrait: Adult
+      weightMultiplier: 0.9
+    - requiredTrait: Elderly
+      weightMultiplier: 0.15
   - traitName: Light Spender
     showInDebugLabel: 1
     spawnChance: 100
     eitherOrPool: Spending Type
     poolWeight: 40
     comesWith: []
+    weightModifiers: []
   - traitName: Heavy Spender
     showInDebugLabel: 1
     spawnChance: 100
     eitherOrPool: Spending Type
     poolWeight: 40
     comesWith: []
+    weightModifiers: []
   - traitName: No Money
     showInDebugLabel: 1
     spawnChance: 100
     eitherOrPool: Spending Type
     poolWeight: 20
     comesWith: []
+    weightModifiers: []
   - traitName: Urgent Shopper
     showInDebugLabel: 1
     spawnChance: 100
     eitherOrPool: Avoidance Priority
     poolWeight: 1
     comesWith: []
+    weightModifiers: []
   - traitName: Casual Shopper
     showInDebugLabel: 1
     spawnChance: 100
     eitherOrPool: Avoidance Priority
     poolWeight: 1
     comesWith: []
+    weightModifiers: []
+  - traitName: Child
+    showInDebugLabel: 1
+    spawnChance: 100
+    eitherOrPool: Age Group
+    poolWeight: 10
+    comesWith: []
+    weightModifiers: []
+  - traitName: Teen
+    showInDebugLabel: 1
+    spawnChance: 100
+    eitherOrPool: Age Group
+    poolWeight: 20
+    comesWith: []
+    weightModifiers: []
+  - traitName: Young Adult
+    showInDebugLabel: 1
+    spawnChance: 100
+    eitherOrPool: Age Group
+    poolWeight: 25
+    comesWith: []
+    weightModifiers: []
+  - traitName: Adult
+    showInDebugLabel: 1
+    spawnChance: 100
+    eitherOrPool: Age Group
+    poolWeight: 35
+    comesWith: []
+    weightModifiers: []
+  - traitName: Elderly
+    showInDebugLabel: 1
+    spawnChance: 100
+    eitherOrPool: Age Group
+    poolWeight: 10
+    comesWith: []
+    weightModifiers: []
   rollOnAwake: 1
   logResult: 0
 --- !u!195 &3430047859680791773
@@ -166,6 +240,7 @@ MonoBehaviour:
   arrivalDistance: 0.08
   turnSpeed: 360
   shelfFacingYawOffset: 90
+  checkoutMarkerYawOffset: 0
   lookDuration: 1.5
   grabDuration: 1.5
   shelfInteractionPriority: 0
@@ -173,6 +248,7 @@ MonoBehaviour:
   casualBrowseChance: 65
   defaultBrowseChance: 35
   browseDurationRange: {x: 2.5, y: 5}
+  personalSpaceRadius: 0.75
   urgentPriorityRange: {x: 15, y: 35}
   casualPriorityRange: {x: 55, y: 75}
   stuckCheckTime: 1.25
@@ -203,6 +279,28 @@ MonoBehaviour:
   showCurrentAction: 1
   showAvoidancePriorityValue: 1
   showWantedProducts: 1
+  showCheckoutQueueNumber: 1
+--- !u!114 &3430047859680791776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770770118774919518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d60ef72fc414a96b44c56df83413bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcSpeechBubble
+  height: 3.65
+  defaultDuration: 2.75
+  fontSize: 17
+  maximumDistance: 35
+  bubbleColour: {r: 0.05, g: 0.06, b: 0.08, a: 0.82}
+  textColour: {r: 1, g: 1, b: 1, a: 1}
+  slowWalkerReactionChance: 40
+  crowdingReactionChance: 55
+  reactionCooldown: 8
 --- !u!1001 &5960069421697611403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263,6 +361,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5028815728566405330, guid: 02faba632a10a954b877426821a5819b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 845a3188257632146825358356958c38, type: 2}
     - target: {fileID: 919132149155446097, guid: 02faba632a10a954b877426821a5819b, type: 3}
       propertyPath: m_Name
       value: BaseMesh_Chibi 1

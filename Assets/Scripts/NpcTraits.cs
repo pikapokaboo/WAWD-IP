@@ -24,12 +24,26 @@ public sealed class NpcTrait
     [Tooltip("Traits automatically added when this trait is selected.")]
     [SerializeField] private List<string> comesWith = new();
 
+    [Tooltip("Multiplies this trait's pool weight when another named trait is active.")]
+    [SerializeField] private List<NpcTraitWeightModifier> weightModifiers = new();
+
     public string Name => traitName?.Trim() ?? string.Empty;
     public bool ShowInDebugLabel => showInDebugLabel;
     public float SpawnChance => spawnChance;
     public string EitherOrPool => eitherOrPool?.Trim() ?? string.Empty;
     public float PoolWeight => Mathf.Max(0f, poolWeight);
     public IReadOnlyList<string> ComesWith => comesWith;
+    public IReadOnlyList<NpcTraitWeightModifier> WeightModifiers => weightModifiers;
+}
+
+[Serializable]
+public sealed class NpcTraitWeightModifier
+{
+    [SerializeField] private string requiredTrait;
+    [SerializeField, Min(0f)] private float weightMultiplier = 1f;
+
+    public string RequiredTrait => requiredTrait?.Trim() ?? string.Empty;
+    public float WeightMultiplier => Mathf.Max(0f, weightMultiplier);
 }
 
 /// <summary>
@@ -92,12 +106,16 @@ public sealed class NpcTraits : MonoBehaviour
             pool.Add(trait);
         }
 
-        foreach (List<NpcTrait> pool in pools.Values)
+        // Resolve age first because other trait pools may condition their
+        // weights on the selected age group.
+        if (pools.TryGetValue("Age Group", out List<NpcTrait> agePool))
         {
-            if (pool.Count > 0 && Roll(pool[0].SpawnChance))
-                SelectWithDependencies(ChooseWeighted(pool), new HashSet<string>(
-                    StringComparer.OrdinalIgnoreCase));
+            RollPool(agePool);
+            pools.Remove("Age Group");
         }
+
+        foreach (List<NpcTrait> pool in pools.Values)
+            RollPool(pool);
 
         HasRolled = true;
         TraitsRolled?.Invoke();
@@ -154,11 +172,18 @@ public sealed class NpcTraits : MonoBehaviour
         return null;
     }
 
-    private static NpcTrait ChooseWeighted(List<NpcTrait> pool)
+    private void RollPool(List<NpcTrait> pool)
+    {
+        if (pool.Count > 0 && Roll(pool[0].SpawnChance))
+            SelectWithDependencies(ChooseWeighted(pool), new HashSet<string>(
+                StringComparer.OrdinalIgnoreCase));
+    }
+
+    private NpcTrait ChooseWeighted(List<NpcTrait> pool)
     {
         float totalWeight = 0f;
         foreach (NpcTrait trait in pool)
-            totalWeight += trait.PoolWeight;
+            totalWeight += GetEffectiveWeight(trait);
 
         if (totalWeight <= 0f)
             return pool[UnityEngine.Random.Range(0, pool.Count)];
@@ -166,12 +191,24 @@ public sealed class NpcTraits : MonoBehaviour
         float result = UnityEngine.Random.value * totalWeight;
         foreach (NpcTrait trait in pool)
         {
-            result -= trait.PoolWeight;
+            result -= GetEffectiveWeight(trait);
             if (result <= 0f)
                 return trait;
         }
 
         return pool[^1];
+    }
+
+    private float GetEffectiveWeight(NpcTrait trait)
+    {
+        float weight = trait.PoolWeight;
+        foreach (NpcTraitWeightModifier modifier in trait.WeightModifiers)
+        {
+            if (!string.IsNullOrWhiteSpace(modifier.RequiredTrait)
+                && activeNames.Contains(modifier.RequiredTrait))
+                weight *= modifier.WeightMultiplier;
+        }
+        return Mathf.Max(0f, weight);
     }
 
     private static bool IsValid(NpcTrait trait)

@@ -28,6 +28,8 @@ public sealed class NpcNavigation : MonoBehaviour
     [SerializeField, Min(1f)] private float turnSpeed = 360f;
     [Tooltip("Corrects models whose visible forward direction differs from Unity's blue Z axis.")]
     [SerializeField] private float shelfFacingYawOffset = 90f;
+    [Tooltip("Model correction when matching a checkout marker's red X arrow.")]
+    [SerializeField] private float checkoutMarkerYawOffset;
     [SerializeField, Min(0f)] private float lookDuration = 1.5f;
     [SerializeField, Min(0f)] private float grabDuration = 1.5f;
     [Tooltip("Temporary right-of-way used while an NPC is stationary at a shelf. Lower is stronger.")]
@@ -40,6 +42,8 @@ public sealed class NpcNavigation : MonoBehaviour
     [SerializeField] private Vector2 browseDurationRange = new(2.5f, 5f);
 
     [Header("Traffic Avoidance")]
+    [Tooltip("Navigation-only personal space. Larger values make NPCs steer away sooner without enlarging their collider.")]
+    [SerializeField, Min(0.1f)] private float personalSpaceRadius = 1f;
     [Tooltip("Urgent Shopper priority range. In Unity, lower numbers have right of way.")]
     [SerializeField] private Vector2Int urgentPriorityRange = new(15, 35);
     [Tooltip("Casual Shopper priority range. Higher numbers yield more readily.")]
@@ -57,18 +61,22 @@ public sealed class NpcNavigation : MonoBehaviour
     private NavMeshAgent agent;
     private NpcTraits traits;
     private Animator animator;
+    private NpcSpeechBubble speech;
     private readonly List<ShelfStation> shoppingRoute = new();
     private readonly List<string> wantedProducts = new();
     private static int activeShopperCount;
     private static readonly HashSet<NpcNavigation> ActiveNpcs = new();
     private bool holdsShoppingSlot;
     private float nextMakeRoomAllowedTime;
+    private bool visuallyAtCheckoutMarker;
 
     public IReadOnlyList<ShelfStation> ShoppingRoute => shoppingRoute;
     public IReadOnlyList<string> WantedProducts => wantedProducts;
     public string CurrentAction { get; private set; } = "Starting";
     public int AvoidancePriority => agent != null ? agent.avoidancePriority : -1;
     public static int ActiveShopperCount => activeShopperCount;
+    public int CheckoutQueueNumber { get; private set; }
+    public bool ReachedCheckoutMarker { get; private set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetShopperCount()
@@ -82,7 +90,10 @@ public sealed class NpcNavigation : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         traits = GetComponent<NpcTraits>();
         animator = GetComponentInChildren<Animator>();
+        speech = GetComponent<NpcSpeechBubble>();
 
+        CapsuleCollider bodyCollider = GetComponent<CapsuleCollider>();
+        agent.radius = bodyCollider != null ? bodyCollider.radius : personalSpaceRadius;
         agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 
         // Start runs after Awake, where NpcTraits normally rolls its result.
@@ -101,14 +112,23 @@ public sealed class NpcNavigation : MonoBehaviour
             for (int i = 0; i < shoppingRoute.Count; i++)
             {
                 PreferAvailableProduct(i);
+                speech?.ThinkAboutProduct(wantedProducts[i]);
                 yield return MaybeBrowse(shoppingRoute[i]);
                 // The shelf may have become occupied while this NPC browsed.
                 PreferAvailableProduct(i);
                 yield return VisitShelf(shoppingRoute[i], wantedProducts[i]);
             }
-            ReleaseShoppingSlot();
+            if (!traits.HasTrait("No Money") && wantedProducts.Count > 0)
+            {
+                CheckoutStation checkout = FindFirstObjectByType<CheckoutStation>();
+                if (checkout != null)
+                    yield return checkout.Checkout(this);
+            }
         }
 
+        // Shopping includes collecting, queueing, and paying. The slot is only
+        // freed once this NPC actually changes state to going home.
+        ReleaseShoppingSlot();
         yield return GoHome(rolledShopping && !receivedShoppingSlot
             ? "Store full - going home"
             : "Going home");
@@ -209,7 +229,12 @@ public sealed class NpcNavigation : MonoBehaviour
 
         if (traits.HasTrait("No Money"))
         {
+            speech?.CommentOnFoundProduct(true);
             yield return PlayAnimationToCompletion("Look", lookDuration + 5f);
+        }
+        else
+        {
+            speech?.CommentOnFoundProduct(false);
         }
 
         CurrentAction = $"Grabbing {product}";
@@ -227,7 +252,7 @@ public sealed class NpcNavigation : MonoBehaviour
         shelf.UnregisterApproachingShopper();
     }
 
-    private IEnumerator MaybeBrowse(ShelfStation wantedShelf)
+    private IEnumerator MaybeBrowse(ShelfStation wantedShelf, bool force = false)
     {
         float chance = traits.HasTrait("Urgent Shopper")
             ? urgentBrowseChance
@@ -235,7 +260,7 @@ public sealed class NpcNavigation : MonoBehaviour
                 ? casualBrowseChance
                 : defaultBrowseChance;
 
-        if (Random.value * 100f >= chance)
+        if (!force && Random.value * 100f >= chance)
             yield break;
 
         List<ShelfStation> choices = new();
@@ -251,6 +276,7 @@ public sealed class NpcNavigation : MonoBehaviour
         int normalPriority = agent.avoidancePriority;
         agent.avoidancePriority = 90;
         CurrentAction = $"Browsing {browseShelf.name}";
+        speech?.CommentOnBrowsing();
         yield return MoveTo(browseShelf.StandPosition);
 
         if (browseShelf == null || browseShelf.HasApproachingShopper || !agent.isOnNavMesh)
@@ -277,6 +303,7 @@ public sealed class NpcNavigation : MonoBehaviour
         CurrentAction = browseShelf.HasApproachingShopper
             ? "Giving way to a shopper"
             : "Finished browsing";
+        speech?.CommentOnFinishedBrowsing();
         agent.updateRotation = true;
         agent.isStopped = false;
         agent.avoidancePriority = normalPriority;
@@ -328,8 +355,9 @@ public sealed class NpcNavigation : MonoBehaviour
         ActiveNpcs.Add(this);
     }
 
-    private IEnumerator MoveTo(Vector3 destination)
+    private IEnumerator MoveTo(Vector3 destination, float reevaluateAfter = 0f)
     {
+        LeaveCheckoutMarker();
         if (!agent.isOnNavMesh)
         {
             CurrentAction = "Not on NavMesh";
@@ -347,6 +375,9 @@ public sealed class NpcNavigation : MonoBehaviour
             yield break;
 
         SetWalking(true);
+        float reevaluateAt = reevaluateAfter > 0f
+            ? Time.time + reevaluateAfter
+            : float.PositiveInfinity;
         Vector3 progressPosition = transform.position;
         float nextOvertakeCheck = Time.time + Random.Range(0f, overtakeCheckInterval);
         float nextProgressCheck = Time.time + stuckCheckTime
@@ -355,6 +386,8 @@ public sealed class NpcNavigation : MonoBehaviour
                || agent.remainingDistance > agent.stoppingDistance + arrivalDistance)
         {
             if (!agent.isOnNavMesh || agent.pathStatus == NavMeshPathStatus.PathInvalid)
+                break;
+            if (Time.time >= reevaluateAt)
                 break;
 
             if (Time.time >= nextOvertakeCheck)
@@ -369,8 +402,15 @@ public sealed class NpcNavigation : MonoBehaviour
                 float progress = Vector3.Distance(transform.position, progressPosition);
                 if (progress < minimumProgress
                     && Time.time >= nextMakeRoomAllowedTime
-                    && HasNearbyBlockingNpc(reachableDestination))
+                    && HasNearbyBlockingNpc(reachableDestination, out NpcNavigation blocker))
+                {
+                    if (blocker != null && blocker.AvoidancePriority < AvoidancePriority)
+                    {
+                        speech?.ReactToBeingBulldozed();
+                        blocker.speech?.ReactToPushingPast();
+                    }
                     yield return MakeRoom(reachableDestination, "Making room for another NPC");
+                }
 
                 progressPosition = transform.position;
                 nextProgressCheck = Time.time + stuckCheckTime
@@ -380,6 +420,121 @@ public sealed class NpcNavigation : MonoBehaviour
             yield return null;
         }
         SetWalking(false);
+    }
+
+    public IEnumerator MoveToCheckoutMarker(Transform marker, string action)
+    {
+        ReachedCheckoutMarker = false;
+        if (marker == null)
+            yield break;
+
+        CurrentAction = action;
+        yield return MoveTo(marker.position, 3f);
+        if (!agent.isOnNavMesh)
+            yield break;
+        if (agent.pathPending
+            || agent.remainingDistance > agent.stoppingDistance + arrivalDistance)
+            yield break;
+
+        agent.isStopped = true;
+        agent.ResetPath();
+        agent.updateRotation = false;
+        SetWalking(false);
+        agent.nextPosition = transform.position;
+        agent.updatePosition = false;
+        Vector3 exact = marker.position;
+        exact.y = transform.position.y;
+        transform.position = exact;
+        visuallyAtCheckoutMarker = true;
+        ReachedCheckoutMarker = true;
+
+        Vector3 markerDirection = marker.right;
+        markerDirection.y = 0f;
+        if (markerDirection.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(
+                markerDirection.normalized, Vector3.up)
+                * Quaternion.Euler(0f, checkoutMarkerYawOffset, 0f);
+            while (Quaternion.Angle(transform.rotation, targetRotation) > 1f)
+            {
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+                yield return null;
+            }
+            transform.rotation = targetRotation;
+        }
+    }
+
+    public void LeaveCheckoutMarker()
+    {
+        if (!visuallyAtCheckoutMarker || agent == null)
+            return;
+
+        transform.position = agent.nextPosition;
+        agent.updatePosition = true;
+        agent.updateRotation = true;
+        agent.isStopped = false;
+        visuallyAtCheckoutMarker = false;
+    }
+
+    public IEnumerator FaceForCheckout(Vector3 target)
+    {
+        Vector3 direction = target - transform.position;
+        direction.y = 0f;
+        if (direction.sqrMagnitude < 0.001f)
+            yield break;
+
+        Quaternion targetRotation = Quaternion.LookRotation(
+            direction.normalized, Vector3.up);
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 1f)
+        {
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+            yield return null;
+        }
+        transform.rotation = targetRotation;
+    }
+
+    public IEnumerator PlayCheckoutAnimation(string stateName)
+    {
+        yield return PlayAnimationToCompletion(stateName, grabDuration + 5f);
+    }
+
+    public IEnumerator BrowseWhileWaitingForCheckout()
+    {
+        yield return MaybeBrowse(null, true);
+        yield return new WaitForSeconds(0.5f);
+    }
+
+    public void SetCheckoutAction(string action)
+    {
+        CurrentAction = action;
+    }
+
+    public void SetCheckoutQueueNumber(int number)
+    {
+        CheckoutQueueNumber = number;
+    }
+
+    public void CommentOnCheckoutQueue()
+    {
+        if (speech == null)
+            speech = GetComponent<NpcSpeechBubble>();
+        speech?.CommentOnQueue();
+    }
+
+    public void Speak(string line, float duration = -1f)
+    {
+        if (speech == null)
+            speech = GetComponent<NpcSpeechBubble>();
+        speech?.Say(line, duration);
+    }
+
+    public void SpeakRandom(string[] lines, float duration = -1f)
+    {
+        if (speech == null)
+            speech = GetComponent<NpcSpeechBubble>();
+        speech?.SayRandom(lines, duration);
     }
 
     private IEnumerator MakeRoom(Vector3 originalDestination, string avoidanceAction)
@@ -395,6 +550,7 @@ public sealed class NpcNavigation : MonoBehaviour
         string previousAction = CurrentAction;
         CurrentAction = avoidanceAction;
         nextMakeRoomAllowedTime = Time.time + makeRoomCooldown;
+        speech?.ReactToCrowding();
 
         routeDirection.Normalize();
         Vector3 side = Vector3.Cross(Vector3.up, routeDirection);
@@ -427,8 +583,9 @@ public sealed class NpcNavigation : MonoBehaviour
         CurrentAction = previousAction;
     }
 
-    private bool HasNearbyBlockingNpc(Vector3 destination)
+    private bool HasNearbyBlockingNpc(Vector3 destination, out NpcNavigation blocker)
     {
+        blocker = null;
         Vector3 routeDirection = destination - transform.position;
         routeDirection.y = 0f;
         if (routeDirection.sqrMagnitude < 0.01f)
@@ -451,7 +608,10 @@ public sealed class NpcNavigation : MonoBehaviour
             // Only an NPC in or near the forward travel corridor counts as a
             // blocker; nearby NPCs behind or well to the side are ignored.
             if (Vector3.Dot(routeDirection, offset.normalized) > 0.35f)
+            {
+                blocker = other;
                 return true;
+            }
         }
         return false;
     }
@@ -498,6 +658,7 @@ public sealed class NpcNavigation : MonoBehaviour
 
         string previousAction = CurrentAction;
         CurrentAction = "Overtaking slower NPC";
+        speech?.ReactToSlowWalker();
 
         Vector3 slowerForward = slowerNpc.agent.velocity.normalized;
         Vector3 side = Vector3.Cross(Vector3.up, slowerForward);
@@ -726,5 +887,6 @@ public sealed class NpcNavigation : MonoBehaviour
         urgentPriorityRange.y = Mathf.Clamp(urgentPriorityRange.y, 0, 99);
         casualPriorityRange.x = Mathf.Clamp(casualPriorityRange.x, 0, 99);
         casualPriorityRange.y = Mathf.Clamp(casualPriorityRange.y, 0, 99);
+        personalSpaceRadius = Mathf.Max(0.1f, personalSpaceRadius);
     }
 }
