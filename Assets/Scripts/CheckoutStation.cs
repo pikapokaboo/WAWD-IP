@@ -15,6 +15,7 @@ public sealed class CheckoutStation : MonoBehaviour
     [SerializeField] private Transform cashier;
     [SerializeField] private Animator cashierAnimator;
     [SerializeField] private Transform monitor;
+    [SerializeField] private Transform counterCupboard;
     [SerializeField] private float cashierFacingYawOffset;
     [SerializeField, Min(1f)] private float turnSpeed = 360f;
 
@@ -54,6 +55,29 @@ public sealed class CheckoutStation : MonoBehaviour
         "The till says no.", "The shelf has excellent taste."
     };
     [SerializeField] private Vector2 cashierRemarkInterval = new(18f, 32f);
+
+    [Header("Cigarette Purchase")]
+    [SerializeField, Range(0f, 100f)] private float childCigaretteChance;
+    [SerializeField, Range(0f, 100f)] private float teenCigaretteChance = 4f;
+    [SerializeField, Range(0f, 100f)] private float youngAdultCigaretteChance = 22f;
+    [SerializeField, Range(0f, 100f)] private float adultCigaretteChance = 18f;
+    [SerializeField, Range(0f, 100f)] private float elderlyCigaretteChance = 7f;
+    [SerializeField] private string[] cigaretteRequests =
+        { "A pack of cigarettes too, please.", "Could I get a cigarette pack?", "And cigarettes, please." };
+    [SerializeField] private string[] ageCheckLines =
+        { "How old are you?", "Can I check your age?", "I'll need to verify your age." };
+    [SerializeField] private string[] teenAgeReplies =
+        { "I'm seventeen.", "Uh... old enough?", "Does almost eighteen count?" };
+    [SerializeField] private string[] youngAdultAgeReplies =
+        { "I'm twenty-one.", "Twenty-three.", "I'm over eighteen." };
+    [SerializeField] private string[] adultAgeReplies =
+        { "I'm an adult.", "Thirty-two.", "Definitely over eighteen." };
+    [SerializeField] private string[] elderlyAgeReplies =
+        { "Old enough to remember cheaper prices.", "Do I really look under eighteen?", "Seventy, dear." };
+    [SerializeField] private string[] cigaretteCostLines =
+        { "That'll be $12 extra.", "The pack is $12.", "That comes to $12 more." };
+    [SerializeField] private string[] teenRefusalLines =
+        { "Nice try. You're too young.", "I'll need an adult, sorry.", "Absolutely not, kid." };
 
     private readonly List<NpcNavigation> customers = new();
     private bool markersVisible;
@@ -164,6 +188,31 @@ public sealed class CheckoutStation : MonoBehaviour
     private IEnumerator RunPayment(NpcNavigation customer)
     {
         PrepareCashierSpeech();
+        bool wantsCigarettes = Random.value * 100f < GetCigaretteChance(customer);
+        bool isTeen = customer.HasTrait("Teen");
+        bool isOfAge = !customer.HasTrait("Child") && !isTeen;
+
+        if (wantsCigarettes && isOfAge)
+        {
+            yield return RunCigarettePayment(customer);
+            yield break;
+        }
+
+        if (wantsCigarettes && isTeen)
+        {
+            customer.SetCheckoutAction("Trying to buy cigarettes");
+            yield return customer.FaceForCheckout(GetCashierLookPosition());
+            customer.SpeakRandom(cigaretteRequests);
+            yield return customer.PlayCheckoutAnimation("Grab");
+            yield return TurnCashierTowards(customer.transform.position);
+            cashierSpeech?.SayRandom(ageCheckLines);
+            yield return PlayCashierInteraction();
+            customer.SpeakRandom(teenAgeReplies);
+            yield return customer.PlayCheckoutAnimation("Grab");
+            cashierSpeech?.SayRandom(teenRefusalLines);
+            yield return PlayCashierInteraction();
+        }
+
         int funnyIndex = -1;
         int funnyPairCount = Mathf.Min(customerFunnyQuestions?.Length ?? 0,
             cashierFunnyReplies?.Length ?? 0);
@@ -197,6 +246,65 @@ public sealed class CheckoutStation : MonoBehaviour
         customer.SpeakRandom(customerGoodbyes);
         yield return customer.PlayCheckoutAnimation("Grab");
         PlayCashierState(idleState);
+    }
+
+    private IEnumerator RunAgeCheck(NpcNavigation customer)
+    {
+        yield return TurnCashierTowards(customer.transform.position);
+        cashierSpeech?.SayRandom(ageCheckLines);
+        yield return PlayCashierInteraction();
+
+        if (customer.HasTrait("Young Adult"))
+            customer.SpeakRandom(youngAdultAgeReplies);
+        else if (customer.HasTrait("Elderly"))
+            customer.SpeakRandom(elderlyAgeReplies);
+        else
+            customer.SpeakRandom(adultAgeReplies);
+        yield return customer.PlayCheckoutAnimation("Grab");
+    }
+
+    private IEnumerator RunCigarettePayment(NpcNavigation customer)
+    {
+        customer.SetCheckoutAction("Buying cigarettes");
+        yield return customer.FaceForCheckout(GetCashierLookPosition());
+
+        // Place the normal shopping on the counter, then make the request.
+        yield return customer.PlayCheckoutAnimation("Grab");
+        customer.SpeakRandom(cigaretteRequests);
+        yield return RunAgeCheck(customer);
+
+        yield return TurnCashierTowards(counterCupboard != null
+            ? counterCupboard.position
+            : transform.position);
+        cashierSpeech?.Say("One moment.");
+        yield return PlayCashierInteraction();
+
+        yield return TurnCashierTowards(customer.transform.position);
+        yield return PlayCashierInteraction();
+        cashierSpeech?.SayRandom(cigaretteCostLines);
+
+        customer.SetCheckoutAction("Paying for cigarettes");
+        yield return customer.PlayCheckoutAnimation("Grab");
+        yield return PlayCashierInteraction();
+
+        yield return TurnCashierTowards(monitor != null
+            ? monitor.position
+            : transform.position);
+        yield return PlayCashierInteraction();
+
+        yield return TurnCashierTowards(customer.transform.position);
+        cashierSpeech?.SayRandom(cashierGoodbyes);
+        yield return PlayCashierInteraction();
+        PlayCashierState(idleState);
+    }
+
+    private float GetCigaretteChance(NpcNavigation customer)
+    {
+        if (customer.HasTrait("Child")) return childCigaretteChance;
+        if (customer.HasTrait("Teen")) return teenCigaretteChance;
+        if (customer.HasTrait("Young Adult")) return youngAdultCigaretteChance;
+        if (customer.HasTrait("Elderly")) return elderlyCigaretteChance;
+        return adultCigaretteChance;
     }
 
     private void PrepareCashierSpeech()

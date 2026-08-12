@@ -633,6 +633,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fridge (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: products.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Chocy Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Chocy Milk Small
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1410,6 +1422,18 @@ PrefabInstance:
     - target: {fileID: 7393501225587124718, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
       propertyPath: m_Name
       value: Fridge (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: products.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Strawberry Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Strawberry Milk Small
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3270,6 +3294,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 278f3c018f0773a4eb0ae119aa43deb1, type: 3}
+--- !u!4 &360362440 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2681971385887941773, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+  m_PrefabInstance: {fileID: 1639723058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &362897701 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2222070010575494313, guid: 278f3c018f0773a4eb0ae119aa43deb1, type: 3}
@@ -7232,11 +7261,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: products.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: 'products.Array.data[0]'
-      value: Bepis
+      value: Sandwich
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Wrap
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8018,6 +8051,18 @@ PrefabInstance:
     - target: {fileID: 7393501225587124718, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
       propertyPath: m_Name
       value: Fridge (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: products.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Bepsi Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Bepsi Large
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8951,6 +8996,18 @@ PrefabInstance:
     - target: {fileID: 7393501225587124718, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
       propertyPath: m_Name
       value: Fridge (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: products.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Milk (OG)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Milk Small (OG)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10741,6 +10798,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4498087588566978136, guid: 049d437936e056342941aff7497ad1e9, type: 3}
   m_PrefabInstance: {fileID: 1066989012}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1069485868 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1347493090854160896, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+  m_PrefabInstance: {fileID: 1639723058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1075664115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11223,11 +11285,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: products.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: 'products.Array.data[0]'
-      value: Nickers
+      value: Mountain Dew
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Instant Noodle
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12754,11 +12820,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: products.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: 'products.Array.data[0]'
-      value: Corn
+      value: Packet Snacks
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Instant Ramen
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14243,15 +14313,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: products.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: 'products.Array.data[0]'
-      value: Stawjerry
+      value: Sakura (Drink)
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: 'products.Array.data[1]'
-      value: Stawjerry
+      value: Can (O)
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15020,11 +15090,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: products.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: 'products.Array.data[0]'
-      value: Wheeze
+      value: Lemon (Drink)
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Can (P)
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16120,11 +16194,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: products.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: 'products.Array.data[0]'
-      value: Domitos
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Bepis
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16435,6 +16513,30 @@ PrefabInstance:
     - target: {fileID: 8307232388747536362, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
       propertyPath: m_Name
       value: ICmachine (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: leftDoor
+      value: 
+      objectReference: {fileID: 1069485868}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: rightDoor
+      value: 
+      objectReference: {fileID: 360362440}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: leftProducts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: rightProducts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: 'leftProducts.Array.data[0]'
+      value: Ice Cream
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: 'rightProducts.Array.data[0]'
+      value: Ice Cream
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17177,11 +17279,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: products.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: 'products.Array.data[0]'
-      value: Bo'oh'o'wa'er
+      value: Green Tea
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Can (Y)
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17613,11 +17719,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: products.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: 'products.Array.data[0]'
-      value: Wamen
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 288261380870400219, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Conk
       objectReference: {fileID: 0}
     - target: {fileID: 6949724909671217246, guid: ee43fb51cc9746e40b69630eddda6098, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18982,6 +19092,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fridge (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: products.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Conk Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Conk Large
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19599,6 +19721,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 278f3c018f0773a4eb0ae119aa43deb1, type: 3}
+--- !u!4 &1935324016 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1347493090854160896, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+  m_PrefabInstance: {fileID: 8802593648582583579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1947888021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21388,6 +21515,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2690099590149274269, guid: 0beb71a2cf1cbb34aab2d56a734426d5, type: 3}
+--- !u!4 &2129308572 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2681971385887941773, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+  m_PrefabInstance: {fileID: 8802593648582583579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2131926407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22512,63 +22644,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6803868907430902984, guid: b85e758549b21f946bba3ba5e831f1fa, type: 3}
   m_PrefabInstance: {fileID: 2912754318960891112}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3324830040729158702
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4026536778696373558, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_Name
-      value: CounterCupboard
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 23.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10.894772
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984613878591643911, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1127bd7b9b03d884c9e65309daff5a25, type: 3}
 --- !u!1001 &3682853803545316531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23422,6 +23497,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1169187811}
     m_Modifications:
+    - target: {fileID: 1056592453984185652, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056592453984185652, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056592453984185652, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056592453984185652, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2766626146231841056, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -23482,9 +23573,29 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5422733380486387921, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5422733380486387921, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7393501225587124718, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
       propertyPath: m_Name
       value: Fridge
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: products.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[0]'
+      value: Banana Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393501225587124719, guid: a3eb5786538e44a45bc99eea8b015a06, type: 3}
+      propertyPath: 'products.Array.data[1]'
+      value: Soju
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23720,6 +23831,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1347493090854160896, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.5877
+      objectReference: {fileID: 0}
+    - target: {fileID: 2681971385887941773, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 58.5996
+      objectReference: {fileID: 0}
     - target: {fileID: 4554015872355586190, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.277
@@ -23763,6 +23882,30 @@ PrefabInstance:
     - target: {fileID: 8307232388747536362, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
       propertyPath: m_Name
       value: ICmachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: leftDoor
+      value: 
+      objectReference: {fileID: 1935324016}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: rightDoor
+      value: 
+      objectReference: {fileID: 2129308572}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: leftProducts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: rightProducts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: 'leftProducts.Array.data[0]'
+      value: Ice Cream
+      objectReference: {fileID: 0}
+    - target: {fileID: 8307232388747536363, guid: 05540252b00930445b1fc48d68045b6c, type: 3}
+      propertyPath: 'rightProducts.Array.data[0]'
+      value: Ice Cream
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23973,7 +24116,6 @@ SceneRoots:
   - {fileID: 3837931450024960039}
   - {fileID: 602302136011996361}
   - {fileID: 41300629}
-  - {fileID: 3324830040729158702}
   - {fileID: 4985722886952021558}
   - {fileID: 1968057829}
   - {fileID: 113888456}

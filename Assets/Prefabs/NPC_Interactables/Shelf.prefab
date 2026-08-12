@@ -50,6 +50,7 @@ MonoBehaviour:
   standingPosition: {fileID: 7193166609565259423}
   lookTarget: {fileID: 5115064120680182883}
   interactionTrigger: Grab
+  facingYawOffset: 90
   showStandingArea: 1
   standingAreaColour: {r: 0.1, g: 0.8, b: 1, a: 0.25}
 --- !u!1 &835562883472487130

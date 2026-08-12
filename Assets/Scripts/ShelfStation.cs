@@ -23,6 +23,12 @@ public sealed class ShelfStation : MonoBehaviour
     [Tooltip("Animator trigger an NPC behaviour should play at this shelf.")]
     [SerializeField] private string interactionTrigger = "Grab";
 
+    [Tooltip("Model-facing correction for this station. Use 0 for direct blue-Z facing.")]
+    [SerializeField] private float facingYawOffset = 90f;
+
+    [Header("Shared Machine (Optional)")]
+    [SerializeField] private IceCreamMachine.Side machineSide;
+
     [Header("Debug View")]
     [Tooltip("Draw the standing area in the Scene view without rendering the cube in-game.")]
     [SerializeField] private bool showStandingArea = true;
@@ -32,17 +38,48 @@ public sealed class ShelfStation : MonoBehaviour
     private static readonly HashSet<ShelfStation> ActiveShelves = new();
     private int approachingShopperCount;
     private bool markerVisible;
+    private FridgeDoor fridgeDoor;
+    private IceCreamMachine iceCreamMachine;
+    private NpcNavigation reservedBy;
 
     public static IEnumerable<ShelfStation> AllActive => ActiveShelves;
-    public IReadOnlyList<string> Products => products;
+    public IReadOnlyList<string> Products => iceCreamMachine != null
+        ? iceCreamMachine.GetProducts(machineSide)
+        : products;
     public string InteractionTrigger => interactionTrigger;
+    public float FacingYawOffset => facingYawOffset;
     public Vector3 StandPosition => standingPosition != null
         ? standingPosition.position
         : transform.position;
     public Vector3 LookPosition => lookTarget != null
         ? lookTarget.position
         : transform.position;
-    public bool HasApproachingShopper => approachingShopperCount > 0;
+    public bool HasApproachingShopper => approachingShopperCount > 0
+        || (iceCreamMachine != null && iceCreamMachine.IsOccupiedByOther(this));
+    public IceCreamMachine.Side MachineSide => machineSide;
+
+    public bool IsAvailableFor(NpcNavigation npc) =>
+        (reservedBy == null || reservedBy == npc)
+        && (iceCreamMachine == null || !iceCreamMachine.IsOccupiedByOther(this));
+
+    public bool TryReserve(NpcNavigation npc)
+    {
+        if (npc == null || !IsAvailableFor(npc)
+            || (iceCreamMachine != null && !iceCreamMachine.TryReserve(this)))
+            return false;
+        reservedBy = npc;
+        approachingShopperCount = 1;
+        return true;
+    }
+
+    public void Release(NpcNavigation npc)
+    {
+        if (reservedBy != npc)
+            return;
+        reservedBy = null;
+        approachingShopperCount = 0;
+        iceCreamMachine?.Release(this);
+    }
 
     public void RegisterApproachingShopper()
     {
@@ -54,8 +91,26 @@ public sealed class ShelfStation : MonoBehaviour
         approachingShopperCount = Mathf.Max(0, approachingShopperCount - 1);
     }
 
+    public void BeginInteraction()
+    {
+        if (fridgeDoor == null)
+            fridgeDoor = GetComponent<FridgeDoor>();
+        fridgeDoor?.BeginUse();
+        iceCreamMachine?.BeginUse(this);
+    }
+
+    public void EndInteraction()
+    {
+        if (fridgeDoor == null)
+            fridgeDoor = GetComponent<FridgeDoor>();
+        fridgeDoor?.EndUse();
+        iceCreamMachine?.EndUse(this);
+    }
+
     private void Awake()
     {
+        fridgeDoor = GetComponent<FridgeDoor>();
+        iceCreamMachine = GetComponentInParent<IceCreamMachine>();
         if (standingPosition == null)
             return;
 
@@ -119,6 +174,8 @@ public sealed class ShelfStation : MonoBehaviour
     {
         ActiveShelves.Remove(this);
         approachingShopperCount = 0;
+        reservedBy = null;
+        iceCreamMachine?.Release(this);
     }
 
     public bool HasProduct(string productName)
@@ -126,7 +183,7 @@ public sealed class ShelfStation : MonoBehaviour
         if (string.IsNullOrWhiteSpace(productName))
             return false;
 
-        foreach (string product in products)
+        foreach (string product in Products)
         {
             if (string.Equals(product?.Trim(), productName.Trim(),
                     StringComparison.OrdinalIgnoreCase))

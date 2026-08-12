@@ -78,6 +78,9 @@ public sealed class NpcNavigation : MonoBehaviour
     public int CheckoutQueueNumber { get; private set; }
     public bool ReachedCheckoutMarker { get; private set; }
 
+    public bool HasTrait(string traitName) =>
+        traits != null && traits.HasTrait(traitName);
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetShopperCount()
     {
@@ -209,23 +212,30 @@ public sealed class NpcNavigation : MonoBehaviour
         if (shelf == null)
             yield break;
 
-        shelf.RegisterApproachingShopper();
+        while (shelf != null && !shelf.TryReserve(this))
+        {
+            CurrentAction = $"Waiting for {product}";
+            yield return new WaitForSeconds(0.25f);
+        }
+        if (shelf == null)
+            yield break;
         CurrentAction = $"Going to {product}";
         yield return MoveTo(shelf.StandPosition);
         if (shelf == null || !agent.isOnNavMesh)
         {
             if (shelf != null)
-                shelf.UnregisterApproachingShopper();
+                shelf.Release(this);
             yield break;
         }
 
         agent.isStopped = true;
         agent.updateRotation = false;
+        shelf.BeginInteraction();
         int normalPriority = agent.avoidancePriority;
         agent.avoidancePriority = shelfInteractionPriority;
         SetWalking(false);
         CurrentAction = $"Looking at {product}";
-        yield return Face(shelf.LookPosition);
+        yield return Face(shelf.LookPosition, shelf.FacingYawOffset);
 
         if (traits.HasTrait("No Money"))
         {
@@ -249,7 +259,8 @@ public sealed class NpcNavigation : MonoBehaviour
             agent.updateRotation = true;
             agent.isStopped = false;
         }
-        shelf.UnregisterApproachingShopper();
+        shelf.Release(this);
+        shelf.EndInteraction();
     }
 
     private IEnumerator MaybeBrowse(ShelfStation wantedShelf, bool force = false)
@@ -273,6 +284,8 @@ public sealed class NpcNavigation : MonoBehaviour
             yield break;
 
         ShelfStation browseShelf = choices[Random.Range(0, choices.Count)];
+        if (!browseShelf.TryReserve(this))
+            yield break;
         int normalPriority = agent.avoidancePriority;
         agent.avoidancePriority = 90;
         CurrentAction = $"Browsing {browseShelf.name}";
@@ -281,15 +294,17 @@ public sealed class NpcNavigation : MonoBehaviour
 
         if (browseShelf == null || browseShelf.HasApproachingShopper || !agent.isOnNavMesh)
         {
+            browseShelf.Release(this);
             agent.avoidancePriority = normalPriority;
             yield break;
         }
 
         agent.isStopped = true;
         agent.updateRotation = false;
+        browseShelf.BeginInteraction();
         agent.avoidancePriority = shelfInteractionPriority;
         SetWalking(false);
-        yield return Face(browseShelf.LookPosition);
+        yield return Face(browseShelf.LookPosition, browseShelf.FacingYawOffset);
 
         float browseUntil = Time.time + Random.Range(
             Mathf.Min(browseDurationRange.x, browseDurationRange.y),
@@ -304,6 +319,8 @@ public sealed class NpcNavigation : MonoBehaviour
             ? "Giving way to a shopper"
             : "Finished browsing";
         speech?.CommentOnFinishedBrowsing();
+        browseShelf.EndInteraction();
+        browseShelf.Release(this);
         agent.updateRotation = true;
         agent.isStopped = false;
         agent.avoidancePriority = normalPriority;
@@ -703,7 +720,7 @@ public sealed class NpcNavigation : MonoBehaviour
         CurrentAction = previousAction;
     }
 
-    private IEnumerator Face(Vector3 target)
+    private IEnumerator Face(Vector3 target, float yawOffset)
     {
         Vector3 direction = target - transform.position;
         direction.y = 0f;
@@ -711,7 +728,7 @@ public sealed class NpcNavigation : MonoBehaviour
             yield break;
 
         Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up)
-            * Quaternion.Euler(0f, shelfFacingYawOffset, 0f);
+            * Quaternion.Euler(0f, yawOffset, 0f);
         while (Quaternion.Angle(transform.rotation, targetRotation) > 1f)
         {
             transform.rotation = Quaternion.RotateTowards(
