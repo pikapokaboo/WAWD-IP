@@ -132,3 +132,9 @@ MonoBehaviour:
   maximumSpawnInterval: 8
   maximumLivingNpcs: 0
   spawnImmediately: 1
+  useDailyQuotas: 1
+  dayOneLegitimateShoppers: 12
+  dayOneShoplifters: 3
+  legitimateIncreasePerDay: 3
+  shoplifterIncreasePerDay: 1
+  scheduleJitter: 0.18

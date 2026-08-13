@@ -76,6 +76,7 @@ public sealed class NpcNavigation : MonoBehaviour
     private bool holdsShoppingSlot;
     private float nextMakeRoomAllowedTime;
     private bool visuallyAtCheckoutMarker;
+    private bool? forcedShoppingIntent;
 
     public IReadOnlyList<ShelfStation> ShoppingRoute => shoppingRoute;
     public IReadOnlyList<string> WantedProducts => wantedProducts;
@@ -87,6 +88,9 @@ public sealed class NpcNavigation : MonoBehaviour
 
     public bool HasTrait(string traitName) =>
         traits != null && traits.HasTrait(traitName);
+
+    public void ForceShoppingIntent(bool shouldShop) =>
+        forcedShoppingIntent = shouldShop;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetShopperCount()
@@ -115,7 +119,8 @@ public sealed class NpcNavigation : MonoBehaviour
         ApplyAvoidanceTrait();
         FindHomeTarget();
 
-        bool rolledShopping = Random.value * 100f < enterStoreChance;
+        bool rolledShopping = forcedShoppingIntent
+            ?? Random.value * 100f < enterStoreChance;
         bool receivedShoppingSlot = rolledShopping && TryTakeShoppingSlot();
         ChairStation eatingChair = null;
         if (receivedShoppingSlot)

@@ -140,6 +140,26 @@ public sealed class NpcTraits : MonoBehaviour
         return names;
     }
 
+    /// <summary>Replaces one rolled Either/Or pool with a specific configured trait.</summary>
+    public bool ForcePoolChoice(string poolName, string traitName)
+    {
+        NpcTrait replacement = FindPossibleTrait(traitName);
+        if (replacement == null || !string.Equals(replacement.EitherOrPool,
+                poolName?.Trim(), StringComparison.OrdinalIgnoreCase))
+            return false;
+
+        activeTraits.RemoveAll(trait => string.Equals(trait.EitherOrPool,
+            poolName?.Trim(), StringComparison.OrdinalIgnoreCase));
+        activeNames.Clear();
+        foreach (NpcTrait trait in activeTraits)
+            activeNames.Add(trait.Name);
+        SelectWithDependencies(replacement, new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase));
+        HasRolled = true;
+        TraitsRolled?.Invoke();
+        return true;
+    }
+
     private void SelectWithDependencies(NpcTrait trait, HashSet<string> chain)
     {
         if (!IsValid(trait) || activeNames.Contains(trait.Name) || !chain.Add(trait.Name))

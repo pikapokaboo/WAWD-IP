@@ -4519,6 +4519,7 @@ GameObject:
   - component: {fileID: 591377959}
   - component: {fileID: 591377958}
   - component: {fileID: 591377957}
+  - component: {fileID: 591377960}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -7359,6 +7360,43 @@ Transform:
   - {fileID: 1450003088}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &591377960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591377956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ad8f24c60d4b70a17d84d08b563a31, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DayNightCycle
+  dayLengthMinutes: 8
+  startHour: 9
+  endHour: 17
+  pauseAtEndOfDay: 1
+  startingDay: 1
+  endOfDayPauseSeconds: 3
+  automaticallyStartNextDay: 1
+  sun: {fileID: 591377958}
+  sunYaw: -30
+  maximumSunIntensity: 1.15
+  sunriseColour: {r: 1, g: 0.55, b: 0.3, a: 1}
+  middayColour: {r: 1, g: 0.96, b: 0.84, a: 1}
+  sunsetColour: {r: 1, g: 0.38, b: 0.22, a: 1}
+  nightAmbientColour: {r: 0.035, g: 0.045, b: 0.09, a: 1}
+  dayAmbientColour: {r: 0.65, g: 0.68, b: 0.72, a: 1}
+  showClock: 1
+  useTwelveHourClock: 1
+  clockFontSize: 24
+  clockSize: {x: 190, y: 58}
+  screenMargin: {x: 22, y: 18}
+  panelColour: {r: 0.035, g: 0.045, b: 0.06, a: 0.72}
+  textColour: {r: 1, g: 1, b: 1, a: 1}
+  onDayEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &912017208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10658,7 +10696,7 @@ Terrain:
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 4ebd0460346e9dc4d8bad15e4ebf06a5, type: 2}
   m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
+  m_TreeBillboardDistance: 5000
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
