@@ -1,0 +1,1797 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5381937998736865625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5566436532406894039}
+  m_Layer: 0
+  m_Name: ICS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5566436532406894039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381937998736865625}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4092964196004216008}
+  - {fileID: 3472015619969663522}
+  - {fileID: 7430608623072566089}
+  - {fileID: 2244598804265134878}
+  - {fileID: 7063104768589161461}
+  - {fileID: 9164351591291770725}
+  - {fileID: 4907085915381144747}
+  - {fileID: 998026522342484550}
+  - {fileID: 4582862448329332147}
+  - {fileID: 8920715701539417085}
+  - {fileID: 8344600777930233543}
+  - {fileID: 1313758814238953573}
+  - {fileID: 7723191117676564760}
+  - {fileID: 1173554042867499785}
+  - {fileID: 1460643058728964908}
+  - {fileID: 9059680458826715111}
+  - {fileID: 2234912212802887772}
+  - {fileID: 1021569403220804562}
+  - {fileID: 3112474102499431996}
+  - {fileID: 7209359787616558645}
+  - {fileID: 3238739538064536021}
+  - {fileID: 6984439089694393396}
+  - {fileID: 5383915564183921350}
+  - {fileID: 494669349530144542}
+  - {fileID: 6791071934313657040}
+  - {fileID: 6441364126571494900}
+  - {fileID: 1592120474898197361}
+  - {fileID: 3317863192740906660}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &39835115882829137
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.331
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.8744946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &1173554042867499785 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 39835115882829137}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &216067584697517629
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.636002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (13)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &1313758814238953573 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 216067584697517629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &324813202497013108
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.331
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.8744946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (20)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &1460643058728964908 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 324813202497013108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &494430443717917993
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.518
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (24)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &1592120474898197361 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 494430443717917993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1135127203950065156
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (14)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &2234912212802887772 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 1135127203950065156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1144655671827004742
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.939
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.221
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (25)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &2244598804265134878 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 1144655671827004742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1592484106629519686
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.404
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.485
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (23)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &494669349530144542 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 1592484106629519686}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2097968417829780510
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.707
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.8744946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (18)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &998026522342484550 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 2097968417829780510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2227486352562017674
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.059
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &1021569403220804562 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 2227486352562017674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2372230641115288698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.872
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.739
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.738
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (26)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &3472015619969663522 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 2372230641115288698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2885094033043368592
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.066
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.8744946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &4092964196004216008 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 2885094033043368592}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3412974119916569579
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.524
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.203
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (16)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &4582862448329332147 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 3412974119916569579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4320485071733375076
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.059
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (21)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &3112474102499431996 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 4320485071733375076}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4338823034258745229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.059
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.077
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (22)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &3238739538064536021 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 4338823034258745229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4526014280989233404
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (11)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &3317863192740906660 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 4526014280989233404}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5305410197389568940
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.518
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &6441364126571494900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 5305410197389568940}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5690987579126375560
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.404
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.673
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &6791071934313657040 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 5690987579126375560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6115237763836185331
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.707
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.8744946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &4907085915381144747 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 6115237763836185331}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6517634804702131358
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.404
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.485
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &5383915564183921350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 6517634804702131358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7136290947757097119
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.707
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.0624943
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &8344600777930233543 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 7136290947757097119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7712545573770804645
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.524
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.203
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (19)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &8920715701539417085 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 7712545573770804645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7889949875972151743
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.331
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.0624943
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &9059680458826715111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 7889949875972151743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8064427180616335677
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.995
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (12)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &9164351591291770725 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 8064427180616335677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8082130250517533292
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.059
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.778
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &6984439089694393396 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 8082130250517533292}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8269163765312845229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.066
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.0624943
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &7063104768589161461 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 8269163765312845229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8414978631796901997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.059
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.077
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (15)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &7209359787616558645 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 8414978631796901997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8636245819649871121
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.066
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.8744946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (17)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &7430608623072566089 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 8636245819649871121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8929091711780472640
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5566436532406894039}
+    m_Modifications:
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.636002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.742
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985832692984270050, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+      propertyPath: m_Name
+      value: Icecreamcupshort (27)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+--- !u!4 &7723191117676564760 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1208311586882524760, guid: 4c5ac0f54ee08f8409323a5c2806beb9, type: 3}
+  m_PrefabInstance: {fileID: 8929091711780472640}
+  m_PrefabAsset: {fileID: 0}
