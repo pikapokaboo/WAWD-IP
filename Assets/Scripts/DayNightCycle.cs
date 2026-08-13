@@ -7,6 +7,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [DisallowMultipleComponent]
 public sealed class DayNightCycle : MonoBehaviour
@@ -38,6 +40,8 @@ public sealed class DayNightCycle : MonoBehaviour
     [SerializeField, Min(12)] private int dayTitleFontSize = 52;
 
     [Header("Sun")]
+    [Tooltip("Legacy option. Leave disabled to keep the scene lighting fixed.")]
+    [SerializeField] private bool animateSunAndLighting;
     [SerializeField] private Light sun;
     [SerializeField] private float sunYaw = -30f;
     [SerializeField, Range(0f, 12f)] private float sunriseHour = 6f;
@@ -62,9 +66,14 @@ public sealed class DayNightCycle : MonoBehaviour
     [Header("End Of Day")]
     [SerializeField] private UnityEvent onDayEnded = new();
 
+    [Header("Shoplifter Failure")]
+    [SerializeField, Min(0)] private int dayOneShoplifters = 3;
+    [SerializeField, Min(0)] private int shoplifterIncreasePerDay = 1;
+    [SerializeField, Range(0f, 1f)] private float allowedEscapeFraction = 0.4f;
+    [SerializeField, Min(0)] private int minimumAllowedEscapes = 1;
+
     [Header("Sound Effects")]
     [SerializeField] private AudioClip cashRegisterSound;
-    [SerializeField] private AudioClip cctvLoopSound;
     [SerializeField] private AudioClip dayCompleteSound;
     [SerializeField] private AudioClip shoplifterRemovalSound;
     [SerializeField, Range(0f, 1f)] private float soundEffectVolume = 0.75f;
@@ -80,7 +89,13 @@ public sealed class DayNightCycle : MonoBehaviour
     private float dayStartOverlayAlpha;
     private Coroutine dayStartSequence;
     private AudioSource soundEffectSource;
-    private AudioSource cctvAudioSource;
+    private bool dayFailed;
+    private int escapedShoplifters;
+    private int totalEscapedShoplifters;
+    private int caughtShoplifters;
+    private GUIStyle failureTitleStyle;
+    private GUIStyle failureBodyStyle;
+    private GUIStyle failureButtonStyle;
 
     public float CurrentHour => PreparingToOpen ? preparationHour
         : Mathf.Clamp(startHour + elapsedGameHours,
@@ -89,7 +104,13 @@ public sealed class DayNightCycle : MonoBehaviour
     public float DayProgress => Mathf.InverseLerp(startHour, endHour, CurrentHour);
     public int CurrentDay { get; private set; }
     public bool PreparingToOpen { get; private set; }
-    public bool DayActive => !PreparingToOpen && !dayEnded;
+    public bool DayActive => !PreparingToOpen && !dayEnded && !dayFailed;
+    public int EscapedShoplifters => escapedShoplifters;
+    public int AllowedShoplifterEscapes => Mathf.Max(minimumAllowedEscapes,
+        Mathf.FloorToInt(ExpectedShopliftersForDay * allowedEscapeFraction));
+    public int ExpectedShopliftersForDay => dayOneShoplifters
+        + Mathf.Max(0, CurrentDay - 1) * shoplifterIncreasePerDay;
+    public int DaysSurvived => Mathf.Max(0, CurrentDay - 1);
     public event Action DayEndedEvent;
 
     private void Awake()
@@ -102,6 +123,7 @@ public sealed class DayNightCycle : MonoBehaviour
         if (sun != null)
             RenderSettings.sun = sun;
         ApplyLighting();
+        EnsureSoundEffectSource();
     }
 
     private void Start()
@@ -112,6 +134,11 @@ public sealed class DayNightCycle : MonoBehaviour
 
     private void Update()
     {
+        if (dayFailed)
+        {
+            HandleFailureInput();
+            return;
+        }
         if (PreparingToOpen || dayEnded || endHour <= startHour)
             return;
 
@@ -125,6 +152,9 @@ public sealed class DayNightCycle : MonoBehaviour
 
     private void ApplyLighting()
     {
+        if (!animateSunAndLighting)
+            return;
+
         float hour = CurrentHour;
         float daylight;
         float sunPitch;
@@ -172,7 +202,6 @@ public sealed class DayNightCycle : MonoBehaviour
         elapsedGameHours = endHour - startHour;
         dayEnded = true;
         CctvSystem.ExitForDayEnd();
-        StopCctvSound();
         RemoveAllNpcs();
         if (dayCompleteSound != null)
             soundEffectSource.PlayOneShot(dayCompleteSound, soundEffectVolume);
@@ -198,17 +227,14 @@ public sealed class DayNightCycle : MonoBehaviour
     {
         elapsedGameHours = 0f;
         dayEnded = false;
+        dayFailed = false;
+        escapedShoplifters = 0;
         PreparingToOpen = true;
         Time.timeScale = 1f;
         TeleportPlayerToDayStart();
         OpeningSequence.Instance?.PrepareForNextDay();
         BeginDayStartSequence();
         ApplyLighting();
-        soundEffectSource = gameObject.AddComponent<AudioSource>();
-        ConfigureEffectSource(soundEffectSource, false);
-        cctvAudioSource = gameObject.AddComponent<AudioSource>();
-        ConfigureEffectSource(cctvAudioSource, true);
-        cctvAudioSource.clip = cctvLoopSound;
     }
 
     public void SkipToEndOfDay()
@@ -236,13 +262,54 @@ public sealed class DayNightCycle : MonoBehaviour
             return;
         PreparingToOpen = false;
         elapsedGameHours = 0f;
+        escapedShoplifters = 0;
         ApplyLighting();
+    }
+
+    public void ReportEscapedShoplifter()
+    {
+        if (!DayActive) return;
+        escapedShoplifters++;
+        totalEscapedShoplifters++;
+        if (escapedShoplifters > AllowedShoplifterEscapes)
+            FailDay();
+    }
+
+    public void ReportCaughtShoplifter()
+    {
+        if (DayActive) caughtShoplifters++;
+    }
+
+    private void FailDay()
+    {
+        dayFailed = true;
+        CctvSystem.ExitForDayEnd();
+        RemoveAllNpcs();
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void HandleFailureInput()
+    {
+        if (Keyboard.current == null) return;
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+            RetryFromDayOne();
+        else if (Keyboard.current.escapeKey.wasPressedThisFrame)
+            SceneManager.LoadScene("Home_Screen");
+    }
+
+    private static void RetryFromDayOne()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public string CurrentTimeText => FormatTime(CurrentHour);
 
     public void PlayRegisterSound()
     {
+        EnsureSoundEffectSource();
         if (cashRegisterSound != null)
             soundEffectSource.PlayOneShot(cashRegisterSound, soundEffectVolume);
     }
@@ -250,19 +317,16 @@ public sealed class DayNightCycle : MonoBehaviour
     public float PlayShoplifterRemovalSound()
     {
         if (shoplifterRemovalSound == null) return 0f;
+        EnsureSoundEffectSource();
         soundEffectSource.PlayOneShot(shoplifterRemovalSound, soundEffectVolume);
         return shoplifterRemovalSound.length;
     }
 
-    public void StartCctvSound()
+    private void EnsureSoundEffectSource()
     {
-        if (cctvLoopSound == null || cctvAudioSource.isPlaying) return;
-        cctvAudioSource.Play();
-    }
-
-    public void StopCctvSound()
-    {
-        if (cctvAudioSource != null) cctvAudioSource.Stop();
+        if (soundEffectSource != null) return;
+        soundEffectSource = gameObject.AddComponent<AudioSource>();
+        ConfigureEffectSource(soundEffectSource, false);
     }
 
     private void ConfigureEffectSource(AudioSource audioSource, bool loop)
@@ -270,7 +334,7 @@ public sealed class DayNightCycle : MonoBehaviour
         audioSource.playOnAwake = false;
         audioSource.loop = loop;
         audioSource.spatialBlend = 0f;
-        audioSource.volume = soundEffectVolume;
+        audioSource.volume = AudioVolumeSettings.SoundEffects;
     }
 
     private void BeginDayStartSequence()
@@ -290,6 +354,7 @@ public sealed class DayNightCycle : MonoBehaviour
 
     private System.Collections.IEnumerator PlayDayStartSequence()
     {
+        HideCursorForBlackScreen();
         dayStartOverlayAlpha = 1f;
         float holdUntil = Time.realtimeSinceStartup + dayTitleHoldSeconds;
         while (Time.realtimeSinceStartup < holdUntil)
@@ -305,6 +370,20 @@ public sealed class DayNightCycle : MonoBehaviour
 
         dayStartOverlayAlpha = 0f;
         dayStartSequence = null;
+        RestoreCursorAfterBlackScreen();
+    }
+
+    private static void HideCursorForBlackScreen()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
+    }
+
+    private static void RestoreCursorAfterBlackScreen()
+    {
+        Cursor.lockState = CctvSystem.IsActive
+            ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = CctvSystem.IsActive;
     }
 
     private void TeleportPlayerToDayStart()
@@ -335,6 +414,11 @@ public sealed class DayNightCycle : MonoBehaviour
 
     private void OnGUI()
     {
+        if (dayFailed)
+        {
+            DrawFailureScreen();
+            return;
+        }
         if (dayEnded)
         {
             DrawDayCompleteScreen();
@@ -359,8 +443,55 @@ public sealed class DayNightCycle : MonoBehaviour
             dayStyle);
     }
 
+    private void DrawFailureScreen()
+    {
+        HideCursorForBlackScreen();
+        GUI.color = new Color(0.025f, 0.01f, 0.015f, 1f);
+        GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height),
+            Texture2D.whiteTexture);
+        GUI.color = Color.white;
+        EnsureFailureStyles();
+
+        GUI.Label(new Rect(0f, Screen.height * 0.5f - 165f,
+            Screen.width, 70f), "SHIFT FAILED", failureTitleStyle);
+        GUI.Label(new Rect(Screen.width * 0.15f, Screen.height * 0.5f - 80f,
+            Screen.width * 0.7f, 140f),
+            $"DAYS SURVIVED: {DaysSurvived}\n"
+            + $"DAY REACHED: {CurrentDay}\n"
+            + $"SHOPLIFTERS CAUGHT: {caughtShoplifters}\n"
+            + $"TOTAL SHOPLIFTERS MISSED: {totalEscapedShoplifters}\n"
+            + $"FINAL SHIFT: {escapedShoplifters} escaped / "
+            + $"{AllowedShoplifterEscapes} allowed", failureBodyStyle);
+
+        float buttonWidth = Mathf.Min(310f, Screen.width * 0.36f);
+        if (GUI.Button(new Rect(Screen.width * 0.5f - buttonWidth - 10f,
+                Screen.height * 0.5f + 90f, buttonWidth, 58f),
+                "RETRY FROM DAY 1  [R]", failureButtonStyle))
+            RetryFromDayOne();
+        if (GUI.Button(new Rect(Screen.width * 0.5f + 10f,
+                Screen.height * 0.5f + 90f, buttonWidth, 58f),
+                "RETURN TO TITLE  [ESC]", failureButtonStyle))
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Home_Screen");
+        }
+    }
+
+    private void EnsureFailureStyles()
+    {
+        failureTitleStyle ??= new GUIStyle(GUI.skin.label)
+        { alignment = TextAnchor.MiddleCenter, fontSize = 54, fontStyle = FontStyle.Bold };
+        failureTitleStyle.normal.textColor = new Color(1f, 0.22f, 0.2f);
+        failureBodyStyle ??= new GUIStyle(GUI.skin.label)
+        { alignment = TextAnchor.MiddleCenter, fontSize = 23, wordWrap = true };
+        failureBodyStyle.normal.textColor = Color.white;
+        failureButtonStyle ??= new GUIStyle(GUI.skin.button)
+        { alignment = TextAnchor.MiddleCenter, fontSize = 19, fontStyle = FontStyle.Bold };
+    }
+
     private void DrawDayCompleteScreen()
     {
+        HideCursorForBlackScreen();
         GUI.color = Color.black;
         GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height),
             Texture2D.whiteTexture);

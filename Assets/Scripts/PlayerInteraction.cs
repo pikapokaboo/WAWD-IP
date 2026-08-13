@@ -87,10 +87,17 @@ public sealed class PlayerInteraction : MonoBehaviour
         if (playerCamera == null)
             return null;
         Ray ray = new(playerCamera.transform.position, playerCamera.transform.forward);
-        return Physics.Raycast(ray, out RaycastHit hit, interactionDistance,
-                interactionLayers, QueryTriggerInteraction.Ignore)
-            ? hit.collider.GetComponentInParent<CashierInteractable>()
-            : null;
+        RaycastHit[] hits = Physics.RaycastAll(ray, interactionDistance,
+            interactionLayers, QueryTriggerInteraction.Ignore);
+        System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+        foreach (RaycastHit hit in hits)
+        {
+            CashierInteractable cashier =
+                hit.collider.GetComponentInParent<CashierInteractable>();
+            if (cashier != null)
+                return cashier;
+        }
+        return null;
     }
 
     private WorkstationInteractable FindWorkstationTarget()

@@ -7,8 +7,8 @@ public sealed class CctvSystem : MonoBehaviour
 {
     public static bool IsActive { get; private set; }
     public static Camera ActiveCamera => IsActive && instance != null
-        && instance.cameras.Count > 0
-        ? instance.cameras[instance.cameraIndex]
+        && instance.playerCamera != null
+        ? instance.playerCamera
         : null;
 
     public static Camera GetGameplayCamera()
@@ -22,6 +22,9 @@ public sealed class CctvSystem : MonoBehaviour
     private Camera playerCamera;
     private PlayerController player;
     private DayNightCycle dayCycle;
+    private Transform originalCameraParent;
+    private Vector3 originalCameraLocalPosition;
+    private Quaternion originalCameraLocalRotation;
     private int cameraIndex;
     private NpcTraits hoveredNpc;
     private Outline hoveredOutline;
@@ -31,6 +34,7 @@ public sealed class CctvSystem : MonoBehaviour
     private Texture2D solidTexture;
     private GUIStyle hudStyle;
     private GUIStyle centreStyle;
+    private bool enteringCctv;
 
     public static void EnterFromWorkstation()
     {
@@ -39,7 +43,8 @@ public sealed class CctvSystem : MonoBehaviour
             GameObject host = new("CCTV System");
             instance = host.AddComponent<CctvSystem>();
         }
-        instance.StartCoroutine(instance.EnterSequence());
+        if (!instance.enteringCctv && !IsActive)
+            instance.StartCoroutine(instance.EnterSequence());
     }
 
     private void Awake()
@@ -48,29 +53,60 @@ public sealed class CctvSystem : MonoBehaviour
         instance = this;
         player = FindFirstObjectByType<PlayerController>();
         playerCamera = player != null ? player.GetComponentInChildren<Camera>() : Camera.main;
+        if (playerCamera != null)
+        {
+            originalCameraParent = playerCamera.transform.parent;
+            originalCameraLocalPosition = playerCamera.transform.localPosition;
+            originalCameraLocalRotation = playerCamera.transform.localRotation;
+        }
         dayCycle = FindFirstObjectByType<DayNightCycle>();
-        foreach (Camera camera in FindObjectsByType<Camera>(FindObjectsSortMode.None))
-            if (camera.gameObject.name == "Camera_View") cameras.Add(camera);
+        RefreshCameraList();
     }
 
     private IEnumerator EnterSequence()
     {
+        enteringCctv = true;
+        fadeAlpha = 0f;
+        RefreshCameraList();
+        if (cameras.Count == 0)
+        {
+            Debug.LogError("CCTV mode could not find any Camera_View cameras.", this);
+            enteringCctv = false;
+            yield break;
+        }
+
         player?.SetInteractionLocked(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        HideCursorForBlackScreen();
         yield return Fade(0f, 1f, 0.5f);
         IsActive = true;
-        if (playerCamera != null) playerCamera.enabled = false;
         SelectCamera(0);
-        DayNightCycle.Instance?.StartCctvSound();
+        yield return null;
         yield return Fade(1f, 0f, 0.5f);
+        fadeAlpha = 0f;
+        enteringCctv = false;
+        RestoreCctvCursor();
+    }
+
+    private void RefreshCameraList()
+    {
+        cameras.Clear();
+        foreach (Camera camera in Resources.FindObjectsOfTypeAll<Camera>())
+        {
+            if (camera == null || camera.gameObject.name != "Camera_View"
+                || !camera.gameObject.scene.IsValid())
+                continue;
+            camera.gameObject.SetActive(true);
+            camera.targetTexture = null;
+            camera.targetDisplay = 0;
+            cameras.Add(camera);
+        }
     }
 
     private void Update()
     {
         if (!IsActive || cameras.Count == 0) return;
         Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        Cursor.visible = fadeAlpha <= 0f;
         if (DeveloperConsole.AnyConsoleOpen)
         {
             ClearHover();
@@ -91,15 +127,25 @@ public sealed class CctvSystem : MonoBehaviour
 
     private void SelectCamera(int index)
     {
-        if (cameras.Count == 0) return;
+        if (cameras.Count == 0 || playerCamera == null) return;
         cameraIndex = (index % cameras.Count + cameras.Count) % cameras.Count;
-        for (int i = 0; i < cameras.Count; i++) cameras[i].enabled = i == cameraIndex;
+        for (int i = 0; i < cameras.Count; i++)
+        {
+            if (cameras[i] == null) continue;
+            // Camera_View components act as view markers. Keeping them disabled
+            // prevents competing render cameras and permanent black frames.
+            cameras[i].enabled = false;
+        }
+        Transform marker = cameras[cameraIndex].transform;
+        playerCamera.transform.SetParent(null, true);
+        playerCamera.transform.SetPositionAndRotation(marker.position, marker.rotation);
+        playerCamera.enabled = true;
         ClearHover();
     }
 
     private void UpdateNpcHover()
     {
-        Camera active = cameras[cameraIndex];
+        Camera active = playerCamera;
         Ray ray = active.ScreenPointToRay(Mouse.current.position.ReadValue());
         NpcTraits npc = Physics.Raycast(ray, out RaycastHit hit, 300f,
                 Physics.AllLayers, QueryTriggerInteraction.Ignore)
@@ -129,12 +175,14 @@ public sealed class CctvSystem : MonoBehaviour
         yield return new WaitForSecondsRealtime(2.5f);
         bool shoplifter = npc != null && npc.HasTrait("No Money");
         resultMessage = shoplifter ? "REMOVING SHOPLIFTER" : "NO SHOP THEFT DETECTED";
+        HideCursorForBlackScreen();
         yield return Fade(0f, 1f, 0.25f);
         float sirenDuration = shoplifter
             ? DayNightCycle.Instance?.PlayShoplifterRemovalSound() ?? 0f
             : 0f;
         if (shoplifter && npc != null)
         {
+            DayNightCycle.Instance?.ReportCaughtShoplifter();
             NpcNavigation navigation = npc.GetComponent<NpcNavigation>();
             navigation?.ReleaseAllOccupancy();
             Destroy(npc.gameObject);
@@ -145,6 +193,7 @@ public sealed class CctvSystem : MonoBehaviour
         resultMessage = null;
         yield return Fade(1f, 0f, 0.35f);
         reporting = false;
+        RestoreCctvCursor();
     }
 
     public static void ExitForDayEnd()
@@ -152,12 +201,18 @@ public sealed class CctvSystem : MonoBehaviour
         if (instance == null || !IsActive) return;
         instance.ClearHover();
         foreach (Camera camera in instance.cameras) camera.enabled = false;
-        if (instance.playerCamera != null) instance.playerCamera.enabled = true;
+        if (instance.playerCamera != null)
+        {
+            instance.playerCamera.transform.SetParent(instance.originalCameraParent, false);
+            instance.playerCamera.transform.localPosition = instance.originalCameraLocalPosition;
+            instance.playerCamera.transform.localRotation = instance.originalCameraLocalRotation;
+            instance.playerCamera.enabled = true;
+        }
         IsActive = false;
-        DayNightCycle.Instance?.StopCctvSound();
         instance.reporting = false;
         instance.resultMessage = null;
         instance.fadeAlpha = 0f;
+        instance.enteringCctv = false;
         instance.player?.SetInteractionLocked(false);
     }
 
@@ -173,13 +228,25 @@ public sealed class CctvSystem : MonoBehaviour
         fadeAlpha = to;
     }
 
+    private static void HideCursorForBlackScreen()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
+    }
+
+    private static void RestoreCctvCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     private void OnGUI()
     {
         if (!IsActive && fadeAlpha <= 0f) return;
         EnsureStyles();
         if (IsActive)
         {
-            GUI.Box(new Rect(8f, 8f, Screen.width - 16f, Screen.height - 16f), "");
+            DrawCctvBorder();
             GUI.Label(new Rect(20f, 18f, 300f, 38f),
                 $"● REC   CAM {cameraIndex + 1:00}", hudStyle);
             string time = dayCycle != null ? dayCycle.CurrentTimeText : "--:--";
@@ -199,6 +266,20 @@ public sealed class CctvSystem : MonoBehaviour
                 GUI.Label(new Rect(0f, 0f, Screen.width, Screen.height), resultMessage, centreStyle);
             GUI.color = Color.white;
         }
+    }
+
+    private void DrawCctvBorder()
+    {
+        Color previousColour = GUI.color;
+        GUI.color = new Color(0.35f, 1f, 0.48f, 0.8f);
+        const float edge = 3f;
+        GUI.DrawTexture(new Rect(8f, 8f, Screen.width - 16f, edge), solidTexture);
+        GUI.DrawTexture(new Rect(8f, Screen.height - 11f,
+            Screen.width - 16f, edge), solidTexture);
+        GUI.DrawTexture(new Rect(8f, 8f, edge, Screen.height - 16f), solidTexture);
+        GUI.DrawTexture(new Rect(Screen.width - 11f, 8f,
+            edge, Screen.height - 16f), solidTexture);
+        GUI.color = previousColour;
     }
 
     private void EnsureStyles()

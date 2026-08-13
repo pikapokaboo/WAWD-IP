@@ -20,7 +20,7 @@ public sealed class MainBgmPlaylist : MonoBehaviour
         source.playOnAwake = false;
         source.loop = false;
         source.spatialBlend = 0f;
-        source.volume = volume;
+        source.volume = volume * AudioVolumeSettings.Bgm;
     }
 
     private void Start()
@@ -35,7 +35,7 @@ public sealed class MainBgmPlaylist : MonoBehaviour
 
     private void Update()
     {
-        source.volume = volume;
+        source.volume = volume * AudioVolumeSettings.Bgm;
         DayNightCycle cycle = FindFirstObjectByType<DayNightCycle>();
         bool allowed = playDuringPreparation || cycle == null || !cycle.PreparingToOpen;
         if (!allowed)

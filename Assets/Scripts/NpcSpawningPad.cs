@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Spawns NPCs at a configurable interval with an optional live NPC safety limit.
@@ -64,7 +65,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
         if (coordinator != this)
             return;
 
-        dayCycle = FindFirstObjectByType<DayNightCycle>();
+        dayCycle = IsHomeMenuScene() ? null : FindFirstObjectByType<DayNightCycle>();
         if (useDailyQuotas && dayCycle != null)
         {
             BuildDailySchedule();
@@ -90,7 +91,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
         RemoveDestroyedNpcs();
 
         if (maximumLivingNpcs == 0 || LivingNpcs.Count < maximumLivingNpcs)
-            SpawnFromNextPad(false, false, false);
+            SpawnFromNextPad(false, false, IsHomeMenuScene());
 
         nextSpawnTime = Time.time + GetRandomSpawnDelay();
     }
@@ -259,7 +260,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
 
     private void InitialiseCoordinator()
     {
-        dayCycle = FindFirstObjectByType<DayNightCycle>();
+        dayCycle = IsHomeMenuScene() ? null : FindFirstObjectByType<DayNightCycle>();
         if (useDailyQuotas && dayCycle != null)
             BuildDailySchedule();
         nextSpawnTime = Time.time + (spawnImmediately ? 0f : GetRandomSpawnDelay());
@@ -277,6 +278,11 @@ public sealed class NpcSpawningPad : MonoBehaviour
     private float GetRandomSpawnDelay()
     {
         return Random.Range(minimumSpawnInterval, maximumSpawnInterval);
+    }
+
+    private static bool IsHomeMenuScene()
+    {
+        return SceneManager.GetActiveScene().name == "Home_Screen";
     }
 
     private void OnValidate()

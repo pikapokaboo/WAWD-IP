@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public sealed class OpeningSequence : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public sealed class OpeningSequence : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void CreateForScene()
     {
+        if (SceneManager.GetActiveScene().name == "Home_Screen")
+            return;
+
         DayNightCycle cycle = FindFirstObjectByType<DayNightCycle>();
         if (cycle == null || FindFirstObjectByType<OpeningSequence>() != null)
             return;
