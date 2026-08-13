@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: PlayerInteraction.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Raycasts to target and activate world interactions.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 

@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: NpcNavigation.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Runs the NPC navigation and interaction state flow.
+// -----------------------------------------------------------------------------
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

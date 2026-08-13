@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: FridgeDoor.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Controls editor and runtime fridge-door movement.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 
 /// <summary>Controls an interactable fridge door in Edit mode and at runtime.</summary>

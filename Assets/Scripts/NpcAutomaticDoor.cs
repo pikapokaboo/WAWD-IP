@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: NpcAutomaticDoor.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Opens doors for nearby NPCs and players.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 
 /// <summary>

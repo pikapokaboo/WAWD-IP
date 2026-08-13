@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: CctvSystem.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Controls CCTV views, NPC reporting, and feedback.
+// -----------------------------------------------------------------------------
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -248,14 +254,14 @@ public sealed class CctvSystem : MonoBehaviour
         {
             DrawCctvBorder();
             GUI.Label(new Rect(20f, 18f, 300f, 38f),
-                $"● REC   CAM {cameraIndex + 1:00}", hudStyle);
+                $"â— REC   CAM {cameraIndex + 1:00}", hudStyle);
             string time = dayCycle != null ? dayCycle.CurrentTimeText : "--:--";
             string day = dayCycle != null ? $"DAY {dayCycle.CurrentDay}" : "DAY --";
             GUI.Label(new Rect(Screen.width - 300f, 18f, 275f, 38f),
                 $"{day}   {time}", hudStyle);
             GUI.Label(new Rect(20f, Screen.height - 62f, 470f, 38f),
                 reporting ? "REPORTING... SYSTEM TEMPORARILY LOCKED"
-                    : "LMB REPORT   A/D OR ←/→ CHANGE CAMERA", hudStyle);
+                    : "LMB REPORT   A/D OR â†/â†’ CHANGE CAMERA", hudStyle);
         }
         if (fadeAlpha > 0f)
         {

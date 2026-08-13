@@ -1,9 +1,15 @@
+// -----------------------------------------------------------------------------
+// File: NPCSitting.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Controls NPC chair approach, sitting, and standing.
+// -----------------------------------------------------------------------------
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
  
 /// <summary>
-/// Standalone sit/stand behaviour. Does not touch NpcNavigation — it shares the same
+/// Standalone sit/stand behaviour. Does not touch NpcNavigation â€” it shares the same
 /// NavMeshAgent but only drives it while a sit sequence is actually running. Targets,
 /// animator triggers, and reservation all live on the ChairStation it's given.
 ///

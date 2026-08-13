@@ -22,7 +22,7 @@ public sealed class StartMenuController : MonoBehaviour
     private const string GameplaySceneName = "Main_Scene";
 
     [Header("Text")]
-    [SerializeField] private string gameTitle = "What ever goofy thing we bouta name dis";
+    [SerializeField] private string gameTitle = "CheckOut LookOut";
 
     [Header("Layout")]
     [SerializeField] private Vector2 panelSize = new(560f, 640f);

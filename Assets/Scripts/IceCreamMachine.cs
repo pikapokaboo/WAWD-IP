@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: IceCreamMachine.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Defines ice-cream products, occupancy, and doors.
+// -----------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using UnityEngine;
 

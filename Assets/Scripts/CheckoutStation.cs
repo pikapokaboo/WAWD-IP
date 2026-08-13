@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: CheckoutStation.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Coordinates checkout queues and cashier interactions.
+// -----------------------------------------------------------------------------
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

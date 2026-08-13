@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: HomeMenuAmbientMode.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Limits the title scene to ambient traffic systems.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 
 /// <summary>

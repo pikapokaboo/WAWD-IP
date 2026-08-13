@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: ShelfStation.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Defines shelf products, positions, and occupancy.
+// -----------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;

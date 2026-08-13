@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: CashierInteractable.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Controls player dialogue and interaction with the cashier.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -308,7 +314,7 @@ public sealed class CashierInteractable : MonoBehaviour
                     optionButtonStyle))
                 continue;
             if (i == 0)
-                currentLine = "Watch the customers through the security cameras and catch shoplifters. Look for tells like someone checking whether anybody is watching, acting suspicious around products, or saying suspicious things out loud. Hover over a customer and report them when you're confident—but be careful, because reporting an innocent shopper will count as a false report.";
+                currentLine = "Watch the customers through the security cameras and catch shoplifters. Look for tells like someone checking whether anybody is watching, acting suspicious around products, or saying suspicious things out loud. Hover over a customer and report them when you're confidentâ€”but be careful, because reporting an innocent shopper will count as a false report.";
             else if (i == 1)
                 currentLine = "Go into the storage room behind me and use the door in there. You can also enter through the door beside the shelves.";
             else

@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: AudioVolumeSettings.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Stores and applies persistent audio volume settings.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 
 public static class AudioVolumeSettings

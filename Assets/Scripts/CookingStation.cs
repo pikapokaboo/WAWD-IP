@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: CookingStation.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Provides NPC food-preparation interaction positions.
+// -----------------------------------------------------------------------------
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

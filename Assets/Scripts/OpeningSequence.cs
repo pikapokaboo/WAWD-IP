@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: OpeningSequence.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Tracks the opening briefing and workstation objective.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: CarSpawningPad.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Spawns and routes ambient vehicles across the NavMesh.
+// -----------------------------------------------------------------------------
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;

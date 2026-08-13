@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: NpcSpeechBubble.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Displays context-sensitive world-space NPC speech.
+// -----------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -98,7 +104,7 @@ public sealed class NpcSpeechBubble : MonoBehaviour
     {
         "Too many witnesses. Next aisle.",
         "Abort snackquisition.",
-        "Nothing to steal—I mean, buy—here.",
+        "Nothing to stealâ€”I mean, buyâ€”here.",
         "That shelf was giving me suspicious looks."
     };
 
@@ -294,7 +300,7 @@ public sealed class NpcSpeechBubble : MonoBehaviour
         {
             ProductMoment.Searching => productThoughts,
             ProductMoment.Browsing => new[] { "Do I need {0}? My heart says yes. My list says nothing.", "Inspecting {0} for scientific reasons." },
-            ProductMoment.Grabbing => new[] { "{0}, welcome to the team.", "Yoink—legally, after checkout.", "A fine addition to my pile of decisions." },
+            ProductMoment.Grabbing => new[] { "{0}, welcome to the team.", "Yoinkâ€”legally, after checkout.", "A fine addition to my pile of decisions." },
             _ => new[] { "{0} has mysteriously changed ownership.", "This is between me and the security camera.", "Yoink, but quietly." }
         };
     }

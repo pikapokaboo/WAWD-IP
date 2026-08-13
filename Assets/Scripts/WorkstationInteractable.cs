@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: WorkstationInteractable.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Starts CCTV gameplay from the security workstation.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 
 [DisallowMultipleComponent]

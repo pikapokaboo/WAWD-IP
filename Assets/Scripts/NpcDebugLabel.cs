@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: NpcDebugLabel.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Displays optional developer information above NPCs.
+// -----------------------------------------------------------------------------
+
 using System.Text;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: OpenFridge.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Defines product access points for open refrigerators.
+// -----------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using UnityEngine;
 

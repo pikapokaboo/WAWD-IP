@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: NpcTraits.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Rolls and exposes weighted NPC trait data.
+// -----------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;

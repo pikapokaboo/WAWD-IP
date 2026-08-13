@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: MainBgmPlaylist.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Randomizes and plays the gameplay music playlist.
+// -----------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;

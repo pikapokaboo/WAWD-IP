@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: ChairStation.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Defines reservable NPC seating positions.
+// -----------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using UnityEngine;
  

@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b78ac1ba5c43649edbf1646f64cd2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTitle: What ever goofy thing we bouta name dis
+  gameTitle: CheckOut LookOut
   settingsPlaceholder: Will insert settings later
   panelSize: {x: 650, y: 720}
   buttonSize: {x: 500, y: 127}

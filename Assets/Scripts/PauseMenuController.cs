@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// File: PauseMenuController.cs
+// Project: WAWD Integrated Studio Project
+// Purpose: Builds and controls the pause and settings menus.
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
