@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3430047859680791775}
   - component: {fileID: 3430047859680791776}
   - component: {fileID: 3430047859680791777}
+  - component: {fileID: 3430047859680791778}
   m_Layer: 8
   m_Name: NPChibi
   m_TagString: NPC
@@ -304,6 +305,87 @@ MonoBehaviour:
   slowWalkerReactionChance: 40
   crowdingReactionChance: 55
   reactionCooldown: 8
+  slowWalkerLines:
+  - Excuse me...
+  - Can I get past?
+  - Bit of a hurry here!
+  - Coming through!
+  crowdingLines:
+  - Hey!
+  - Watch it!
+  - A little space, please!
+  - Oof!
+  - Personal space is still free!
+  - This isn't bumper cars!
+  bulldozedLines:
+  - I'm walking here!
+  - Was that really necessary?
+  - Okay, you win!
+  - Apparently I'm part of the trolley now.
+  - Please stop pushing me!
+  pushingPastLines:
+  - Sorry, coming through!
+  - Pardon me!
+  - Urgent shopping business!
+  - Beep beep!
+  - The aisle waits for no one!
+  bumpLines:
+  - Oops, sorry!
+  - Excuse me!
+  - Didn't see you there!
+  - Bonk!
+  - Aisle collision!
+  - We need indicators on these things.
+  shoppingThoughtChance: 45
+  thoughtCooldown: 5
+  productThoughts:
+  - Now, where is the {0}?
+  - I only came in for {0}...
+  - Can't forget the {0}.
+  - 'Mission: find {0}.'
+  browsingThoughts:
+  - Ooh, what's this?
+  - Just looking...
+  - Do I need this? Probably not.
+  - Window shopping, but indoors.
+  - I have completely forgotten my list.
+  finishedBrowsingThoughts:
+  - Back to the list.
+  - I should probably keep moving.
+  - Nope, don't need it.
+  - My wallet survives another aisle.
+  queueThoughts:
+  - This queue isn't too bad.
+  - I always choose the slow line.
+  - Nearly there...
+  - Should've used self-checkout.
+  - Time to inspect the receipt sweets.
+  foundProductThoughts:
+  - There it is!
+  - Into the basket you go.
+  - Excellent choice, me.
+  - That's one thing off the list.
+  stealingThoughts:
+  - Nobody saw that...
+  - Free sample, right?
+  - Act natural.
+  - This is between me and the shelf.
+  shoplifterSearchThoughts:
+  - Where's the {0}? Asking for absolutely no receipt.
+  - 'Target acquired: {0}. Wallet status: decorative.'
+  - I need {0}. Payment is more of a suggestion.
+  - 'Today''s special: five-finger discount on {0}.'
+  shoplifterBrowsingThoughts:
+  - Just browsing... very suspiciously.
+  - Where are the cameras? Purely academic question.
+  - Act natural. Nobody acts this natural.
+  - I am an innocent customer with an empty wallet.
+  - Would this fit under my shirt? Hypothetically.
+  shoplifterFinishedBrowsingThoughts:
+  - Too many witnesses. Next aisle.
+  - Abort snackquisition.
+  - "Nothing to steal\u2014I mean, buy\u2014here."
+  - That shelf was giving me suspicious looks.
 --- !u!114 &3430047859680791777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,13 +396,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50d69dbf2b0299948879e319ad47ae92, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcSitting
   sitTransitionDuration: 1
   standTransitionDuration: 1
   seatedDurationRange: {x: 5, y: 15}
   arrivalDistance: 0.1
   seatTurnSpeed: 360
+--- !u!114 &3430047859680791778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770770118774919518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5cbadb8d8b47f6a7fb498752df44ac, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::NpcAppearance
+  randomiseOnAwake: 1
+  minimumSaturation: 0.35
+  maximumSaturation: 0.8
+  minimumBrightness: 0.65
+  maximumBrightness: 1
+  excludedName: eye
 --- !u!1001 &5960069421697611403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,6 +485,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 845a3188257632146825358356958c38, type: 2}
+    - target: {fileID: -610808964931467145, guid: 02faba632a10a954b877426821a5819b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 614098cb8d3f8254e8f2af3b0e5b5306, type: 2}
     - target: {fileID: 919132149155446097, guid: 02faba632a10a954b877426821a5819b, type: 3}
       propertyPath: m_Name
       value: BaseMesh_Chibi 1

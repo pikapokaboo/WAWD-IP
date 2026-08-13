@@ -13,12 +13,20 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public sealed class NpcSpawningPad : MonoBehaviour
 {
+    private static readonly List<NpcSpawningPad> SpawnPads = new();
+    private static readonly List<GameObject> LivingNpcs = new();
+    private static NpcSpawningPad coordinator;
+    private static int nextPadIndex;
+
     [Header("Spawn Settings")]
     [Tooltip("NPC prefab created by this pad.")]
     [SerializeField] private GameObject npcPrefab;
 
     [Tooltip("Optional transform used as the exact spawn position and rotation.")]
     [SerializeField] private Transform spawnPoint;
+
+    [Tooltip("NPCs created by this pad will leave through this despawning pad.")]
+    [SerializeField] private Transform pairedDespawningPad;
 
     [Tooltip("Vertical offset used when no custom spawn point is assigned.")]
     [SerializeField, Min(0f)] private float spawnHeight = 0.05f;
@@ -38,8 +46,9 @@ public sealed class NpcSpawningPad : MonoBehaviour
     [SerializeField, Min(0)] private int shoplifterIncreasePerDay = 1;
     [Tooltip("Small timing variation while keeping customers evenly spread through the day.")]
     [SerializeField, Range(0f, 0.4f)] private float scheduleJitter = 0.18f;
+    [Tooltip("Keep spawning passers-by between scheduled customers. These NPCs only go home.")]
+    [SerializeField] private bool spawnHomeboundNpcs = true;
 
-    private readonly List<GameObject> livingNpcs = new();
     private float nextSpawnTime;
     private DayNightCycle dayCycle;
     private int scheduledDay;
@@ -48,10 +57,18 @@ public sealed class NpcSpawningPad : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!SpawnPads.Contains(this))
+            SpawnPads.Add(this);
+        if (coordinator == null)
+            coordinator = this;
+        if (coordinator != this)
+            return;
+
         dayCycle = FindFirstObjectByType<DayNightCycle>();
         if (useDailyQuotas && dayCycle != null)
         {
             BuildDailySchedule();
+            nextSpawnTime = Time.time + (spawnImmediately ? 0f : GetRandomSpawnDelay());
             return;
         }
         nextSpawnTime = Time.time + (spawnImmediately ? 0f : GetRandomSpawnDelay());
@@ -59,6 +76,9 @@ public sealed class NpcSpawningPad : MonoBehaviour
 
     private void Update()
     {
+        if (coordinator != this)
+            return;
+
         if (useDailyQuotas && dayCycle != null)
         {
             UpdateDailySchedule();
@@ -69,8 +89,8 @@ public sealed class NpcSpawningPad : MonoBehaviour
 
         RemoveDestroyedNpcs();
 
-        if (maximumLivingNpcs == 0 || livingNpcs.Count < maximumLivingNpcs)
-            SpawnNpc();
+        if (maximumLivingNpcs == 0 || LivingNpcs.Count < maximumLivingNpcs)
+            SpawnFromNextPad(false, false, false);
 
         nextSpawnTime = Time.time + GetRandomSpawnDelay();
     }
@@ -80,10 +100,11 @@ public sealed class NpcSpawningPad : MonoBehaviour
     /// </summary>
     public void SpawnNpc()
     {
-        SpawnNpc(false, false);
+        SpawnNpc(false, false, false);
     }
 
-    private void SpawnNpc(bool forceCustomerType, bool shoplifter)
+    private void SpawnNpc(bool forceCustomerType, bool shoplifter,
+        bool forceHomebound)
     {
         if (npcPrefab == null)
         {
@@ -93,7 +114,7 @@ public sealed class NpcSpawningPad : MonoBehaviour
         }
 
         RemoveDestroyedNpcs();
-        if (maximumLivingNpcs > 0 && livingNpcs.Count >= maximumLivingNpcs)
+        if (maximumLivingNpcs > 0 && LivingNpcs.Count >= maximumLivingNpcs)
             return;
 
         Vector3 position = spawnPoint != null
@@ -102,31 +123,77 @@ public sealed class NpcSpawningPad : MonoBehaviour
         Quaternion rotation = spawnPoint != null ? spawnPoint.rotation : transform.rotation;
 
         GameObject spawnedNpc = Instantiate(npcPrefab, position, rotation);
+        NpcNavigation navigation = spawnedNpc.GetComponent<NpcNavigation>();
+        if (pairedDespawningPad != null)
+            navigation?.SetHomeTarget(pairedDespawningPad);
         if (forceCustomerType)
         {
             NpcTraits traits = spawnedNpc.GetComponent<NpcTraits>();
             traits?.ForcePoolChoice("Spending Type",
                 shoplifter ? "No Money" : Random.value < 0.5f
                     ? "Light Spender" : "Heavy Spender");
-            spawnedNpc.GetComponent<NpcNavigation>()?.ForceShoppingIntent(true);
+            navigation?.ForceShoppingIntent(true);
         }
-        livingNpcs.Add(spawnedNpc);
+        else if (forceHomebound)
+            navigation?.ForceShoppingIntent(false);
+        LivingNpcs.Add(spawnedNpc);
+    }
+
+    private void SpawnFromNextPad(bool forceCustomerType, bool shoplifter,
+        bool forceHomebound)
+    {
+        NpcSpawningPad pad = GetNextSpawnPad();
+        if (pad != null)
+            pad.SpawnNpc(forceCustomerType, shoplifter, forceHomebound);
+    }
+
+    private static NpcSpawningPad GetNextSpawnPad()
+    {
+        SpawnPads.RemoveAll(pad => pad == null);
+        if (SpawnPads.Count == 0)
+            return null;
+
+        for (int checkedPads = 0; checkedPads < SpawnPads.Count; checkedPads++)
+        {
+            int index = nextPadIndex % SpawnPads.Count;
+            nextPadIndex = (index + 1) % SpawnPads.Count;
+            NpcSpawningPad pad = SpawnPads[index];
+            if (pad.isActiveAndEnabled && pad.npcPrefab != null)
+                return pad;
+        }
+        return null;
     }
 
     private void UpdateDailySchedule()
     {
         int currentDay = dayCycle != null ? dayCycle.CurrentDay : 1;
         if (currentDay != scheduledDay)
+        {
             BuildDailySchedule();
-        if (dayCycle.DayEnded || nextScheduledSpawn >= dailySchedule.Count
-            || dayCycle.DayProgress < dailySchedule[nextScheduledSpawn].progress)
+            nextSpawnTime = Time.time + GetRandomSpawnDelay();
+        }
+        if (dayCycle.DayEnded)
             return;
 
         RemoveDestroyedNpcs();
-        if (maximumLivingNpcs > 0 && livingNpcs.Count >= maximumLivingNpcs)
-            return;
-        SpawnNpc(true, dailySchedule[nextScheduledSpawn].shoplifter);
-        nextScheduledSpawn++;
+        bool hasRoom = maximumLivingNpcs == 0 || LivingNpcs.Count < maximumLivingNpcs;
+        bool spawnedScheduledCustomer = false;
+
+        if (hasRoom && nextScheduledSpawn < dailySchedule.Count
+            && dayCycle.DayProgress >= dailySchedule[nextScheduledSpawn].progress)
+        {
+            SpawnFromNextPad(true, dailySchedule[nextScheduledSpawn].shoplifter, false);
+            nextScheduledSpawn++;
+            spawnedScheduledCustomer = true;
+            hasRoom = maximumLivingNpcs == 0 || LivingNpcs.Count < maximumLivingNpcs;
+        }
+
+        if (spawnHomeboundNpcs && !spawnedScheduledCustomer
+            && hasRoom && Time.time >= nextSpawnTime)
+        {
+            SpawnFromNextPad(false, false, true);
+            nextSpawnTime = Time.time + GetRandomSpawnDelay();
+        }
     }
 
     private void BuildDailySchedule()
@@ -174,7 +241,35 @@ public sealed class NpcSpawningPad : MonoBehaviour
 
     private void RemoveDestroyedNpcs()
     {
-        livingNpcs.RemoveAll(npc => npc == null);
+        LivingNpcs.RemoveAll(npc => npc == null);
+    }
+
+    private void OnDisable()
+    {
+        SpawnPads.Remove(this);
+        if (coordinator != this)
+            return;
+
+        coordinator = SpawnPads.Count > 0 ? SpawnPads[0] : null;
+        if (coordinator != null && coordinator.isActiveAndEnabled)
+            coordinator.InitialiseCoordinator();
+    }
+
+    private void InitialiseCoordinator()
+    {
+        dayCycle = FindFirstObjectByType<DayNightCycle>();
+        if (useDailyQuotas && dayCycle != null)
+            BuildDailySchedule();
+        nextSpawnTime = Time.time + (spawnImmediately ? 0f : GetRandomSpawnDelay());
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetSpawnNetwork()
+    {
+        SpawnPads.Clear();
+        LivingNpcs.Clear();
+        coordinator = null;
+        nextPadIndex = 0;
     }
 
     private float GetRandomSpawnDelay()

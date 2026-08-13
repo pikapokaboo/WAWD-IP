@@ -16,11 +16,14 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
     [Tooltip("Switch this if the door swings around the wrong edge.")]
     [SerializeField] private bool hingeOnPositiveSide;
 
-    [Header("Runtime NPC Opening")]
+    [Header("Runtime Automatic Opening")]
     [SerializeField] private bool automaticallyOpenForNpcs = true;
+    [SerializeField] private bool automaticallyOpenForPlayer;
     [SerializeField, Min(0.1f)] private float detectionRadius = 3f;
     [SerializeField, Min(1f)] private float swingSpeed = 180f;
     [SerializeField, Min(0f)] private float closeDelay = 0.75f;
+    [Tooltip("Disable only the moving door panel's colliders while it is open.")]
+    [SerializeField] private bool disableDoorCollisionWhileOpen;
 
     [SerializeField, HideInInspector] private bool closedPoseStored;
     [SerializeField, HideInInspector] private Vector3 closedLocalPosition;
@@ -85,23 +88,30 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
         if (!Application.isPlaying)
             return;
 
-        if (automaticallyOpenForNpcs && HasNearbyNpc())
+        bool automaticOpeningEnabled = automaticallyOpenForNpcs
+            || automaticallyOpenForPlayer;
+        if (automaticOpeningEnabled && HasNearbyOpener())
             lastNpcNearbyTime = Time.time;
 
-        bool shouldOpen = open || (automaticallyOpenForNpcs
+        bool shouldOpen = open || (automaticOpeningEnabled
             && Time.time <= lastNpcNearbyTime + closeDelay);
         ApplyRuntimePose(shouldOpen);
     }
 
-    private bool HasNearbyNpc()
+    private bool HasNearbyOpener()
     {
         Vector3 centre = GetDetectionCentre();
         Collider[] nearby = Physics.OverlapSphere(centre, detectionRadius,
             Physics.AllLayers, QueryTriggerInteraction.Ignore);
         foreach (Collider candidate in nearby)
         {
-            if (candidate != null
+            if (candidate == null)
+                continue;
+            if (automaticallyOpenForNpcs
                 && candidate.GetComponentInParent<NpcNavigation>() != null)
+                return true;
+            if (automaticallyOpenForPlayer
+                && candidate.GetComponentInParent<PlayerController>() != null)
                 return true;
         }
         return false;
@@ -145,6 +155,8 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
         if (!closedPoseStored || doorVisual == null || doorVisual.parent == null)
             return;
 
+        SetDoorPanelCollision(!openPose);
+
         doorVisual.SetLocalPositionAndRotation(closedLocalPosition, closedLocalRotation);
         if (handleVisual != null)
             handleVisual.SetLocalPositionAndRotation(
@@ -172,6 +184,15 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
         RotateAround(doorVisual, hingeWorld, swing);
         if (handleVisual != null && !handleVisual.IsChildOf(doorVisual))
             RotateAround(handleVisual, hingeWorld, swing);
+    }
+
+    private void SetDoorPanelCollision(bool enabled)
+    {
+        if (!disableDoorCollisionWhileOpen || doorVisual == null)
+            return;
+        foreach (Collider doorCollider in
+                 doorVisual.GetComponentsInChildren<Collider>(true))
+            doorCollider.enabled = enabled;
     }
 
     private static void RotateAround(Transform target, Vector3 pivot, Quaternion rotation)

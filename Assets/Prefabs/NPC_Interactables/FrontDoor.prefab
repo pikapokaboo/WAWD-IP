@@ -51,9 +51,11 @@ MonoBehaviour:
   openAngle: 95
   hingeOnPositiveSide: 0
   automaticallyOpenForNpcs: 1
+  automaticallyOpenForPlayer: 0
   detectionRadius: 3
   swingSpeed: 180
   closeDelay: 0.75
+  disableDoorCollisionWhileOpen: 0
   closedPoseStored: 0
   closedLocalPosition: {x: 0, y: 0, z: 0}
   closedLocalRotation: {x: 0, y: 0, z: 0, w: 1}

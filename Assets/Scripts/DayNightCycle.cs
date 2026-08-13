@@ -23,6 +23,17 @@ public sealed class DayNightCycle : MonoBehaviour
     [SerializeField, Min(0f)] private float endOfDayPauseSeconds = 3f;
     [SerializeField] private bool automaticallyStartNextDay = true;
 
+    [Header("Player Day Start")]
+    [Tooltip("The position and rotation used for the player at the start of every day.")]
+    [SerializeField] private Transform playerSpawnPosition;
+    [SerializeField] private PlayerController player;
+
+    [Header("Day Start Sequence")]
+    [SerializeField] private bool showDayStartSequence = true;
+    [SerializeField, Min(0f)] private float dayTitleHoldSeconds = 1.25f;
+    [SerializeField, Min(0.01f)] private float dayTitleFadeSeconds = 0.75f;
+    [SerializeField, Min(12)] private int dayTitleFontSize = 52;
+
     [Header("Sun")]
     [SerializeField] private Light sun;
     [SerializeField] private float sunYaw = -30f;
@@ -50,6 +61,9 @@ public sealed class DayNightCycle : MonoBehaviour
     private GUIStyle clockStyle;
     private Texture2D panelTexture;
     private GUIStyle dayStyle;
+    private GUIStyle dayTitleStyle;
+    private float dayStartOverlayAlpha;
+    private Coroutine dayStartSequence;
 
     public float CurrentHour => Mathf.Clamp(startHour + elapsedGameHours,
         startHour, Mathf.Max(startHour, endHour));
@@ -66,6 +80,12 @@ public sealed class DayNightCycle : MonoBehaviour
         if (sun != null)
             RenderSettings.sun = sun;
         ApplyLighting();
+    }
+
+    private void Start()
+    {
+        TeleportPlayerToDayStart();
+        BeginDayStartSequence();
     }
 
     private void Update()
@@ -123,11 +143,79 @@ public sealed class DayNightCycle : MonoBehaviour
         elapsedGameHours = 0f;
         dayEnded = false;
         Time.timeScale = 1f;
+        TeleportPlayerToDayStart();
+        BeginDayStartSequence();
         ApplyLighting();
+    }
+
+    private void BeginDayStartSequence()
+    {
+        if (dayStartSequence != null)
+            StopCoroutine(dayStartSequence);
+
+        if (!showDayStartSequence)
+        {
+            dayStartOverlayAlpha = 0f;
+            dayStartSequence = null;
+            return;
+        }
+
+        dayStartSequence = StartCoroutine(PlayDayStartSequence());
+    }
+
+    private System.Collections.IEnumerator PlayDayStartSequence()
+    {
+        dayStartOverlayAlpha = 1f;
+        float holdUntil = Time.realtimeSinceStartup + dayTitleHoldSeconds;
+        while (Time.realtimeSinceStartup < holdUntil)
+            yield return null;
+
+        float fadeStart = Time.realtimeSinceStartup;
+        while (dayStartOverlayAlpha > 0f)
+        {
+            dayStartOverlayAlpha = 1f - Mathf.Clamp01(
+                (Time.realtimeSinceStartup - fadeStart) / dayTitleFadeSeconds);
+            yield return null;
+        }
+
+        dayStartOverlayAlpha = 0f;
+        dayStartSequence = null;
+    }
+
+    private void TeleportPlayerToDayStart()
+    {
+        if (playerSpawnPosition == null)
+        {
+            GameObject spawnObject = GameObject.Find("Player_Spawn_pos");
+            if (spawnObject != null)
+                playerSpawnPosition = spawnObject.transform;
+        }
+
+        if (player == null)
+            player = FindFirstObjectByType<PlayerController>();
+        if (player == null || playerSpawnPosition == null)
+            return;
+
+        CharacterController controller = player.GetComponent<CharacterController>();
+        bool controllerWasEnabled = controller != null && controller.enabled;
+        if (controllerWasEnabled)
+            controller.enabled = false;
+
+        player.transform.SetPositionAndRotation(
+            playerSpawnPosition.position, playerSpawnPosition.rotation);
+
+        if (controllerWasEnabled)
+            controller.enabled = true;
     }
 
     private void OnGUI()
     {
+        if (dayStartOverlayAlpha > 0f)
+        {
+            DrawDayStartOverlay();
+            return;
+        }
+
         if (!showClock)
             return;
         EnsureStyle();
@@ -138,6 +226,33 @@ public sealed class DayNightCycle : MonoBehaviour
         GUI.Label(new Rect(Screen.width - 220f, screenMargin.y + clockSize.y + 2f,
             198f, 32f), dayEnded ? $"DAY {CurrentDay} COMPLETE" : $"DAY {CurrentDay}",
             dayStyle);
+    }
+
+    private void DrawDayStartOverlay()
+    {
+        if (dayStartOverlayAlpha <= 0f)
+            return;
+
+        Color previousColour = GUI.color;
+        GUI.color = new Color(0f, 0f, 0f, dayStartOverlayAlpha);
+        GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height),
+            Texture2D.whiteTexture);
+
+        if (dayTitleStyle == null)
+        {
+            dayTitleStyle = new GUIStyle(GUI.skin.label)
+            {
+                alignment = TextAnchor.MiddleCenter,
+                fontSize = dayTitleFontSize,
+                fontStyle = FontStyle.Bold
+            };
+            dayTitleStyle.normal.textColor = Color.white;
+        }
+
+        GUI.color = new Color(1f, 1f, 1f, dayStartOverlayAlpha);
+        GUI.Label(new Rect(0f, 0f, Screen.width, Screen.height),
+            $"DAY {CurrentDay}", dayTitleStyle);
+        GUI.color = previousColour;
     }
 
     private void EnsureDayStyle()

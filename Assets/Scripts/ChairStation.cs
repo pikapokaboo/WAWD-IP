@@ -114,7 +114,10 @@ public sealed class ChairStation : MonoBehaviour
     {
         if (!Application.isPlaying)
         {
-            RefreshPreview();
+            // Preview posing is the only editor-time work this component needs.
+            // Never scan or update anything while preview mode is disabled.
+            if (previewSeatedNpc)
+                RefreshPreview();
             return;
         }
         if (markerVisible != DeveloperConsole.ShowInteractionMarkers)
@@ -194,7 +197,6 @@ public sealed class ChairStation : MonoBehaviour
 
     private void RefreshPreview()
     {
-        RecoverPreviewReference();
         if (Application.isPlaying || !previewSeatedNpc
             || seatedNpcPreviewPrefab == null || seatPoint == null)
         {
@@ -204,9 +206,15 @@ public sealed class ChairStation : MonoBehaviour
 
         if (previewInstance == null)
         {
+            RecoverPreviewReference();
+        }
+
+        if (previewInstance == null)
+        {
             previewInstance = Instantiate(seatedNpcPreviewPrefab);
             previewInstance.name = PreviewObjectName;
             previewInstance.hideFlags = HideFlags.HideAndDontSave;
+            previewInstance.transform.SetParent(transform, true);
             previewInstance.SetActive(false);
             foreach (MonoBehaviour behaviour in previewInstance
                 .GetComponentsInChildren<MonoBehaviour>(true))
@@ -238,26 +246,29 @@ public sealed class ChairStation : MonoBehaviour
         if (Application.isPlaying || previewInstance != null)
             return;
 
-        foreach (GameObject candidate in Resources.FindObjectsOfTypeAll<GameObject>())
+        // Preview objects are parented to their chair, so recovery after a script
+        // reload only checks this chair's direct children instead of scanning every
+        // loaded GameObject once per chair per editor frame.
+        for (int i = 0; i < transform.childCount; i++)
         {
-            if (candidate == null)
-                continue;
-            if (candidate.name == PreviewObjectName)
+            GameObject candidate = transform.GetChild(i).gameObject;
+            if (candidate.name == PreviewObjectName
+                || candidate.name == "Seated NPC Preview (Editor Only)")
             {
                 previewInstance = candidate;
                 return;
             }
-
-            // Remove previews made by the older implementation, which did not
-            // carry an owner ID and could be orphaned by a script reload.
-            if (candidate.name == "Seated NPC Preview (Editor Only)")
-                DestroyPreviewObject(candidate);
         }
     }
 
     private void DestroyPreview()
     {
-        RecoverPreviewReference();
+        if (previewInstance == null)
+        {
+            // This cheap child lookup is only needed during validation/disable,
+            // never continuously while the editor is idle.
+            RecoverPreviewReference();
+        }
         if (previewInstance == null)
             return;
         GameObject objectToDestroy = previewInstance;

@@ -92,6 +92,8 @@ public sealed class NpcNavigation : MonoBehaviour
     public void ForceShoppingIntent(bool shouldShop) =>
         forcedShoppingIntent = shouldShop;
 
+    public void SetHomeTarget(Transform target) => homeTarget = target;
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetShopperCount()
     {
