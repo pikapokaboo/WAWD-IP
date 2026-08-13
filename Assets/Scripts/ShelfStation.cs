@@ -40,12 +40,13 @@ public sealed class ShelfStation : MonoBehaviour
     private bool markerVisible;
     private FridgeDoor fridgeDoor;
     private IceCreamMachine iceCreamMachine;
+    private OpenFridge openFridge;
     private NpcNavigation reservedBy;
 
     public static IEnumerable<ShelfStation> AllActive => ActiveShelves;
     public IReadOnlyList<string> Products => iceCreamMachine != null
         ? iceCreamMachine.GetProducts(machineSide)
-        : products;
+        : openFridge != null ? openFridge.Products : products;
     public string InteractionTrigger => interactionTrigger;
     public float FacingYawOffset => facingYawOffset;
     public Vector3 StandPosition => standingPosition != null
@@ -57,6 +58,7 @@ public sealed class ShelfStation : MonoBehaviour
     public bool HasApproachingShopper => approachingShopperCount > 0
         || (iceCreamMachine != null && iceCreamMachine.IsOccupiedByOther(this));
     public IceCreamMachine.Side MachineSide => machineSide;
+    public OpenFridge SharedOpenFridge => openFridge;
 
     public bool IsAvailableFor(NpcNavigation npc) =>
         (reservedBy == null || reservedBy == npc)
@@ -70,6 +72,20 @@ public sealed class ShelfStation : MonoBehaviour
         reservedBy = npc;
         approachingShopperCount = 1;
         return true;
+    }
+
+    public ShelfStation FindAvailableSharedPosition(NpcNavigation npc)
+    {
+        if (openFridge == null)
+            return this;
+
+        foreach (ShelfStation station in ActiveShelves)
+        {
+            if (station != null && station.openFridge == openFridge
+                && station.IsAvailableFor(npc))
+                return station;
+        }
+        return this;
     }
 
     public void Release(NpcNavigation npc)
@@ -111,6 +127,7 @@ public sealed class ShelfStation : MonoBehaviour
     {
         fridgeDoor = GetComponent<FridgeDoor>();
         iceCreamMachine = GetComponentInParent<IceCreamMachine>();
+        openFridge = GetComponentInParent<OpenFridge>();
         if (standingPosition == null)
             return;
 

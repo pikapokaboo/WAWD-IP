@@ -80,6 +80,7 @@ public sealed class CheckoutStation : MonoBehaviour
         { "Nice try. You're too young.", "I'll need an adult, sorry.", "Absolutely not, kid." };
 
     private readonly List<NpcNavigation> customers = new();
+    private NpcNavigation paymentCustomer;
     private bool markersVisible;
     private NpcSpeechBubble cashierSpeech;
     private float nextCashierRemarkTime;
@@ -128,7 +129,36 @@ public sealed class CheckoutStation : MonoBehaviour
         if (customer == null || paymentPosition == null)
             yield break;
 
-        customers.Add(customer);
+        // With an entirely empty checkout, approaching shoppers race for the
+        // payment position. Tickets only begin once somebody has claimed it.
+        if (paymentCustomer == null && customers.Count == 0)
+        {
+            customer.SetCheckoutQueueNumber(0);
+            while (customer != null && paymentCustomer == null
+                   && customers.Count == 0)
+            {
+                yield return customer.MoveToCheckoutMarker(
+                    paymentPosition, "Going to available checkout");
+                if (!customer.ReachedCheckoutMarker)
+                    continue;
+
+                if (paymentCustomer == null && customers.Count == 0)
+                {
+                    paymentCustomer = customer;
+                    yield return RunPayment(customer);
+                    paymentCustomer = null;
+                    customer.SetCheckoutQueueNumber(0);
+                    customer.LeaveCheckoutMarker();
+                    yield break;
+                }
+            }
+            customer?.LeaveCheckoutMarker();
+        }
+
+        if (customer == null)
+            yield break;
+        if (!customers.Contains(customer))
+            customers.Add(customer);
         int lastPosition = int.MinValue;
 
         while (customer != null)
@@ -139,39 +169,46 @@ public sealed class CheckoutStation : MonoBehaviour
                 yield break;
 
             customer.SetCheckoutQueueNumber(queueNumber + 1);
-            if (queueNumber == 0)
+            if (queueNumber == 0 && paymentCustomer == null)
             {
-                yield return customer.MoveToCheckoutMarker(
-                    paymentPosition, "Going to payment position");
-                if (!customer.ReachedCheckoutMarker)
+                customers.RemoveAt(0);
+                paymentCustomer = customer;
+                customer.SetCheckoutQueueNumber(0);
+                do
                 {
-                    yield return null;
-                    continue;
+                    yield return customer.MoveToCheckoutMarker(
+                        paymentPosition, "Going to payment position");
+                }
+                while (customer != null && !customer.ReachedCheckoutMarker);
+                if (customer == null)
+                {
+                    paymentCustomer = null;
+                    yield break;
                 }
                 yield return RunPayment(customer);
-                customers.Remove(customer);
+                paymentCustomer = null;
                 break;
             }
 
-            int slotIndex = queueNumber - 1;
+            int slotIndex = queueNumber;
             if (slotIndex < queuePositions.Count && queuePositions[slotIndex] != null)
             {
                 if (lastPosition != slotIndex)
                 {
                     yield return customer.MoveToCheckoutMarker(
-                        queuePositions[slotIndex], $"Waiting in queue #{queueNumber}");
+                        queuePositions[slotIndex], $"Waiting in queue #{queueNumber + 1}");
                     lastPosition = customer.ReachedCheckoutMarker
                         ? slotIndex
                         : int.MinValue;
                     if (customer.ReachedCheckoutMarker)
                         customer.CommentOnCheckoutQueue();
                 }
-                customer.SetCheckoutAction($"Waiting in queue #{queueNumber}");
+                customer.SetCheckoutAction($"Waiting in queue #{queueNumber + 1}");
                 yield return null;
             }
             else
             {
-                customer.SetCheckoutAction($"Queue full - browsing (ticket #{queueNumber})");
+                customer.SetCheckoutAction($"Queue full - browsing (ticket #{queueNumber + 1})");
                 yield return customer.BrowseWhileWaitingForCheckout();
                 lastPosition = int.MinValue;
             }

@@ -127,7 +127,12 @@ public sealed class NpcNavigation : MonoBehaviour
             {
                 CheckoutStation checkout = FindFirstObjectByType<CheckoutStation>();
                 if (checkout != null)
+                {
                     yield return checkout.Checkout(this);
+                    CookingStation cooking = FindFirstObjectByType<CookingStation>();
+                    if (cooking != null)
+                        yield return cooking.PrepareFood(this);
+                }
             }
         }
 
@@ -215,10 +220,13 @@ public sealed class NpcNavigation : MonoBehaviour
         if (shelf == null)
             yield break;
 
+        shelf = shelf.FindAvailableSharedPosition(this);
         while (shelf != null && !shelf.TryReserve(this))
         {
             CurrentAction = $"Waiting for {product}";
             yield return new WaitForSeconds(0.25f);
+            if (shelf != null)
+                shelf = shelf.FindAvailableSharedPosition(this);
         }
         if (shelf == null)
             yield break;
@@ -242,12 +250,12 @@ public sealed class NpcNavigation : MonoBehaviour
 
         if (traits.HasTrait("No Money"))
         {
-            speech?.CommentOnFoundProduct(true);
+            speech?.CommentOnFoundProduct(product, true);
             yield return PlayAnimationToCompletion("Look", lookDuration + 5f);
         }
         else
         {
-            speech?.CommentOnFoundProduct(false);
+            speech?.CommentOnFoundProduct(product, false);
         }
 
         CurrentAction = $"Grabbing {product}";
@@ -292,7 +300,10 @@ public sealed class NpcNavigation : MonoBehaviour
         int normalPriority = agent.avoidancePriority;
         agent.avoidancePriority = 90;
         CurrentAction = $"Browsing {browseShelf.name}";
-        speech?.CommentOnBrowsing();
+        string browsedProduct = browseShelf.Products.Count > 0
+            ? browseShelf.Products[Random.Range(0, browseShelf.Products.Count)]
+            : null;
+        speech?.CommentOnBrowsing(browsedProduct);
         yield return MoveTo(browseShelf.StandPosition);
 
         if (browseShelf == null || browseShelf.HasApproachingShopper || !agent.isOnNavMesh)
