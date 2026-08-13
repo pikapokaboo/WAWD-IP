@@ -26,10 +26,31 @@ public sealed class OpeningSequence : MonoBehaviour
             return;
 
         DayNightCycle cycle = FindFirstObjectByType<DayNightCycle>();
-        if (cycle == null || FindFirstObjectByType<OpeningSequence>() != null)
-            return;
-        GameObject host = new("Opening Sequence");
-        host.AddComponent<OpeningSequence>().dayCycle = cycle;
+        if (cycle != null)
+            EnsureForMainScene(cycle);
+    }
+
+    public static OpeningSequence EnsureForMainScene(DayNightCycle cycle)
+    {
+        if (SceneManager.GetActiveScene().name != "Main_Scene")
+            return null;
+
+        OpeningSequence sequence = FindFirstObjectByType<OpeningSequence>();
+        if (sequence == null)
+        {
+            GameObject host = new("Opening Sequence");
+            sequence = host.AddComponent<OpeningSequence>();
+        }
+
+        sequence.dayCycle = cycle;
+        Instance = sequence;
+        return sequence;
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        Instance = null;
     }
 
     private void Awake()
@@ -61,6 +82,9 @@ public sealed class OpeningSequence : MonoBehaviour
 
     private void OnGUI()
     {
+        if (SceneManager.GetActiveScene().name != "Main_Scene")
+            return;
+
         if (Stage == OpeningStage.DayStarted)
             return;
         EnsureStyle();

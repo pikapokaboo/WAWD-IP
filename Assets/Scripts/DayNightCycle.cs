@@ -116,6 +116,7 @@ public sealed class DayNightCycle : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        OpeningSequence.EnsureForMainScene(this);
         CurrentDay = Mathf.Max(1, startingDay);
         PreparingToOpen = prepareBeforeDayOne && CurrentDay == 1;
         if (sun == null)

@@ -39,6 +39,7 @@ public sealed class CctvSystem : MonoBehaviour
     private float fadeAlpha;
     private Texture2D solidTexture;
     private GUIStyle hudStyle;
+    private GUIStyle helpStyle;
     private GUIStyle centreStyle;
     private bool enteringCctv;
 
@@ -253,15 +254,16 @@ public sealed class CctvSystem : MonoBehaviour
         if (IsActive)
         {
             DrawCctvBorder();
-            GUI.Label(new Rect(20f, 18f, 300f, 38f),
-                $"â— REC   CAM {cameraIndex + 1:00}", hudStyle);
+            GUI.Label(new Rect(20f, 18f, 250f, 38f),
+                $"REC   CAM {cameraIndex + 1:00}", hudStyle);
             string time = dayCycle != null ? dayCycle.CurrentTimeText : "--:--";
             string day = dayCycle != null ? $"DAY {dayCycle.CurrentDay}" : "DAY --";
             GUI.Label(new Rect(Screen.width - 300f, 18f, 275f, 38f),
                 $"{day}   {time}", hudStyle);
-            GUI.Label(new Rect(20f, Screen.height - 62f, 470f, 38f),
+            float helpWidth = Mathf.Min(620f, Screen.width - 40f);
+            GUI.Label(new Rect(20f, Screen.height - 62f, helpWidth, 38f),
                 reporting ? "REPORTING... SYSTEM TEMPORARILY LOCKED"
-                    : "LMB REPORT   A/D OR â†/â†’ CHANGE CAMERA", hudStyle);
+                    : "LMB: REPORT    A/D OR LEFT/RIGHT: CHANGE CAMERA", helpStyle);
         }
         if (fadeAlpha > 0f)
         {
@@ -296,8 +298,19 @@ public sealed class CctvSystem : MonoBehaviour
             solidTexture.SetPixel(0, 0, Color.white); solidTexture.Apply();
         }
         hudStyle ??= new GUIStyle(GUI.skin.box)
-        { fontSize = 18, fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter };
+        {
+            fontSize = 18,
+            fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.MiddleCenter,
+            padding = new RectOffset(12, 12, 6, 6)
+        };
         hudStyle.normal.textColor = new Color(0.55f, 1f, 0.65f);
+        helpStyle ??= new GUIStyle(hudStyle)
+        {
+            alignment = TextAnchor.MiddleLeft,
+            fontSize = 17,
+            clipping = TextClipping.Clip
+        };
         centreStyle ??= new GUIStyle(GUI.skin.label)
         { fontSize = 34, fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter };
         centreStyle.normal.textColor = Color.white;
