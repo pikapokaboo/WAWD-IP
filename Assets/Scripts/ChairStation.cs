@@ -6,6 +6,7 @@ using UnityEngine;
 /// exact seat transform. Mirrors ShelfStation's reservation and debug-marker pattern.
 /// This component does not move or animate NPCs.
 /// </summary>
+[ExecuteAlways]
 [DisallowMultipleComponent]
 public sealed class ChairStation : MonoBehaviour
 {
@@ -21,6 +22,17 @@ public sealed class ChairStation : MonoBehaviour
  
     [Tooltip("Animator trigger played when standing up.")]
     [SerializeField] private string standTrigger = "Stand";
+
+    [Header("Seated Pose")]
+    [Tooltip("Fine adjustment from Sit_pos, using the seated NPC's local axes.")]
+    [SerializeField] private Vector3 seatedPositionOffset;
+    [Tooltip("Fine rotation adjustment applied after the Sit_pos red-arrow direction.")]
+    [SerializeField] private Vector3 seatedRotationOffset;
+
+    [Header("Editor Preview")]
+    [Tooltip("Show an NPC in its seated animation without entering Play mode.")]
+    [SerializeField] private bool previewSeatedNpc;
+    [SerializeField] private GameObject seatedNpcPreviewPrefab;
  
     [Header("Debug View")]
     [Tooltip("Draw the approach/seat markers in the Scene view without rendering them in-game.")]
@@ -32,15 +44,37 @@ public sealed class ChairStation : MonoBehaviour
     private static readonly HashSet<ChairStation> ActiveChairs = new();
     private bool markerVisible;
     private NpcSitting reservedBy;
+    [System.NonSerialized] private GameObject previewInstance;
  
     public static IEnumerable<ChairStation> AllActive => ActiveChairs;
  
     public string SitTrigger => sitTrigger;
     public string StandTrigger => standTrigger;
     public Vector3 ApproachPosition => approachPoint != null ? approachPoint.position : transform.position;
-    public Vector3 SeatPosition => seatPoint != null ? seatPoint.position : transform.position;
-    public Quaternion SeatRotation => seatPoint != null ? seatPoint.rotation : transform.rotation;
-    public Vector3 SeatForward => seatPoint != null ? seatPoint.forward : transform.forward;
+    public Vector3 SeatPosition
+    {
+        get
+        {
+            Vector3 origin = seatPoint != null ? seatPoint.position : transform.position;
+            return origin + BaseSeatRotation * seatedPositionOffset;
+        }
+    }
+    // Interaction markers use their red X arrow as the NPC-facing direction,
+    // matching checkout and cooking position markers.
+    public Vector3 SeatForward => seatPoint != null ? seatPoint.right : transform.right;
+    public Vector3 ApproachForward => approachPoint != null ? approachPoint.right : transform.right;
+    public Quaternion SeatRotation => BaseSeatRotation
+        * Quaternion.Euler(seatedRotationOffset);
+    public Quaternion ApproachRotation => FlatRotation(ApproachForward, transform.rotation);
+    private Quaternion BaseSeatRotation => FlatRotation(SeatForward, transform.rotation);
+
+    private static Quaternion FlatRotation(Vector3 direction, Quaternion fallback)
+    {
+        direction.y = 0f;
+        return direction.sqrMagnitude > 0.001f
+            ? Quaternion.LookRotation(direction.normalized, Vector3.up)
+            : fallback;
+    }
  
     public bool IsAvailableFor(NpcSitting npc) => reservedBy == null || reservedBy == npc;
  
@@ -66,9 +100,23 @@ public sealed class ChairStation : MonoBehaviour
  
         SetRuntimeMarkerVisibility(false);
     }
+
+    private void OnValidate()
+    {
+        if (!Application.isPlaying)
+        {
+            SetRuntimeMarkerVisibility(false);
+            RefreshPreview();
+        }
+    }
  
     private void Update()
     {
+        if (!Application.isPlaying)
+        {
+            RefreshPreview();
+            return;
+        }
         if (markerVisible != DeveloperConsole.ShowInteractionMarkers)
             SetRuntimeMarkerVisibility(DeveloperConsole.ShowInteractionMarkers);
     }
@@ -131,11 +179,112 @@ public sealed class ChairStation : MonoBehaviour
     private void OnEnable()
     {
         ActiveChairs.Add(this);
+        SetRuntimeMarkerVisibility(Application.isPlaying
+            && DeveloperConsole.ShowInteractionMarkers);
+        if (!Application.isPlaying)
+            RefreshPreview();
     }
  
     private void OnDisable()
     {
         ActiveChairs.Remove(this);
         reservedBy = null;
+        DestroyPreview();
+    }
+
+    private void RefreshPreview()
+    {
+        RecoverPreviewReference();
+        if (Application.isPlaying || !previewSeatedNpc
+            || seatedNpcPreviewPrefab == null || seatPoint == null)
+        {
+            DestroyPreview();
+            return;
+        }
+
+        if (previewInstance == null)
+        {
+            previewInstance = Instantiate(seatedNpcPreviewPrefab);
+            previewInstance.name = PreviewObjectName;
+            previewInstance.hideFlags = HideFlags.HideAndDontSave;
+            previewInstance.SetActive(false);
+            foreach (MonoBehaviour behaviour in previewInstance
+                .GetComponentsInChildren<MonoBehaviour>(true))
+                behaviour.enabled = false;
+            foreach (Collider previewCollider in previewInstance
+                .GetComponentsInChildren<Collider>(true))
+                previewCollider.enabled = false;
+            UnityEngine.AI.NavMeshAgent previewAgent = previewInstance
+                .GetComponent<UnityEngine.AI.NavMeshAgent>();
+            if (previewAgent != null)
+                previewAgent.enabled = false;
+            previewInstance.SetActive(true);
+        }
+
+        previewInstance.transform.SetPositionAndRotation(SeatPosition, SeatRotation);
+        Animator previewAnimator = previewInstance.GetComponentInChildren<Animator>();
+        if (previewAnimator != null)
+        {
+            previewAnimator.Play(sitTrigger, 0, 0.95f);
+            previewAnimator.Update(0f);
+        }
+    }
+
+    private string PreviewObjectName =>
+        $"Seated NPC Preview (Editor Only) [{GetInstanceID()}]";
+
+    private void RecoverPreviewReference()
+    {
+        if (Application.isPlaying || previewInstance != null)
+            return;
+
+        foreach (GameObject candidate in Resources.FindObjectsOfTypeAll<GameObject>())
+        {
+            if (candidate == null)
+                continue;
+            if (candidate.name == PreviewObjectName)
+            {
+                previewInstance = candidate;
+                return;
+            }
+
+            // Remove previews made by the older implementation, which did not
+            // carry an owner ID and could be orphaned by a script reload.
+            if (candidate.name == "Seated NPC Preview (Editor Only)")
+                DestroyPreviewObject(candidate);
+        }
+    }
+
+    private void DestroyPreview()
+    {
+        RecoverPreviewReference();
+        if (previewInstance == null)
+            return;
+        GameObject objectToDestroy = previewInstance;
+        previewInstance = null;
+        DestroyPreviewObject(objectToDestroy);
+    }
+
+    private static void DestroyPreviewObject(GameObject objectToDestroy)
+    {
+        if (objectToDestroy == null)
+            return;
+        if (Application.isPlaying)
+        {
+            Destroy(objectToDestroy);
+            return;
+        }
+
+        // OnValidate cannot destroy immediately. Hide and rename it now so it
+        // cannot be rediscovered, then remove it after Unity finishes validation.
+        objectToDestroy.SetActive(false);
+        objectToDestroy.name = "Seated NPC Preview (Pending Delete)";
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.delayCall += () =>
+        {
+            if (objectToDestroy != null)
+                DestroyImmediate(objectToDestroy);
+        };
+#endif
     }
 }

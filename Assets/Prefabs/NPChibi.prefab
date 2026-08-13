@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3430047859680791774}
   - component: {fileID: 3430047859680791775}
   - component: {fileID: 3430047859680791776}
+  - component: {fileID: 3430047859680791777}
   m_Layer: 8
   m_Name: NPChibi
   m_TagString: NPC
@@ -248,6 +249,8 @@ MonoBehaviour:
   casualBrowseChance: 65
   defaultBrowseChance: 35
   browseDurationRange: {x: 2.5, y: 5}
+  eatInStoreChance: 35
+  heatedFoodEatChance: 70
   personalSpaceRadius: 0.75
   urgentPriorityRange: {x: 15, y: 35}
   casualPriorityRange: {x: 55, y: 75}
@@ -301,6 +304,23 @@ MonoBehaviour:
   slowWalkerReactionChance: 40
   crowdingReactionChance: 55
   reactionCooldown: 8
+--- !u!114 &3430047859680791777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770770118774919518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d69dbf2b0299948879e319ad47ae92, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::NpcSitting
+  sitTransitionDuration: 1
+  standTransitionDuration: 1
+  seatedDurationRange: {x: 5, y: 15}
+  arrivalDistance: 0.1
+  seatTurnSpeed: 360
 --- !u!1001 &5960069421697611403
 PrefabInstance:
   m_ObjectHideFlags: 0

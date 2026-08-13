@@ -41,6 +41,12 @@ public sealed class NpcNavigation : MonoBehaviour
     [SerializeField, Range(0f, 100f)] private float defaultBrowseChance = 35f;
     [SerializeField] private Vector2 browseDurationRange = new(2.5f, 5f);
 
+    [Header("Eating")]
+    [Tooltip("Chance that an NPC with food chooses an available chair after shopping.")]
+    [SerializeField, Range(0f, 100f)] private float eatInStoreChance = 35f;
+    [Tooltip("Higher sitting chance when the NPC has food for the microwave or hot-water station.")]
+    [SerializeField, Range(0f, 100f)] private float heatedFoodEatChance = 70f;
+
     [Header("Traffic Avoidance")]
     [Tooltip("Navigation-only personal space. Larger values make NPCs steer away sooner without enlarging their collider.")]
     [SerializeField, Min(0.1f)] private float personalSpaceRadius = 1f;
@@ -111,6 +117,7 @@ public sealed class NpcNavigation : MonoBehaviour
 
         bool rolledShopping = Random.value * 100f < enterStoreChance;
         bool receivedShoppingSlot = rolledShopping && TryTakeShoppingSlot();
+        ChairStation eatingChair = null;
         if (receivedShoppingSlot)
         {
             BuildShoppingRoute();
@@ -123,23 +130,38 @@ public sealed class NpcNavigation : MonoBehaviour
                 PreferAvailableProduct(i);
                 yield return VisitShelf(shoppingRoute[i], wantedProducts[i]);
             }
-            if (!traits.HasTrait("No Money") && wantedProducts.Count > 0)
+            bool hasFood = wantedProducts.Count > 0;
+            CookingStation cooking = FindFirstObjectByType<CookingStation>();
+            if (hasFood)
+            {
+                bool needsHeating = cooking != null
+                    && cooking.HasFoodNeedingPreparation(this);
+                eatingChair = ReserveEatingChair(needsHeating
+                    ? heatedFoodEatChance
+                    : eatInStoreChance);
+            }
+
+            if (!traits.HasTrait("No Money") && hasFood)
             {
                 CheckoutStation checkout = FindFirstObjectByType<CheckoutStation>();
                 if (checkout != null)
                 {
                     yield return checkout.Checkout(this);
-                    CookingStation cooking = FindFirstObjectByType<CookingStation>();
                     if (cooking != null)
-                        yield return cooking.PrepareFood(this);
+                        yield return cooking.PrepareFood(this, eatingChair != null);
                 }
+            }
+            else if (traits.HasTrait("No Money") && hasFood && cooking != null)
+            {
+                yield return cooking.PrepareFood(this, eatingChair != null);
             }
         }
 
         // Shopping includes collecting, queueing, and paying. The slot is only
         // freed once this NPC actually changes state to going home.
         ReleaseShoppingSlot();
-        yield return MaybeRest();
+        if (eatingChair != null)
+            yield return EatAtChair(eatingChair);
         yield return GoHome(rolledShopping && !receivedShoppingSlot
             ? "Store full - going home"
             : "Going home");
@@ -341,26 +363,27 @@ public sealed class NpcNavigation : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator MaybeRest()
+    private ChairStation ReserveEatingChair(float chance)
     {
-        if (sitting == null || !traits.HasTrait("Tired"))
-            yield break;
-
         ChairStation chair = FindNearestAvailableChair();
-        if (chair == null)
-            yield break;
+        if (sitting == null || chair == null
+            || Random.value * 100f >= chance
+            || !sitting.TryReserveChair(chair))
+            return null;
+        return chair;
+    }
 
-        CurrentAction = "Feeling tired";
-        if (!sitting.TryBeginSitSequence(chair))
+    private IEnumerator EatAtChair(ChairStation chair)
+    {
+        CurrentAction = "Going to sit and eat";
+        if (!sitting.BeginReservedSitSequence(chair))
             yield break;
-
         while (sitting.IsSitting)
         {
-            CurrentAction = "Resting";
+            CurrentAction = "Sitting and eating";
             yield return null;
         }
-
-        CurrentAction = "Rested";
+        CurrentAction = "Finished eating";
     }
 
     private ChairStation FindNearestAvailableChair()

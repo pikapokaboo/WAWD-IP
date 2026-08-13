@@ -32,9 +32,9 @@ public sealed class CookingStation : MonoBehaviour
 
     private bool markersVisible;
 
-    public IEnumerator PrepareFood(NpcNavigation npc)
+    public IEnumerator PrepareFood(NpcNavigation npc, bool forcePreparation = false)
     {
-        if (npc == null || Random.value * 100f >= useChance)
+        if (npc == null || (!forcePreparation && Random.value * 100f >= useChance))
             yield break;
 
         bool needsMicrowave = ContainsAny(npc.WantedProducts, microwaveProducts);
@@ -49,6 +49,10 @@ public sealed class CookingStation : MonoBehaviour
             yield return UseAvailablePosition(npc, hotWaterPositions,
                 "Waiting for hot water", "Adding hot water", hotWaterWait);
     }
+
+    public bool HasFoodNeedingPreparation(NpcNavigation npc) => npc != null
+        && (ContainsAny(npc.WantedProducts, microwaveProducts)
+            || ContainsAny(npc.WantedProducts, hotWaterProducts));
 
     private IEnumerator UseAvailablePosition(NpcNavigation npc,
         List<CookingPosition> positions, string waitingAction,
