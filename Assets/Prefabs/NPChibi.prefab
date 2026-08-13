@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3430047859680791774}
   - component: {fileID: 3430047859680791775}
   - component: {fileID: 3430047859680791776}
+  - component: {fileID: -8931898710847186788}
   m_Layer: 8
   m_Name: NPChibi
   m_TagString: NPC
@@ -195,6 +196,13 @@ MonoBehaviour:
     poolWeight: 10
     comesWith: []
     weightModifiers: []
+  - traitName: Tired
+    showInDebugLabel: 1
+    spawnChance: 100
+    eitherOrPool: 
+    poolWeight: 2
+    comesWith: []
+    weightModifiers: []
   rollOnAwake: 1
   logResult: 0
 --- !u!195 &3430047859680791773
@@ -301,6 +309,90 @@ MonoBehaviour:
   slowWalkerReactionChance: 40
   crowdingReactionChance: 55
   reactionCooldown: 8
+  slowWalkerLines:
+  - Excuse me...
+  - Can I get past?
+  - Bit of a hurry here!
+  - Coming through!
+  crowdingLines:
+  - Hey!
+  - Watch it!
+  - A little space, please!
+  - Oof!
+  - Personal space is still free!
+  - This isn't bumper cars!
+  bulldozedLines:
+  - I'm walking here!
+  - Was that really necessary?
+  - Okay, you win!
+  - Apparently I'm part of the trolley now.
+  - Please stop pushing me!
+  pushingPastLines:
+  - Sorry, coming through!
+  - Pardon me!
+  - Urgent shopping business!
+  - Beep beep!
+  - The aisle waits for no one!
+  bumpLines:
+  - Oops, sorry!
+  - Excuse me!
+  - Didn't see you there!
+  - Bonk!
+  - Aisle collision!
+  - We need indicators on these things.
+  shoppingThoughtChance: 45
+  thoughtCooldown: 5
+  productThoughts:
+  - Now, where is the {0}?
+  - I only came in for {0}...
+  - Can't forget the {0}.
+  - 'Mission: find {0}.'
+  browsingThoughts:
+  - Ooh, what's this?
+  - Just looking...
+  - Do I need this? Probably not.
+  - Window shopping, but indoors.
+  - I have completely forgotten my list.
+  finishedBrowsingThoughts:
+  - Back to the list.
+  - I should probably keep moving.
+  - Nope, don't need it.
+  - My wallet survives another aisle.
+  queueThoughts:
+  - This queue isn't too bad.
+  - I always choose the slow line.
+  - Nearly there...
+  - Should've used self-checkout.
+  - Time to inspect the receipt sweets.
+  foundProductThoughts:
+  - There it is!
+  - Into the basket you go.
+  - Excellent choice, me.
+  - That's one thing off the list.
+  stealingThoughts:
+  - Nobody saw that...
+  - Free sample, right?
+  - Act natural.
+  - This is between me and the shelf.
+--- !u!114 &-8931898710847186788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770770118774919518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d69dbf2b0299948879e319ad47ae92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcSitting
+  sitTransitionDuration: 0.5
+  standTransitionDuration: 0.5
+  seatedDuration: 5
+  arrivalDistance: 0.1
+  seatTurnSpeed: 360
+  moveTimeout: 5
+  seatNavMeshSampleRadius: 2
 --- !u!1001 &5960069421697611403
 PrefabInstance:
   m_ObjectHideFlags: 0

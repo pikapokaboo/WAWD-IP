@@ -25,6 +25,10 @@ public sealed class NpcSitting : MonoBehaviour
     [Header("Movement")]
     [SerializeField, Min(0.05f)] private float arrivalDistance = 0.1f;
     [SerializeField, Min(1f)] private float seatTurnSpeed = 360f;
+    [Tooltip("Safety net: if a walk to the box or the chair takes longer than this, give up instead of hanging forever.")]
+    [SerializeField, Min(1f)] private float moveTimeout = 10f;
+    [Tooltip("How far to search for a valid NavMesh point near the (possibly off-mesh) seat when standing back up.")]
+    [SerializeField, Min(0.1f)] private float seatNavMeshSampleRadius = 1.5f;
  
     private NavMeshAgent agent;
     private Animator animator;
@@ -58,52 +62,102 @@ public sealed class NpcSitting : MonoBehaviour
     {
         ChairStation chair = reservedChair;
         IsSitting = true;
+        bool agentDisabled = false;
  
-        // 1. Walk to the box beside the chair.
-        yield return MoveTo(chair.ApproachPosition);
+        // try/finally guarantees the chair is released and the agent is left in a usable
+        // state even if a step below fails, times out, or this object gets destroyed.
+        try
+        {
+            // 1. Walk to the box beside the chair.
+            animator?.SetBool("IsWalking", true);
+            yield return MoveTo(chair.ApproachPosition);
  
-        // 2. Walk from the box onto the chair itself, then play the sit animation.
-        yield return MoveTo(chair.SeatPosition);
-        yield return FaceDirection(chair.SeatForward);
-
-        animator?.SetBool("IsWalking", false);
-        animator?.SetTrigger(chair.SitTrigger);
-        Debug.Log($"Sit trigger fired. Current state: {animator.GetCurrentAnimatorStateInfo(0).fullPathHash}, has param: {System.Array.Exists(animator.parameters, p => p.name == chair.SitTrigger)}");
+            // 2. Walk from the box onto the chair itself, then play the sit animation.
+            yield return MoveTo(chair.SeatPosition);
+            yield return FaceDirection(chair.SeatForward);
  
-        // Hand the transform fully over to the seat point / animation instead of the agent,
-        // since chairs usually sit slightly off the NavMesh.
-        agent.enabled = false;
-        transform.SetPositionAndRotation(chair.SeatPosition, chair.SeatRotation);
-        yield return new WaitForSeconds(sitTransitionDuration);
+            animator?.SetBool("IsWalking", false);
+            animator?.SetTrigger(chair.SitTrigger);
  
-        // 3. Stay seated.
-        yield return new WaitForSeconds(seatedDuration);
+            // Hand the transform fully over to the seat point / animation instead of the
+            // agent, since chairs usually sit slightly off the NavMesh.
+            agent.enabled = false;
+            agentDisabled = true;
+            transform.SetPositionAndRotation(chair.SeatPosition, chair.SeatRotation);
+            yield return new WaitForSeconds(sitTransitionDuration);
  
-        // 4. Stand up, then walk back to the box.
-        animator?.SetTrigger(chair.StandTrigger);
-        yield return new WaitForSeconds(standTransitionDuration);
+            // 3. Stay seated.
+            yield return new WaitForSeconds(seatedDuration);
  
-        agent.enabled = true;
-        agent.Warp(chair.SeatPosition);
-        animator?.SetBool("IsWalking", true);
-        yield return MoveTo(chair.ApproachPosition);
+            // 4. Stand up, then walk back to the box.
+            animator?.SetTrigger(chair.StandTrigger);
+            yield return new WaitForSeconds(standTransitionDuration);
  
-        chair.Release(this);
-        reservedChair = null;
-        IsSitting = false;
-        sitRoutine = null;
+            // Warping straight to chair.SeatPosition can silently fail and leave the agent
+            // off the NavMesh (SeatPosition is allowed to sit off-mesh), which would make
+            // the walk back below bail out instantly. Snap to the nearest valid point instead.
+            Vector3 standPosition = chair.ApproachPosition;
+            if (NavMesh.SamplePosition(chair.SeatPosition, out NavMeshHit standHit,
+                    seatNavMeshSampleRadius, agent.areaMask))
+                standPosition = standHit.position;
+ 
+            agent.enabled = true;
+            agentDisabled = false;
+            agent.Warp(standPosition);
+            animator?.SetBool("IsWalking", true);
+            yield return MoveTo(chair.ApproachPosition);
+        }
+        finally
+        {
+            if (agentDisabled && agent != null)
+                agent.enabled = true;
+ 
+            chair.Release(this);
+            reservedChair = null;
+            IsSitting = false;
+            sitRoutine = null;
+        }
     }
  
     private IEnumerator MoveTo(Vector3 destination)
     {
+        if (!agent.isOnNavMesh)
+        {
+            Debug.LogWarning($"{name}: NpcSitting tried to move while not on a NavMesh.", this);
+            yield break;
+        }
+ 
+        Vector3 reachableDestination = destination;
+        if (NavMesh.SamplePosition(destination, out NavMeshHit hit,
+                Mathf.Max(0.75f, agent.radius), agent.areaMask))
+            reachableDestination = hit.position;
+ 
         agent.isStopped = false;
-        agent.SetDestination(destination);
+        if (!agent.SetDestination(reachableDestination))
+        {
+            Debug.LogWarning($"{name}: NpcSitting could not path to {reachableDestination}.", this);
+            yield break;
+        }
  
-        // Wait a frame so pathPending has a chance to become true before we check it.
-        yield return null;
+        // Hard safety net: if the agent takes too long to reach the destination, bail out instead of hanging forever.
+        float deadline = Time.time + moveTimeout;
+        while (agent.pathPending
+               || agent.remainingDistance > agent.stoppingDistance + arrivalDistance)
+        {
+            if (!agent.isOnNavMesh || agent.pathStatus == NavMeshPathStatus.PathInvalid)
+            {
+                Debug.LogWarning($"{name}: NpcSitting's path to {reachableDestination} became invalid.", this);
+                yield break;
+            }
  
-        while (agent.pathPending || agent.remainingDistance > arrivalDistance)
+            if (Time.time >= deadline)
+            {
+                Debug.LogWarning($"{name}: NpcSitting timed out walking to {reachableDestination}.", this);
+                yield break;
+            }
+ 
             yield return null;
+        }
     }
  
     private IEnumerator FaceDirection(Vector3 forward)
@@ -120,24 +174,4 @@ public sealed class NpcSitting : MonoBehaviour
         }
         transform.rotation = targetRotation;
     }
-
-    #if UNITY_EDITOR
-    [ContextMenu("DEBUG: Sit On Nearest Chair")]
-    private void DebugSitNearestChair()
-    {
-        ChairStation nearest = null;
-        float closestSqr = float.PositiveInfinity;
-        foreach (var chair in ChairStation.AllActive)
-        {
-            if (chair == null || !chair.IsAvailableFor(this)) continue;
-            float sqr = (chair.ApproachPosition - transform.position).sqrMagnitude;
-            if (sqr < closestSqr) { closestSqr = sqr; nearest = chair; }
-        }
-
-        if (nearest == null)
-            Debug.LogWarning("No available ChairStation found.", this);
-        else if (!TryBeginSitSequence(nearest))
-            Debug.LogWarning("TryBeginSitSequence failed (already reserved/sitting).", this);
-    }
-    #endif
 }
