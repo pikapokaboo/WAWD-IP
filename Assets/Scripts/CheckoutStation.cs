@@ -273,6 +273,7 @@ public sealed class CheckoutStation : MonoBehaviour
 
         yield return TurnCashierTowards(monitor != null ? monitor.position : transform.position);
         cashierSpeech?.SayRandom(cashierScanningLines);
+        DayNightCycle.Instance?.PlayRegisterSound();
         yield return PlayCashierInteraction();
 
         yield return TurnCashierTowards(customer.transform.position);
@@ -327,6 +328,7 @@ public sealed class CheckoutStation : MonoBehaviour
         yield return TurnCashierTowards(monitor != null
             ? monitor.position
             : transform.position);
+        DayNightCycle.Instance?.PlayRegisterSound();
         yield return PlayCashierInteraction();
 
         yield return TurnCashierTowards(customer.transform.position);
@@ -410,6 +412,22 @@ public sealed class CheckoutStation : MonoBehaviour
     private void RemoveMissingCustomers()
     {
         customers.RemoveAll(customer => customer == null);
+    }
+
+    public void ReleaseCustomer(NpcNavigation customer)
+    {
+        if (customer == null) return;
+        customers.Remove(customer);
+        if (paymentCustomer == customer) paymentCustomer = null;
+        customer.SetCheckoutQueueNumber(0);
+        customer.LeaveCheckoutMarker();
+    }
+
+    public static void ReleaseCustomerFromAll(NpcNavigation customer)
+    {
+        foreach (CheckoutStation station in
+                 FindObjectsByType<CheckoutStation>(FindObjectsSortMode.None))
+            station.ReleaseCustomer(customer);
     }
 
     private void OnDrawGizmos()

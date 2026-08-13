@@ -117,6 +117,18 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
         return false;
     }
 
+    public static void RefreshAllAfterNpcRemoval()
+    {
+        foreach (NpcAutomaticDoor door in
+                 FindObjectsByType<NpcAutomaticDoor>(FindObjectsSortMode.None))
+        {
+            if (door == null || !door.isActiveAndEnabled) continue;
+            door.lastNpcNearbyTime = float.NegativeInfinity;
+            if (!door.open && !door.HasNearbyOpener())
+                door.ApplyRuntimePose(false);
+        }
+    }
+
     private void ApplyRuntimePose(bool openPose)
     {
         if (doorVisual == null)

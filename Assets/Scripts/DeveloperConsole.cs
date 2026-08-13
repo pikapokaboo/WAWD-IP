@@ -14,6 +14,7 @@ public sealed class DeveloperConsole : MonoBehaviour
 {
     public static bool ShowNpcDebug { get; private set; }
     public static bool ShowInteractionMarkers { get; private set; }
+    public static bool AnyConsoleOpen { get; private set; }
 
     [Header("Controls")]
     [SerializeField] private Key toggleKey = Key.F6;
@@ -79,6 +80,7 @@ public sealed class DeveloperConsole : MonoBehaviour
     private void SetOpen(bool open)
     {
         isOpen = open;
+        AnyConsoleOpen = open;
         if (open)
         {
             playerWasEnabled = playerController != null && playerController.enabled;
@@ -92,8 +94,9 @@ public sealed class DeveloperConsole : MonoBehaviour
         {
             if (playerController != null && playerWasEnabled)
                 playerController.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Cursor.lockState = CctvSystem.IsActive
+                ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = CctvSystem.IsActive;
         }
     }
 
@@ -150,7 +153,7 @@ public sealed class DeveloperConsole : MonoBehaviour
         switch (command)
         {
             case "help":
-                output.Add("help | clear | fps | timescale <number> | playerpos | npcdebug | markers | debugstatus | quit");
+                output.Add("help | clear | fps | timescale <number> | playerpos | npcdebug | markers | debugstatus | skipday | quit");
                 break;
             case "clear":
                 output.Clear();
@@ -181,6 +184,15 @@ public sealed class DeveloperConsole : MonoBehaviour
                 break;
             case "debugstatus":
                 output.Add($"NPC labels: {OnOff(ShowNpcDebug)} | Interaction markers: {OnOff(ShowInteractionMarkers)}");
+                break;
+            case "skipday":
+                DayNightCycle cycle = FindFirstObjectByType<DayNightCycle>();
+                if (cycle == null) output.Add("No day cycle found.");
+                else
+                {
+                    cycle.SkipToEndOfDay();
+                    output.Add("Skipped to the end of the current day.");
+                }
                 break;
             case "quit":
                 output.Add("Closing application...");
@@ -223,6 +235,7 @@ public sealed class DeveloperConsole : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (isOpen) AnyConsoleOpen = false;
         if (panelTexture != null)
             Destroy(panelTexture);
     }

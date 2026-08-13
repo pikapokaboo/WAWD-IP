@@ -33,11 +33,12 @@ public sealed class NpcDebugLabel : MonoBehaviour
 
     private void OnGUI()
     {
-        if (!DeveloperConsole.ShowNpcDebug || !showDebugNote || Camera.main == null
+        Camera viewCamera = CctvSystem.GetGameplayCamera();
+        if (!DeveloperConsole.ShowNpcDebug || !showDebugNote || viewCamera == null
             || traits == null || navigation == null)
             return;
 
-        Vector3 screen = Camera.main.WorldToScreenPoint(
+        Vector3 screen = viewCamera.WorldToScreenPoint(
             transform.position + Vector3.up * height);
         if (screen.z <= 0f)
             return;

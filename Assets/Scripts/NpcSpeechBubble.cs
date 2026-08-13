@@ -386,7 +386,7 @@ public sealed class NpcSpeechBubble : MonoBehaviour
 
     private void OnGUI()
     {
-        Camera camera = Camera.main;
+        Camera camera = CctvSystem.GetGameplayCamera();
         if (!IsSpeaking || camera == null)
             return;
         Vector3 worldPosition = transform.position + Vector3.up * height;

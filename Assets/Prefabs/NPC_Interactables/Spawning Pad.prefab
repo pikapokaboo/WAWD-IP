@@ -134,9 +134,9 @@ MonoBehaviour:
   maximumLivingNpcs: 0
   spawnImmediately: 1
   useDailyQuotas: 1
-  dayOneLegitimateShoppers: 12
-  dayOneShoplifters: 3
-  legitimateIncreasePerDay: 3
+  dayOneLegitimateShoppers: 20
+  dayOneShoplifters: 5
+  legitimateIncreasePerDay: 4
   shoplifterIncreasePerDay: 1
   scheduleJitter: 0.18
   spawnHomeboundNpcs: 1

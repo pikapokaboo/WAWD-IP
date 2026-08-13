@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float airControl = 0.35f;
 
     [Header("Jumping")]
+    [SerializeField] private bool allowJump;
     [SerializeField, Min(0f)] private float jumpHeight = 1.5f;
     [SerializeField] private float gravity = -25f;
     [SerializeField, Min(0f)] private float groundedForce = 2f;
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
     private InputAction lookAction;
     private InputAction jumpAction;
     private InputAction sprintAction;
+    private bool interactionLocked;
 
     private void Awake()
     {
@@ -93,8 +95,35 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (interactionLocked)
+            return;
         HandleLook();
         HandleMovement();
+    }
+
+    public void SetInteractionLocked(bool locked)
+    {
+        interactionLocked = locked;
+        planarVelocity = Vector3.zero;
+        IsSprinting = false;
+        SetCursorState(!locked && lockCursor);
+    }
+
+    public void LookAtPoint(Vector3 worldPoint)
+    {
+        Vector3 flatDirection = worldPoint - transform.position;
+        flatDirection.y = 0f;
+        if (flatDirection.sqrMagnitude > 0.001f)
+            transform.rotation = Quaternion.LookRotation(flatDirection);
+
+        if (cameraTransform == null)
+            return;
+        Vector3 cameraDirection = worldPoint - cameraTransform.position;
+        float horizontalDistance = new Vector2(cameraDirection.x,
+            cameraDirection.z).magnitude;
+        pitch = Mathf.Clamp(-Mathf.Atan2(cameraDirection.y, horizontalDistance)
+            * Mathf.Rad2Deg, -maxLookAngle, maxLookAngle);
+        cameraTransform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
     }
 
     private void HandleMovement()
@@ -121,7 +150,7 @@ public class PlayerController : MonoBehaviour
         if (grounded && verticalVelocity < 0f)
             verticalVelocity = -groundedForce;
 
-        if (grounded && jumpAction.WasPressedThisFrame())
+        if (allowJump && grounded && jumpAction.WasPressedThisFrame())
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
         verticalVelocity += gravity * Time.deltaTime;

@@ -94,6 +94,16 @@ public sealed class NpcNavigation : MonoBehaviour
 
     public void SetHomeTarget(Transform target) => homeTarget = target;
 
+    public void ReleaseAllOccupancy()
+    {
+        ShelfStation.ReleaseAllFor(this);
+        CheckoutStation.ReleaseCustomerFromAll(this);
+        CookingStation.ReleaseUserFromAll(this);
+        NpcSitting npcSitting = sitting != null ? sitting : GetComponent<NpcSitting>();
+        if (npcSitting != null) npcSitting.ReleaseReservation();
+        ReleaseShoppingSlot();
+    }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetShopperCount()
     {
@@ -450,7 +460,7 @@ public sealed class NpcNavigation : MonoBehaviour
 
     private void OnDisable()
     {
-        ReleaseShoppingSlot();
+        ReleaseAllOccupancy();
         ActiveNpcs.Remove(this);
     }
 

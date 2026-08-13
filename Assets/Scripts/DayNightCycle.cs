@@ -11,6 +11,7 @@ using UnityEngine.Events;
 [DisallowMultipleComponent]
 public sealed class DayNightCycle : MonoBehaviour
 {
+    public static DayNightCycle Instance { get; private set; }
     [Header("Day Timing")]
     [Tooltip("Real-world minutes from the start time until the end time.")]
     [SerializeField, Min(0.1f)] private float dayLengthMinutes = 15f;
@@ -22,6 +23,8 @@ public sealed class DayNightCycle : MonoBehaviour
     [SerializeField, Min(1)] private int startingDay = 1;
     [SerializeField, Min(0f)] private float endOfDayPauseSeconds = 3f;
     [SerializeField] private bool automaticallyStartNextDay = true;
+    [SerializeField] private bool prepareBeforeDayOne = true;
+    [SerializeField, Range(0f, 24f)] private float preparationHour = 5.5f;
 
     [Header("Player Day Start")]
     [Tooltip("The position and rotation used for the player at the start of every day.")]
@@ -37,6 +40,9 @@ public sealed class DayNightCycle : MonoBehaviour
     [Header("Sun")]
     [SerializeField] private Light sun;
     [SerializeField] private float sunYaw = -30f;
+    [SerializeField, Range(0f, 12f)] private float sunriseHour = 6f;
+    [SerializeField, Range(10f, 15f)] private float solarNoonHour = 12f;
+    [SerializeField, Range(15f, 24f)] private float sunsetHour = 19f;
     [SerializeField, Min(0f)] private float maximumSunIntensity = 1.15f;
     [SerializeField] private Color sunriseColour = new(1f, 0.55f, 0.3f);
     [SerializeField] private Color middayColour = new(1f, 0.96f, 0.84f);
@@ -56,25 +62,41 @@ public sealed class DayNightCycle : MonoBehaviour
     [Header("End Of Day")]
     [SerializeField] private UnityEvent onDayEnded = new();
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip cashRegisterSound;
+    [SerializeField] private AudioClip cctvLoopSound;
+    [SerializeField] private AudioClip dayCompleteSound;
+    [SerializeField] private AudioClip shoplifterRemovalSound;
+    [SerializeField, Range(0f, 1f)] private float soundEffectVolume = 0.75f;
+
     private float elapsedGameHours;
     private bool dayEnded;
     private GUIStyle clockStyle;
     private Texture2D panelTexture;
     private GUIStyle dayStyle;
     private GUIStyle dayTitleStyle;
+    private GUIStyle dayCompleteTitleStyle;
+    private GUIStyle dayCompleteSubtitleStyle;
     private float dayStartOverlayAlpha;
     private Coroutine dayStartSequence;
+    private AudioSource soundEffectSource;
+    private AudioSource cctvAudioSource;
 
-    public float CurrentHour => Mathf.Clamp(startHour + elapsedGameHours,
-        startHour, Mathf.Max(startHour, endHour));
+    public float CurrentHour => PreparingToOpen ? preparationHour
+        : Mathf.Clamp(startHour + elapsedGameHours,
+            startHour, Mathf.Max(startHour, endHour));
     public bool DayEnded => dayEnded;
     public float DayProgress => Mathf.InverseLerp(startHour, endHour, CurrentHour);
     public int CurrentDay { get; private set; }
+    public bool PreparingToOpen { get; private set; }
+    public bool DayActive => !PreparingToOpen && !dayEnded;
     public event Action DayEndedEvent;
 
     private void Awake()
     {
+        Instance = this;
         CurrentDay = Mathf.Max(1, startingDay);
+        PreparingToOpen = prepareBeforeDayOne && CurrentDay == 1;
         if (sun == null)
             sun = GetComponent<Light>();
         if (sun != null)
@@ -90,11 +112,12 @@ public sealed class DayNightCycle : MonoBehaviour
 
     private void Update()
     {
-        if (dayEnded || endHour <= startHour)
+        if (PreparingToOpen || dayEnded || endHour <= startHour)
             return;
 
         float realSeconds = Mathf.Max(0.1f, dayLengthMinutes * 60f);
-        elapsedGameHours += (endHour - startHour) * Time.deltaTime / realSeconds;
+        elapsedGameHours += (endHour - startHour) * Time.deltaTime
+            / realSeconds;
         if (CurrentHour >= endHour)
             EndDay();
         ApplyLighting();
@@ -103,13 +126,39 @@ public sealed class DayNightCycle : MonoBehaviour
     private void ApplyLighting()
     {
         float hour = CurrentHour;
-        float daylight = Mathf.Clamp01(Mathf.Sin((hour - 6f) / 12f * Mathf.PI));
+        float daylight;
+        float sunPitch;
+        if (hour <= sunriseHour)
+        {
+            daylight = 0f;
+            sunPitch = Mathf.Lerp(-18f, 0f,
+                Mathf.InverseLerp(0f, sunriseHour, hour));
+        }
+        else if (hour <= solarNoonHour)
+        {
+            float morning = Mathf.InverseLerp(sunriseHour, solarNoonHour, hour);
+            daylight = Mathf.Sin(morning * Mathf.PI * 0.5f);
+            sunPitch = Mathf.Lerp(0f, 90f, morning);
+        }
+        else if (hour < sunsetHour)
+        {
+            float afternoon = Mathf.InverseLerp(solarNoonHour, sunsetHour, hour);
+            daylight = Mathf.Cos(afternoon * Mathf.PI * 0.5f);
+            sunPitch = Mathf.Lerp(90f, 180f, afternoon);
+        }
+        else
+        {
+            daylight = 0f;
+            sunPitch = Mathf.Lerp(180f, 198f,
+                Mathf.InverseLerp(sunsetHour, 24f, hour));
+        }
         if (sun != null)
         {
-            sun.transform.rotation = Quaternion.Euler((hour / 24f) * 360f - 90f,
-                sunYaw, 0f);
+            // In Unity, an X rotation of 90 degrees points a directional
+            // light straight down: sunrise=0, noon=90, sunset=180.
+            sun.transform.rotation = Quaternion.Euler(sunPitch, sunYaw, 0f);
             sun.intensity = daylight * maximumSunIntensity;
-            float colourPhase = Mathf.InverseLerp(6f, 18f, hour);
+            float colourPhase = Mathf.InverseLerp(sunriseHour, sunsetHour, hour);
             sun.color = colourPhase < 0.5f
                 ? Color.Lerp(sunriseColour, middayColour, colourPhase * 2f)
                 : Color.Lerp(middayColour, sunsetColour, (colourPhase - 0.5f) * 2f);
@@ -122,6 +171,11 @@ public sealed class DayNightCycle : MonoBehaviour
     {
         elapsedGameHours = endHour - startHour;
         dayEnded = true;
+        CctvSystem.ExitForDayEnd();
+        StopCctvSound();
+        RemoveAllNpcs();
+        if (dayCompleteSound != null)
+            soundEffectSource.PlayOneShot(dayCompleteSound, soundEffectVolume);
         DayEndedEvent?.Invoke();
         onDayEnded.Invoke();
         if (pauseAtEndOfDay)
@@ -132,7 +186,9 @@ public sealed class DayNightCycle : MonoBehaviour
 
     private System.Collections.IEnumerator StartNextDayAfterPause()
     {
-        yield return new WaitForSecondsRealtime(endOfDayPauseSeconds);
+        float soundDuration = dayCompleteSound != null ? dayCompleteSound.length : 0f;
+        yield return new WaitForSecondsRealtime(Mathf.Max(
+            endOfDayPauseSeconds, soundDuration));
         CurrentDay++;
         RestartDay();
     }
@@ -142,10 +198,79 @@ public sealed class DayNightCycle : MonoBehaviour
     {
         elapsedGameHours = 0f;
         dayEnded = false;
+        PreparingToOpen = true;
         Time.timeScale = 1f;
         TeleportPlayerToDayStart();
+        OpeningSequence.Instance?.PrepareForNextDay();
         BeginDayStartSequence();
         ApplyLighting();
+        soundEffectSource = gameObject.AddComponent<AudioSource>();
+        ConfigureEffectSource(soundEffectSource, false);
+        cctvAudioSource = gameObject.AddComponent<AudioSource>();
+        ConfigureEffectSource(cctvAudioSource, true);
+        cctvAudioSource.clip = cctvLoopSound;
+    }
+
+    public void SkipToEndOfDay()
+    {
+        if (dayEnded) return;
+        EndDay();
+    }
+
+    private static void RemoveAllNpcs()
+    {
+        NpcNavigation[] npcs = FindObjectsByType<NpcNavigation>(
+            FindObjectsSortMode.None);
+        foreach (NpcNavigation npc in npcs)
+        {
+            if (npc == null) continue;
+            npc.ReleaseAllOccupancy();
+            Destroy(npc.gameObject);
+        }
+        NpcAutomaticDoor.RefreshAllAfterNpcRemoval();
+    }
+
+    public void BeginOpeningDay()
+    {
+        if (!PreparingToOpen)
+            return;
+        PreparingToOpen = false;
+        elapsedGameHours = 0f;
+        ApplyLighting();
+    }
+
+    public string CurrentTimeText => FormatTime(CurrentHour);
+
+    public void PlayRegisterSound()
+    {
+        if (cashRegisterSound != null)
+            soundEffectSource.PlayOneShot(cashRegisterSound, soundEffectVolume);
+    }
+
+    public float PlayShoplifterRemovalSound()
+    {
+        if (shoplifterRemovalSound == null) return 0f;
+        soundEffectSource.PlayOneShot(shoplifterRemovalSound, soundEffectVolume);
+        return shoplifterRemovalSound.length;
+    }
+
+    public void StartCctvSound()
+    {
+        if (cctvLoopSound == null || cctvAudioSource.isPlaying) return;
+        cctvAudioSource.Play();
+    }
+
+    public void StopCctvSound()
+    {
+        if (cctvAudioSource != null) cctvAudioSource.Stop();
+    }
+
+    private void ConfigureEffectSource(AudioSource audioSource, bool loop)
+    {
+        audioSource.playOnAwake = false;
+        audioSource.loop = loop;
+        audioSource.spatialBlend = 0f;
+        audioSource.volume = soundEffectVolume;
     }
 
     private void BeginDayStartSequence()
@@ -210,6 +335,12 @@ public sealed class DayNightCycle : MonoBehaviour
 
     private void OnGUI()
     {
+        if (dayEnded)
+        {
+            DrawDayCompleteScreen();
+            return;
+        }
+
         if (dayStartOverlayAlpha > 0f)
         {
             DrawDayStartOverlay();
@@ -226,6 +357,38 @@ public sealed class DayNightCycle : MonoBehaviour
         GUI.Label(new Rect(Screen.width - 220f, screenMargin.y + clockSize.y + 2f,
             198f, 32f), dayEnded ? $"DAY {CurrentDay} COMPLETE" : $"DAY {CurrentDay}",
             dayStyle);
+    }
+
+    private void DrawDayCompleteScreen()
+    {
+        GUI.color = Color.black;
+        GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height),
+            Texture2D.whiteTexture);
+        GUI.color = Color.white;
+
+        dayCompleteTitleStyle ??= new GUIStyle(GUI.skin.label)
+        {
+            alignment = TextAnchor.MiddleCenter,
+            fontSize = 52,
+            fontStyle = FontStyle.Bold
+        };
+        dayCompleteTitleStyle.normal.textColor = Color.white;
+        dayCompleteSubtitleStyle ??= new GUIStyle(GUI.skin.label)
+        {
+            alignment = TextAnchor.MiddleCenter,
+            fontSize = 24
+        };
+        dayCompleteSubtitleStyle.normal.textColor = new Color(0.72f, 0.86f, 1f);
+
+        GUI.Label(new Rect(0f, Screen.height * 0.5f - 85f,
+            Screen.width, 70f), $"DAY {CurrentDay} COMPLETE!",
+            dayCompleteTitleStyle);
+        GUI.Label(new Rect(0f, Screen.height * 0.5f - 10f,
+            Screen.width, 45f), "Great work. Preparing the next shift...",
+            dayCompleteSubtitleStyle);
+        GUI.Label(new Rect(0f, Screen.height * 0.5f + 35f,
+            Screen.width, 40f), $"DAY {CurrentDay + 1} STARTING SOON",
+            dayCompleteSubtitleStyle);
     }
 
     private void DrawDayStartOverlay()
@@ -299,6 +462,7 @@ public sealed class DayNightCycle : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (Instance == this) Instance = null;
         if (panelTexture != null)
             Destroy(panelTexture);
     }

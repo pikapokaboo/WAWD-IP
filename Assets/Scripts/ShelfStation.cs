@@ -97,6 +97,17 @@ public sealed class ShelfStation : MonoBehaviour
         iceCreamMachine?.Release(this);
     }
 
+    public static void ReleaseAllFor(NpcNavigation npc)
+    {
+        if (npc == null) return;
+        foreach (ShelfStation shelf in ActiveShelves)
+        {
+            if (shelf == null || shelf.reservedBy != npc) continue;
+            shelf.EndInteraction();
+            shelf.Release(npc);
+        }
+    }
+
     public void RegisterApproachingShopper()
     {
         approachingShopperCount++;

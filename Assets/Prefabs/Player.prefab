@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 908001417669482418}
   - component: {fileID: 6072267303198007342}
   - component: {fileID: 6072267303198007343}
+  - component: {fileID: 6072267303198007344}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -334,6 +335,7 @@ MonoBehaviour:
   deceleration: 70
   airControl: 0.35
   jumpHeight: 1.5
+  allowJump: 0
   gravity: -25
   groundedForce: 2
   mouseSensitivity: 0.12
@@ -374,3 +376,23 @@ MonoBehaviour:
   panelColour: {r: 0.035, g: 0.045, b: 0.06, a: 0.72}
   accentColour: {r: 0.22, g: 0.72, b: 0.95, a: 1}
   textColour: {r: 0.88, g: 0.92, b: 0.96, a: 1}
+--- !u!114 &6072267303198007344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072267303198007341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df23d06a7c740a9b832d500a6fdcc42, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  playerCamera: {fileID: 0}
+  interactionDistance: 4
+  interactionLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  crosshairSize: 5
+  crosshairColour: {r: 1, g: 1, b: 1, a: 1}
+  promptFontSize: 20

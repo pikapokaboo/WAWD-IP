@@ -166,6 +166,8 @@ public sealed class NpcSpawningPad : MonoBehaviour
 
     private void UpdateDailySchedule()
     {
+        if (!dayCycle.DayActive)
+            return;
         int currentDay = dayCycle != null ? dayCycle.CurrentDay : 1;
         if (currentDay != scheduledDay)
         {

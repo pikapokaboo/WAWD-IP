@@ -33,6 +33,12 @@ public sealed class NpcSitting : MonoBehaviour
  
     public bool IsSitting { get; private set; }
     public ChairStation ReservedChair => reservedChair;
+
+    public void ReleaseReservation()
+    {
+        if (reservedChair != null) reservedChair.Release(this);
+        reservedChair = null;
+    }
  
     private void Awake()
     {
@@ -165,9 +171,7 @@ public sealed class NpcSitting : MonoBehaviour
 
     private void OnDisable()
     {
-        if (reservedChair != null)
-            reservedChair.Release(this);
-        reservedChair = null;
+        ReleaseReservation();
         sitRoutine = null;
         IsSitting = false;
     }

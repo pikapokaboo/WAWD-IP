@@ -54,6 +54,27 @@ public sealed class CookingStation : MonoBehaviour
         && (ContainsAny(npc.WantedProducts, microwaveProducts)
             || ContainsAny(npc.WantedProducts, hotWaterProducts));
 
+    public void ReleaseUser(NpcNavigation npc)
+    {
+        ReleaseFromPositions(microwavePositions, npc);
+        ReleaseFromPositions(hotWaterPositions, npc);
+    }
+
+    public static void ReleaseUserFromAll(NpcNavigation npc)
+    {
+        foreach (CookingStation station in
+                 FindObjectsByType<CookingStation>(FindObjectsSortMode.None))
+            station.ReleaseUser(npc);
+    }
+
+    private static void ReleaseFromPositions(List<CookingPosition> positions,
+        NpcNavigation npc)
+    {
+        if (positions == null) return;
+        foreach (CookingPosition position in positions)
+            if (position != null && position.user == npc) position.user = null;
+    }
+
     private IEnumerator UseAvailablePosition(NpcNavigation npc,
         List<CookingPosition> positions, string waitingAction,
         string usingAction, float waitDuration)

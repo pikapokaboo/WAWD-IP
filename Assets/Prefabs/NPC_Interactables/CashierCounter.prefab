@@ -2386,6 +2386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7326522935163029831}
   - component: {fileID: 3900700859932133122}
+  - component: {fileID: 3900700859932133123}
   m_Layer: 0
   m_Name: Cashier_Chibi
   m_TagString: Untagged
@@ -2432,6 +2433,62 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &3900700859932133123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154792676273206393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b71adbc55ad407096be3c9f1129ddde, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::CashierInteractable
+  prompt: '[E] Talk'
+  dialogue:
+  - Welcome! Let me know if you need anything.
+  - Long day, huh?
+  - Please don't ask me to price-check the entire shop.
+  - The register and I are in a committed relationship.
+  speakerName: Cashier
+  charactersPerSecond: 45
+  panelColour: {r: 0.025, g: 0.03, b: 0.045, a: 0.92}
+  nameColour: {r: 0.35, g: 0.8, b: 1, a: 1}
+  dialogueColour: {r: 1, g: 1, b: 1, a: 1}
+  greeting: Hello! What can I help you with?
+  dialogueOptions:
+  - How is your day going?
+  - Any shopping advice?
+  - Goodbye
+  optionResponses:
+  - Not bad! The register has only yelled at me twice today.
+  - Never shop hungry. That's how you leave with twelve snacks.
+  - See you around!
+  casualDialogueOptions:
+  - How's your shift going?
+  - Anything interesting happen today?
+  - What do you think of the customers?
+  - Any advice for surviving this place?
+  - I'd better get back to work.
+  shiftResponses:
+  - Pretty normal. The till beeped at me in a judgmental tone, though.
+  - Quiet so far. Saying that out loud has probably doomed us.
+  - I've been standing here so long I think the counter considers me furniture.
+  interestingResponses:
+  - Someone spent ten minutes choosing milk and left with crisps.
+  - A customer apologised to the automatic door. Very polite.
+  - I watched someone check their pockets for a phone they were holding.
+  customerResponses:
+  - Most are lovely. Some navigate aisles like lost shopping trolleys.
+  - They're unpredictable. That's why you're watching the cameras, right?
+  - I like them. I just wish they knew queues are lines, not abstract art.
+  adviceResponses:
+  - Coffee, comfortable shoes, and never trust an unusually innocent shopper.
+  - Keep an eye on quiet corners. Also keep snacks nearby. Mostly the snacks.
+  - If something looks suspicious, check twice before reporting grandma.
+  outlineColour: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4
 --- !u!1 &5159178223344041946
 GameObject:
   m_ObjectHideFlags: 0
