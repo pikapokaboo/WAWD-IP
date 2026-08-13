@@ -1,0 +1,1167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2979307905221680141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8917978576007699190}
+  m_Layer: 0
+  m_Name: DrinkS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8917978576007699190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979307905221680141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.6730003, y: 2.1600003, z: -20.055002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5993830039812612978}
+  - {fileID: 4268253122759319479}
+  - {fileID: 5041450727620683282}
+  - {fileID: 377586261116727575}
+  - {fileID: 8887624718936247053}
+  - {fileID: 1063424902548700994}
+  - {fileID: 8559308713520793358}
+  - {fileID: 2544326289529892887}
+  - {fileID: 2689766961400981835}
+  - {fileID: 177413017371431798}
+  - {fileID: 126674065657957170}
+  - {fileID: 3491020836379412539}
+  - {fileID: 8926192816723390099}
+  - {fileID: 9004991890228596105}
+  - {fileID: 2446276401012955106}
+  - {fileID: 23603673243460024}
+  - {fileID: 7211478156058669919}
+  - {fileID: 7373236524704057162}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1281101473657012950
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.42999983
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.9700012
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &177413017371431798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 1281101473657012950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1329448472418851474
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.42999983
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.49000168
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (13)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &126674065657957170 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 1329448472418851474}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1432976298227544088
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.9700012
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (11)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &23603673243460024 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 1432976298227544088}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1624774203126587575
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8569999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.9700012
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &377586261116727575 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 1624774203126587575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2122079858078133986
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8569999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (15)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &1063424902548700994 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 2122079858078133986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2577105480931072411
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.42999983
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (16)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &3491020836379412539 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 2577105480931072411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2921374539688398359
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8569999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8660011
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &4268253122759319479 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 2921374539688398359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3530378403853623735
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.42999983
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8660011
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &2544326289529892887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 3530378403853623735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3621954436373825090
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.4200001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &2446276401012955106 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 3621954436373825090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3954960914387122411
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.42999983
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.4200001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &2689766961400981835 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 3954960914387122411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4656567643566944978
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8569999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3550014
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &5993830039812612978 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 4656567643566944978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6217214382478014386
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8569999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.4200001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &5041450727620683282 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 6217214382478014386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7312133712239007406
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.42999983
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3550014
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &8559308713520793358 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 7312133712239007406}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7516817983453986611
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3550014
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &8926192816723390099 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 7516817983453986611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7558729730729908909
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8569999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.49000168
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (12)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &8887624718936247053 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 7558729730729908909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8018948696016378921
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8660011
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &9004991890228596105 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 8018948696016378921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8494862838485079786
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (17)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &7373236524704057162 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 8494862838485079786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8621435735178191615
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8917978576007699190}
+    m_Modifications:
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.49000168
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800032060237826842, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+      propertyPath: m_Name
+      value: DrinkSakura (14)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+--- !u!4 &7211478156058669919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1418967256716153248, guid: c85cbbaa5942dc940a2bc18d3f76f636, type: 3}
+  m_PrefabInstance: {fileID: 8621435735178191615}
+  m_PrefabAsset: {fileID: 0}

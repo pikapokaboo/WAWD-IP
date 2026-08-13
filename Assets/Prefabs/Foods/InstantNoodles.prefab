@@ -1,0 +1,1233 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3069850918786567709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5934298411296460619}
+  m_Layer: 0
+  m_Name: InstantNoodles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5934298411296460619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069850918786567709}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.34, y: 1.6531755, z: -28.764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1826007642846239073}
+  - {fileID: 7705170617119988481}
+  - {fileID: 9176759671655829803}
+  - {fileID: 8727876792109193791}
+  - {fileID: 8220736494548603412}
+  - {fileID: 3622020806030832403}
+  - {fileID: 2808738169978234815}
+  - {fileID: 696780705019429676}
+  - {fileID: 1835199939898146476}
+  - {fileID: 892593832120221794}
+  - {fileID: 3545497179268214799}
+  - {fileID: 2650374201548989661}
+  - {fileID: 3946853225297749946}
+  - {fileID: 6748173964606347119}
+  - {fileID: 5704945228387155360}
+  - {fileID: 370230361370865108}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &269942207588674690
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42017543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.63199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.88853776
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.45880347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 54.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &3946853225297749946 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 269942207588674690}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &309956723653835575
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42017543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2539997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9493261
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.3142929
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 36.636
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &3545497179268214799 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 309956723653835575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &521588124296788011
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66113496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.63199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9267117
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.3757732
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -44.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (11)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &3622020806030832403 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 521588124296788011}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1274809319654748133
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2539997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (14)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &2650374201548989661 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 1274809319654748133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1406153750597151879
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66113496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42017543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.88853776
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.45880347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 54.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &2808738169978234815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 1406153750597151879}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3174753539683349908
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42017543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8780003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.88853776
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.45880347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 54.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &1835199939898146476 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 3174753539683349908}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3183558264808837721
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66113496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42017543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8780003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9267117
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.3757732
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -44.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &1826007642846239073 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 3183558264808837721}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3484202353095878380
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (16)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &370230361370865108 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 3484202353095878380}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4114649886022175578
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8780003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7616485
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.64799047
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 80.781
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (13)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &892593832120221794 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 4114649886022175578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4382700924243052564
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66113496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7616485
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.64799047
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 80.781
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (12)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &696780705019429676 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 4382700924243052564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5146736210020391212
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66113496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42017543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.63199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &8220736494548603412 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 5146736210020391212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5342231592207260179
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66113496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42017543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2539997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.88853776
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.45880347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 54.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &9176759671655829803 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 5342231592207260179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5505273042978492679
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66113496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2539997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9493261
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.3142929
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 36.636
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &8727876792109193791 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 5505273042978492679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6888060754855579705
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66113496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.8780003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &7705170617119988481 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 6888060754855579705}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7556857030907632727
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.63199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9267117
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.3757732
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -44.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (15)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &6748173964606347119 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 7556857030907632727}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8814956710274561688
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5934298411296460619}
+    m_Modifications:
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.025000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42017543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481888351632183682, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+      propertyPath: m_Name
+      value: Instant noodles (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+--- !u!4 &5704945228387155360 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3853125357944113976, guid: 10f40deef90d6ca49bad5253f8698472, type: 3}
+  m_PrefabInstance: {fileID: 8814956710274561688}
+  m_PrefabAsset: {fileID: 0}
