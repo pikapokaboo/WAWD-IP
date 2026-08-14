@@ -48,6 +48,7 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
     private void OnValidate()
     {
         FindParts();
+        EnsureMovingPartsAreDynamicInEditor();
         StoreClosedPoseIfNeeded();
         detectionRadius = Mathf.Max(0.1f, detectionRadius);
         swingSpeed = Mathf.Max(1f, swingSpeed);
@@ -92,7 +93,10 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
     private void Update()
     {
         if (!Application.isPlaying)
+        {
+            EnsureMovingPartsAreDynamicInEditor();
             return;
+        }
 
         bool automaticOpeningEnabled = automaticallyOpenForNpcs
             || automaticallyOpenForPlayer;
@@ -246,6 +250,52 @@ public sealed class NpcAutomaticDoor : MonoBehaviour
         if (handleVisual == null)
             handleVisual = FindNamedRenderer("handle")?.transform;
     }
+
+    [ContextMenu("Prepare Moving Parts For Light Bake")]
+    private void PrepareMovingPartsForLightBake()
+    {
+        FindParts();
+        EnsureMovingPartsAreDynamicInEditor();
+    }
+
+    private void EnsureMovingPartsAreDynamicInEditor()
+    {
+#if UNITY_EDITOR
+        if (Application.isPlaying)
+            return;
+
+        ClearStaticFlagsRecursively(doorVisual);
+        if (handleVisual != null && (doorVisual == null || !handleVisual.IsChildOf(doorVisual)))
+            ClearStaticFlagsRecursively(handleVisual);
+#endif
+    }
+
+#if UNITY_EDITOR
+    private static void ClearStaticFlagsRecursively(Transform movingRoot)
+    {
+        if (movingRoot == null)
+            return;
+
+        foreach (Transform part in movingRoot.GetComponentsInChildren<Transform>(true))
+        {
+            if (UnityEditor.GameObjectUtility.GetStaticEditorFlags(part.gameObject) != 0)
+            {
+                UnityEditor.GameObjectUtility.SetStaticEditorFlags(
+                    part.gameObject, 0);
+                UnityEditor.EditorUtility.SetDirty(part.gameObject);
+            }
+        }
+
+        foreach (MeshRenderer renderer in movingRoot.GetComponentsInChildren<MeshRenderer>(true))
+        {
+            if (renderer.receiveGI == UnityEngine.ReceiveGI.LightProbes)
+                continue;
+
+            renderer.receiveGI = UnityEngine.ReceiveGI.LightProbes;
+            UnityEditor.EditorUtility.SetDirty(renderer);
+        }
+    }
+#endif
 
     private Vector3 GetDetectionCentre()
     {
