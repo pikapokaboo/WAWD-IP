@@ -17,8 +17,8 @@ public sealed class NpcDespawningPad : MonoBehaviour
     {
         if (other.CompareTag("NPC"))
         {
-            NpcTraits traits = other.GetComponent<NpcTraits>();
-            if (traits != null && traits.HasTrait("No Money"))
+            NpcNavigation navigation = other.GetComponent<NpcNavigation>();
+            if (navigation != null && navigation.IsReportableShoplifter)
                 DayNightCycle.Instance?.ReportEscapedShoplifter();
             Destroy(other.gameObject);
         }

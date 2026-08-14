@@ -11,6 +11,12 @@ using UnityEngine.InputSystem;
 
 public sealed class CctvSystem : MonoBehaviour
 {
+    private const string RemovingShoplifterMessage = "REMOVING SHOPLIFTER";
+    private const string RemovalOverlayImageResource = "Picture_yay";
+
+    [Header("Removal Overlay")]
+    [SerializeField, Range(0f, 1f)] private float removalOverlayImageAlpha = 0.14f;
+
     public static bool IsActive { get; private set; }
     public static Camera ActiveCamera => IsActive && instance != null
         && instance.playerCamera != null
@@ -36,7 +42,9 @@ public sealed class CctvSystem : MonoBehaviour
     private Outline hoveredOutline;
     private bool reporting;
     private string resultMessage;
+    private bool resultShowsRemovalImage;
     private float fadeAlpha;
+    private Texture2D removalOverlayImage;
     private Texture2D solidTexture;
     private GUIStyle hudStyle;
     private GUIStyle helpStyle;
@@ -112,6 +120,11 @@ public sealed class CctvSystem : MonoBehaviour
     private void Update()
     {
         if (!IsActive || cameras.Count == 0) return;
+        if (PauseMenuController.IsPaused)
+        {
+            ClearHover();
+            return;
+        }
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = fadeAlpha <= 0f;
         if (DeveloperConsole.AnyConsoleOpen)
@@ -180,8 +193,10 @@ public sealed class CctvSystem : MonoBehaviour
     {
         reporting = true;
         yield return new WaitForSecondsRealtime(2.5f);
-        bool shoplifter = npc != null && npc.HasTrait("No Money");
-        resultMessage = shoplifter ? "REMOVING SHOPLIFTER" : "NO SHOP THEFT DETECTED";
+        NpcNavigation navigation = npc != null ? npc.GetComponent<NpcNavigation>() : null;
+        bool shoplifter = navigation != null && navigation.IsReportableShoplifter;
+        resultShowsRemovalImage = shoplifter;
+        resultMessage = shoplifter ? RemovingShoplifterMessage : "NO SHOP THEFT DETECTED";
         HideCursorForBlackScreen();
         yield return Fade(0f, 1f, 0.25f);
         float sirenDuration = shoplifter
@@ -190,7 +205,6 @@ public sealed class CctvSystem : MonoBehaviour
         if (shoplifter && npc != null)
         {
             DayNightCycle.Instance?.ReportCaughtShoplifter();
-            NpcNavigation navigation = npc.GetComponent<NpcNavigation>();
             navigation?.ReleaseAllOccupancy();
             Destroy(npc.gameObject);
             yield return null;
@@ -198,6 +212,7 @@ public sealed class CctvSystem : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(Mathf.Max(1f, sirenDuration));
         resultMessage = null;
+        resultShowsRemovalImage = false;
         yield return Fade(1f, 0f, 0.35f);
         reporting = false;
         RestoreCctvCursor();
@@ -218,6 +233,7 @@ public sealed class CctvSystem : MonoBehaviour
         IsActive = false;
         instance.reporting = false;
         instance.resultMessage = null;
+        instance.resultShowsRemovalImage = false;
         instance.fadeAlpha = 0f;
         instance.enteringCctv = false;
         instance.player?.SetInteractionLocked(false);
@@ -249,6 +265,7 @@ public sealed class CctvSystem : MonoBehaviour
 
     private void OnGUI()
     {
+        if (PauseMenuController.IsPaused) return;
         if (!IsActive && fadeAlpha <= 0f) return;
         EnsureStyles();
         if (IsActive)
@@ -269,11 +286,22 @@ public sealed class CctvSystem : MonoBehaviour
         {
             GUI.color = new Color(0f, 0f, 0f, fadeAlpha);
             GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), solidTexture);
+            DrawRemovalOverlayImage();
             GUI.color = new Color(1f, 1f, 1f, fadeAlpha);
             if (!string.IsNullOrEmpty(resultMessage))
                 GUI.Label(new Rect(0f, 0f, Screen.width, Screen.height), resultMessage, centreStyle);
             GUI.color = Color.white;
         }
+    }
+
+    private void DrawRemovalOverlayImage()
+    {
+        if (!resultShowsRemovalImage || removalOverlayImage == null)
+            return;
+
+        GUI.color = new Color(1f, 1f, 1f, fadeAlpha * removalOverlayImageAlpha);
+        GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height),
+            removalOverlayImage, ScaleMode.ScaleToFit, true);
     }
 
     private void DrawCctvBorder()
@@ -297,6 +325,8 @@ public sealed class CctvSystem : MonoBehaviour
             solidTexture = new Texture2D(1, 1);
             solidTexture.SetPixel(0, 0, Color.white); solidTexture.Apply();
         }
+        if (removalOverlayImage == null)
+            removalOverlayImage = Resources.Load<Texture2D>(RemovalOverlayImageResource);
         hudStyle ??= new GUIStyle(GUI.skin.box)
         {
             fontSize = 18,

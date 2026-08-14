@@ -29,12 +29,39 @@ public sealed class PauseMenuController : MonoBehaviour
     private PlayerController player;
     private bool playerWasEnabled;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    private static void CreateForMainScene()
+    public static bool IsPaused { get; private set; }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void RegisterSceneInstallHook()
     {
-        if (SceneManager.GetActiveScene().name != "Main_Scene"
-            || FindFirstObjectByType<PauseMenuController>() != null)
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void InstallForActiveScene()
+    {
+        EnsureForScene(SceneManager.GetActiveScene());
+    }
+
+    private static void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        EnsureForScene(scene);
+    }
+
+    private static void EnsureForScene(Scene scene)
+    {
+        if (scene.name != "Main_Scene")
             return;
+
+        PauseMenuController existing = FindFirstObjectByType<PauseMenuController>(
+            FindObjectsInactive.Include);
+        if (existing != null)
+        {
+            existing.gameObject.SetActive(true);
+            existing.enabled = true;
+            return;
+        }
 
         new GameObject("Pause Menu").AddComponent<PauseMenuController>();
     }
@@ -60,6 +87,7 @@ public sealed class PauseMenuController : MonoBehaviour
     private void OpenPauseMenu()
     {
         paused = true;
+        IsPaused = true;
         previousTimeScale = Time.timeScale > 0f ? Time.timeScale : 1f;
         playerWasEnabled = player != null && player.enabled;
         if (player != null)
@@ -75,6 +103,7 @@ public sealed class PauseMenuController : MonoBehaviour
     private void ContinueGame()
     {
         paused = false;
+        IsPaused = false;
         pausePanel.SetActive(false);
         settingsPanel.SetActive(false);
         dimmer.SetActive(false);
@@ -352,6 +381,8 @@ public sealed class PauseMenuController : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (paused)
+            IsPaused = false;
         if (!paused) return;
         Time.timeScale = previousTimeScale;
         if (player != null && playerWasEnabled)

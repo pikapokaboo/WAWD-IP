@@ -90,7 +90,7 @@ public sealed class OpeningSequence : MonoBehaviour
         EnsureStyle();
         string objective = Stage == OpeningStage.TalkToCashier
             ? "OBJECTIVE: Talk to the cashier"
-            : "OBJECTIVE: Go to the security room and use the workstation";
+            : "OBJECTIVE: Go to work";
         GUI.Label(new Rect(24f, 24f, 530f, 46f), objective, objectiveStyle);
     }
 

@@ -906,7 +906,7 @@ PrefabInstance:
       objectReference: {fileID: 775654215}
     - target: {fileID: 472834873387021296, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_VersionIndex
-      value: 2557
+      value: 2566
       objectReference: {fileID: 0}
     - target: {fileID: 521420282798340762, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_Mesh
@@ -922,7 +922,7 @@ PrefabInstance:
       objectReference: {fileID: 1691745460}
     - target: {fileID: 3050554223625450025, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_VersionIndex
-      value: 2554
+      value: 2563
       objectReference: {fileID: 0}
     - target: {fileID: 3194710602133155101, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_Mesh
@@ -942,7 +942,7 @@ PrefabInstance:
       objectReference: {fileID: 923781418}
     - target: {fileID: 4415432063183199374, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_VersionIndex
-      value: 9861
+      value: 9870
       objectReference: {fileID: 0}
     - target: {fileID: 4507040774003581175, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1006,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 1739866419}
     - target: {fileID: 6761607051588963728, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_VersionIndex
-      value: 3241
+      value: 3250
       objectReference: {fileID: 0}
     - target: {fileID: 7333173262344637317, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_Mesh
@@ -1022,7 +1022,7 @@ PrefabInstance:
       objectReference: {fileID: 1110990959}
     - target: {fileID: 8957552096295328254, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_VersionIndex
-      value: 9864
+      value: 9873
       objectReference: {fileID: 0}
     - target: {fileID: 8991272440110713407, guid: a261e1119a631b94bb4404bda598345b, type: 3}
       propertyPath: m_Name
@@ -1073,7 +1073,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameTitle: CheckOut LookOut
-  settingsPlaceholder: Will insert settings later
   panelSize: {x: 650, y: 720}
   buttonSize: {x: 500, y: 127}
   panelOffset: {x: 70, y: 0}
@@ -1103,18 +1102,6 @@ MonoBehaviour:
     height: 0
   backgroundMusic: {fileID: 0}
   musicVolume: 0.5
---- !u!114 &1100000003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100000000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6666666666666666666666666666666, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1100000002
 Transform:
   m_ObjectHideFlags: 0
@@ -1130,6 +1117,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1100000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6666666666666666666666666666666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1110990959
 Mesh:
   m_ObjectHideFlags: 0

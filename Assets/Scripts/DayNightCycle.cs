@@ -77,6 +77,7 @@ public sealed class DayNightCycle : MonoBehaviour
     [SerializeField] private AudioClip dayCompleteSound;
     [SerializeField] private AudioClip shoplifterRemovalSound;
     [SerializeField, Range(0f, 1f)] private float soundEffectVolume = 0.75f;
+    [SerializeField, Range(0f, 4f)] private float dayCompleteSoundVolumeMultiplier = 4f;
 
     private float elapsedGameHours;
     private bool dayEnded;
@@ -205,7 +206,8 @@ public sealed class DayNightCycle : MonoBehaviour
         CctvSystem.ExitForDayEnd();
         RemoveAllNpcs();
         if (dayCompleteSound != null)
-            soundEffectSource.PlayOneShot(dayCompleteSound, soundEffectVolume);
+            soundEffectSource.PlayOneShot(dayCompleteSound,
+                soundEffectVolume * dayCompleteSoundVolumeMultiplier);
         DayEndedEvent?.Invoke();
         onDayEnded.Invoke();
         if (pauseAtEndOfDay)

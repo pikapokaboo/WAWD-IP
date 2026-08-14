@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff3f47730de4e76b640d07188f484cc, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::WorkstationInteractable
-  prompt: '[E] Prepare for the day'
+  prompt: '[E] Go to work'
   outlineColour: {r: 0.35, g: 0.8, b: 1, a: 1}
   outlineWidth: 4
 --- !u!1 &7205632446045627007

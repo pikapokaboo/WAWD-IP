@@ -80,6 +80,7 @@ public sealed class NpcNavigation : MonoBehaviour
     private static int activeShopperCount;
     private static readonly HashSet<NpcNavigation> ActiveNpcs = new();
     private bool holdsShoppingSlot;
+    private bool enteredStoreAsShopper;
     private float nextMakeRoomAllowedTime;
     private bool visuallyAtCheckoutMarker;
     private bool? forcedShoppingIntent;
@@ -91,6 +92,8 @@ public sealed class NpcNavigation : MonoBehaviour
     public static int ActiveShopperCount => activeShopperCount;
     public int CheckoutQueueNumber { get; private set; }
     public bool ReachedCheckoutMarker { get; private set; }
+    public bool IsReportableShoplifter =>
+        enteredStoreAsShopper && HasTrait("No Money");
 
     public bool HasTrait(string traitName) =>
         traits != null && traits.HasTrait(traitName);
@@ -143,6 +146,7 @@ public sealed class NpcNavigation : MonoBehaviour
         ChairStation eatingChair = null;
         if (receivedShoppingSlot)
         {
+            enteredStoreAsShopper = true;
             BuildShoppingRoute();
             for (int i = 0; i < shoppingRoute.Count; i++)
             {

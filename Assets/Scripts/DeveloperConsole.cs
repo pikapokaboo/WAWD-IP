@@ -44,6 +44,14 @@ public sealed class DeveloperConsole : MonoBehaviour
 
     public bool IsOpen => isOpen;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        AnyConsoleOpen = false;
+        ShowNpcDebug = false;
+        ShowInteractionMarkers = false;
+    }
+
     private void Awake()
     {
         if (playerController == null)

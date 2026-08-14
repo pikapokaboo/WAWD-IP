@@ -9,7 +9,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public sealed class WorkstationInteractable : MonoBehaviour
 {
-    [SerializeField] private string prompt = "[E] Prepare for the day";
+    [SerializeField] private string prompt = "[E] Go to work";
     [SerializeField] private Color outlineColour = new(0.35f, 0.8f, 1f, 1f);
     [SerializeField, Range(0f, 10f)] private float outlineWidth = 4f;
 
