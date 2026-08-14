@@ -1087,7 +1087,7 @@ MonoBehaviour:
   playButtonTexture: {fileID: 2800000, guid: a1111111111111111111111111111111, type: 3}
   settingsButtonTexture: {fileID: 2800000, guid: a2222222222222222222222222222222, type: 3}
   exitButtonTexture: {fileID: 2800000, guid: a3333333333333333333333333333333, type: 3}
-  backButtonTexture: {fileID: 2800000, guid: a4444444444444444444444444444444, type: 3}
+  backButtonTexture: {fileID: 0}
   buttonArtworkUv:
     serializedVersion: 2
     x: 0
